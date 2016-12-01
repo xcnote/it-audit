@@ -1,0 +1,12 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+HI ALL:<br/>
+&nbsp;&nbsp;用户：$!{userName} 已绑定bucket($!{bucketName})，请为该bucket绑定加速域名。<br/>
+&nbsp;&nbsp;该bucket源站域名：$!{sourceUri}。加速域名绑定地址：$!{cdnSpeedBindUrl}。<br/>
+<br/>
+<span>请检查源站域名是否正确，并前往用户CDN控制台绑定加速域名。如有疑问请联系点播产品或开发。</span>
+</body>
+</html>
