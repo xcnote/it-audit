@@ -25,24 +25,18 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-
-//@Profile(value = { "production", "it", "test", "dev" })
-//@ImportResource("classpath:/META-INF/spring/properties-config.xml") // content: <context:property-placeholder ... />
 @Configuration
 @Import(PropertyConfig.class)
-@ComponentScan(basePackages = { "com.ksyun.video.domain" })
-@EnableJpaRepositories(basePackages = { "com.ksyun.video.persistence.dao" },
-entityManagerFactoryRef = "defaultEntityManagerFactory",
-transactionManagerRef = "defaultJpaTransactionManager",
-includeFilters = {},
-excludeFilters = {})
-//Refer to http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative-annotations
+@ComponentScan(basePackages = { "com.it.audit.domain" })
+@EnableJpaRepositories(
+		basePackages = { "com.it.audit.persistence.dao" },
+		entityManagerFactoryRef = "defaultEntityManagerFactory",
+		transactionManagerRef = "defaultJpaTransactionManager",
+		includeFilters = {},
+		excludeFilters = {})
 @EnableTransactionManagement
 @Slf4j
 public class ContextConfigurationForJPA2 implements TransactionManagementConfigurer {
-
-//    @Setter(onMethod = @_({ @Autowired }))
-//    private Environment env;
 
     @Value("${jdbc.driverclass}")
     private String driverClassName;
@@ -85,7 +79,6 @@ public class ContextConfigurationForJPA2 implements TransactionManagementConfigu
         dataSource.setMaxActive(10);
         dataSource.setMaxIdle(5);
         dataSource.setMinIdle(5);
-        //dataSource.setValidationQuery("SELECT 1 FROM SYSIBM.SYSDUMMY1");
         dataSource.setValidationQuery("SELECT 1");
         dataSource.setTestOnBorrow(true);
         dataSource.setTestOnReturn(true);
@@ -119,13 +112,6 @@ public class ContextConfigurationForJPA2 implements TransactionManagementConfigu
      */
     @Bean(name = "jpaDialect")
     public JpaDialect jpaDialect() {
-        //		try {
-        //			final JpaDialect dialect = (JpaDialect)Class.forName(this.hibernameSqlDialect).newInstance();
-        //			return dialect;
-        //		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-        //			throw new RuntimeException(e);
-        //		}
-        //return new IsolationSupportHibernateJpaDialect();
         return new HibernateJpaDialect();
     }
 

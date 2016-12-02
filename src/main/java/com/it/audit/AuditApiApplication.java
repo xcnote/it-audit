@@ -10,6 +10,7 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.jetty.JettyServerCustomizer;
@@ -17,17 +18,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.ksyun.video.config.PropertyConfig;
-import com.ksyun.video.config.VideoWebConfig;
-import com.ksyun.video.task.TaskManager;
+import com.it.audit.config.AuditWebConfig;
+import com.it.audit.config.PropertyConfig;
 
 
 @Configuration
 @SpringBootApplication
-@Import({PropertyConfig.class,VideoWebConfig.class})
-public class VideoApiApplication extends WebMvcConfigurerAdapter {
+@Import({PropertyConfig.class,AuditWebConfig.class})
+public class AuditApiApplication extends WebMvcAutoConfiguration {
 
 	public static int port = 8081;
 
@@ -38,27 +37,12 @@ public class VideoApiApplication extends WebMvcConfigurerAdapter {
 				port = Integer.parseInt(portNumString.trim());
 		} catch (Exception e) {
 		}
-		final ApplicationContext ctx = SpringApplication.run(VideoApiApplication.class, args);
+		final ApplicationContext ctx = SpringApplication.run(AuditApiApplication.class, args);
 		initStaticField(ctx);
-		
-		TaskManager taskManager = ctx.getBean(TaskManager.class);
-		taskManager.runLocalCacheExpire(60);
-		taskManager.runNoCallBackDispose();
-		taskManager.runCommitSolrTask();
-		taskManager.runCleanImportFromKs3Progress();
 	}
-
+	
 	private static void initStaticField(ApplicationContext ctx) {
-		/*try {
-			//Environment env = (Environment) ctx.getBean(Environment.class);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
 	}
-
-
-
 
 	@Bean
 	public EmbeddedServletContainerFactory servletContainer() {
@@ -66,11 +50,6 @@ public class VideoApiApplication extends WebMvcConfigurerAdapter {
 		factory.addServerCustomizers(new JettyServerCustomizer() {
 			@Override
 			public void customize(Server server) {
-				//Setup JMX
-				/*final MBeanContainer mbContainer = new MBeanContainer(ManagementFactory.getPlatformMBeanServer());
-				server.addEventListener(mbContainer);
-				server.addBean(mbContainer);*/
-				
 				final QueuedThreadPool threadPool = server.getBean(QueuedThreadPool.class);
 				threadPool.setMaxThreads(200);//设置最大线程数量
 				threadPool.setMinThreads(10);//设置最小线程数量

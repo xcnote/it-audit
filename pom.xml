@@ -221,16 +221,16 @@
 			<version>${commons-lang3-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 	</dependencies>
 	<profiles>
@@ -240,9 +240,9 @@
 			<properties>
 				<!-- mysql -->
 				<jdbc.driverclass>com.mysql.jdbc.Driver</jdbc.driverclass>
-				<jdbc.url><![CDATA[jdbc:mysql://10.147.6.252:3306/ksyun_video_api?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8]]></jdbc.url>
-				<jdbc.username>ksyun_video_api</jdbc.username>
-				<jdbc.password><![CDATA[ksyun_video_api@)!%1015]]></jdbc.password>
+				<jdbc.url><![CDATA[jdbc:mysql://120.92.51.193:3306/it_audit?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8]]></jdbc.url>
+				<jdbc.username>it_audit</jdbc.username>
+				<jdbc.password><![CDATA[123456]]></jdbc.password>
 			</properties>
 		</profile>
 		<!-- 测试 -->
@@ -251,9 +251,9 @@
 			<properties>
 				<!-- mysql -->
 				<jdbc.driverclass>com.mysql.jdbc.Driver</jdbc.driverclass>
-				<jdbc.url><![CDATA[jdbc:mysql://10.4.2.38:8306/ksyun_video_api?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8]]></jdbc.url>
-				<jdbc.username>root</jdbc.username>
-				<jdbc.password><![CDATA[111111]]></jdbc.password>
+				<jdbc.url><![CDATA[jdbc:mysql://120.92.51.193:3306/it_audit?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8]]></jdbc.url>
+				<jdbc.username>it_audit</jdbc.username>
+				<jdbc.password><![CDATA[123456]]></jdbc.password>
 			</properties>
 		</profile>
 		<profile>

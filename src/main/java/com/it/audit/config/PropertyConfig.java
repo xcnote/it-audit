@@ -8,13 +8,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
- * see: http://fahdshariff.blogspot.com/2012/09/spring-3-javaconfig-loading-properties.html
  * 
- * @author zhanghaolun
+ * @author xiaocheng
  * 
  */
 @Configuration
-@PropertySource(value = { "classpath:ksyun-video.properties", "file:${user.dir}/ksyun-video.properties", "file:/etc/ksyun-video/ksyun-video.properties" }, ignoreResourceNotFound = true)
+@PropertySource(value = { "classpath:it-audit.properties", "file:${user.dir}/it-audit.properties", "file:/etc/it-audit/it-audit.properties" }, ignoreResourceNotFound = true)
 @Slf4j
 public class PropertyConfig {
 

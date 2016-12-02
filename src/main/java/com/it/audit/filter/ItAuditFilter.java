@@ -12,7 +12,7 @@ import javax.servlet.ServletResponse;
 import org.eclipse.jetty.server.Response;
 import org.springframework.stereotype.Component;
 
-import com.ksyun.video.common.auth.AuthContextHolder;
+import com.it.audit.auth.AuthContextHolder;
 
 @Component
 /**
@@ -20,8 +20,7 @@ import com.ksyun.video.common.auth.AuthContextHolder;
  * @author lijunwei
  *
  */
-
-public class KsyunVideoFilter implements Filter{	
+public class ItAuditFilter implements Filter{	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -31,6 +30,7 @@ public class KsyunVideoFilter implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		try{
+			System.err.println("filter");
 			AuthContextHolder.init();
 			req.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
