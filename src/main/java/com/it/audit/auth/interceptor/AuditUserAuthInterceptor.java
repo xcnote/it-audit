@@ -23,7 +23,7 @@ public class AuditUserAuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String path = request.getRequestURI();
-		System.out.println("auth");
+		log.info("path:{}", path);
 //		List<String> authRequestURI = RequestURI.USER_AUTH_OPERATE_URIS;
 		
 //		//请求地址需检查用户权限

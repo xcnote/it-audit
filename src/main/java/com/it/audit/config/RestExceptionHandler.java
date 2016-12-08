@@ -37,7 +37,7 @@ public class RestExceptionHandler extends AbstractHandlerExceptionResolver
 	private final List<String> callBackNeedRetry = new ArrayList<String>();
 	
 	//需要统一处理错误信息的异常
-	private final Map<String,String> expMsgOverride = new HashMap<String,String>();
+//	private final Map<String,String> expMsgOverride = new HashMap<String,String>();
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

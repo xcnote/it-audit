@@ -1,18 +1,17 @@
 package com.it.audit.auth.interceptor;
 
-import javax.servlet.http.Cookie;
+//import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.it.audit.auth.AuthContextHolder;
+
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
@@ -39,17 +38,16 @@ public class AuditCookieInterceptor extends HandlerInterceptorAdapter {
 			return super.preHandle(request, response, handler);
 		}
 		
-		Cookie[] cookies = request.getCookies();
-		Cookie kscCookie = null;
-		Cookie subCookie = null;
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-			}
-		}
+//		Cookie[] cookies = request.getCookies();
+//		Cookie kscCookie = null;
+//		Cookie subCookie = null;
+//		if (cookies != null) {
+//			for (Cookie cookie : cookies) {
+//			}
+//		}
 
 //		String token = kscCookie.getValue();
 //		String ip = request.getHeader("X-Forwarded-For");
-		System.out.println("cookie");
 		AuthContextHolder.get().setLoginInfo(null);
 		return super.preHandle(request, response, handler);
 	}

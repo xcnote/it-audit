@@ -2,8 +2,6 @@ package com.it.audit.config;
 
 import javax.servlet.Filter;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +15,8 @@ import com.it.audit.auth.interceptor.AuditCookieInterceptor;
 import com.it.audit.auth.interceptor.AuditUserAuthInterceptor;
 import com.it.audit.filter.ItAuditFilter;
 import com.it.audit.web.constants.RequestURI;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @ComponentScan(basePackages = { "com.it.audit" })
