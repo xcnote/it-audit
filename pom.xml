@@ -13,15 +13,9 @@
 	<properties>
 		<spring-boot-dependencies.version>1.3.0.RELEASE</spring-boot-dependencies.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.0.5.RELEASE</spring.version>
 		<jackson.version>2.3.0</jackson.version>
-		<jaxb-api.version>2.2.11</jaxb-api.version>
-		<jaxb-impl.version>2.2.7</jaxb-impl.version>
-		<jaxb2-basics.version>0.6.5</jaxb2-basics.version>
-		<xstream.version>1.4.7</xstream.version>
 		<joda-time.version>2.4</joda-time.version>
 		<validation-api.version>1.1.0.Final</validation-api.version>
-		<hibernate-validator.version>5.0.1.Final</hibernate-validator.version>
 		<maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
 		<commons-lang3-version>3.4</commons-lang3-version>
 	</properties>
@@ -240,7 +234,7 @@
 			<properties>
 				<!-- mysql -->
 				<jdbc.driverclass>com.mysql.jdbc.Driver</jdbc.driverclass>
-				<jdbc.url><![CDATA[jdbc:mysql://120.92.51.193:3306/it_audit?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8]]></jdbc.url>
+				<jdbc.url><![CDATA[jdbc:mysql://120.92.51.193:3306/it_audit?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8&useSSL=false]]></jdbc.url>
 				<jdbc.username>it_audit</jdbc.username>
 				<jdbc.password><![CDATA[123456]]></jdbc.password>
 			</properties>
@@ -251,7 +245,7 @@
 			<properties>
 				<!-- mysql -->
 				<jdbc.driverclass>com.mysql.jdbc.Driver</jdbc.driverclass>
-				<jdbc.url><![CDATA[jdbc:mysql://120.92.51.193:3306/it_audit?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8]]></jdbc.url>
+				<jdbc.url><![CDATA[jdbc:mysql://120.92.51.193:3306/it_audit?useUnicode\=true&characterEncoding\=utf8&characterSetResults\=utf8&useSSL=false]]></jdbc.url>
 				<jdbc.username>it_audit</jdbc.username>
 				<jdbc.password><![CDATA[123456]]></jdbc.password>
 			</properties>
