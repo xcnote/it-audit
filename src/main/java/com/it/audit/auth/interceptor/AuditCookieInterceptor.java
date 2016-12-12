@@ -1,14 +1,18 @@
 package com.it.audit.auth.interceptor;
 
+import javax.servlet.http.Cookie;
 //import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.it.audit.auth.AuthContextHolder;
+import com.it.audit.domain.ItAuditUser;
+import com.it.audit.util.CommonUtil;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -38,17 +42,24 @@ public class AuditCookieInterceptor extends HandlerInterceptorAdapter {
 			return super.preHandle(request, response, handler);
 		}
 		
-//		Cookie[] cookies = request.getCookies();
-//		Cookie kscCookie = null;
-//		Cookie subCookie = null;
-//		if (cookies != null) {
-//			for (Cookie cookie : cookies) {
-//			}
-//		}
-
-//		String token = kscCookie.getValue();
-//		String ip = request.getHeader("X-Forwarded-For");
-		AuthContextHolder.get().setLoginInfo(null);
+		ItAuditUser user = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			String token = null;
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals(CommonUtil.USER_COOKIE_KEY)){
+					token = cookie.getValue();
+				};
+			}
+			if(StringUtils.isNotBlank(token)){
+				
+			}
+		}
+		
+		if(user == null  /*或已停用*/){
+			
+		}
+		AuthContextHolder.get().setUserInfo(user);
 		return super.preHandle(request, response, handler);
 	}
 }

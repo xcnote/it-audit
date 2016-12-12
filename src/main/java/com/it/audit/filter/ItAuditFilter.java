@@ -30,7 +30,6 @@ public class ItAuditFilter implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		try{
-			System.err.println("filter");
 			AuthContextHolder.init();
 			req.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
