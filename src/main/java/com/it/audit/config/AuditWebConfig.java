@@ -1,5 +1,7 @@
 package com.it.audit.config;
 
+import java.util.List;
+
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
 import com.it.audit.auth.interceptor.AuditCookieInterceptor;
 import com.it.audit.auth.interceptor.AuditUserAuthInterceptor;
@@ -118,24 +122,24 @@ public class AuditWebConfig extends WebMvcConfigurerAdapter{
 //		stringHttpMessageConverter.setWriteAcceptCharset(false);
 //		return stringHttpMessageConverter;
 //	}
-	//exception handle
-//	@Override
-//    public final void configureHandlerExceptionResolvers(final List<HandlerExceptionResolver> exceptionResolvers) {
-//		exceptionResolvers.add(this.annotationExceptionHandlerExceptionResolver());
-//		exceptionResolvers.add(this.restExceptionResolver());
-//	}
-//	@Bean(name = "exceptionHandlerExceptionResolver")
-//    public ExceptionHandlerExceptionResolver annotationExceptionHandlerExceptionResolver() {
-//        final ExceptionHandlerExceptionResolver resolver = new ExceptionHandlerExceptionResolver();
-//        resolver.setOrder(0);
-//        return resolver;
-//    }
-//	@Bean(name = "restExceptionResolver")
-//    public RestExceptionHandler restExceptionResolver() {
-//        final RestExceptionHandler bean = new RestExceptionHandler();
-//        bean.setOrder(100);
-//        return bean;
-//    }
+//	exception handle
+	@Override
+    public final void configureHandlerExceptionResolvers(final List<HandlerExceptionResolver> exceptionResolvers) {
+		exceptionResolvers.add(this.annotationExceptionHandlerExceptionResolver());
+		exceptionResolvers.add(this.restExceptionResolver());
+	}
+	@Bean(name = "exceptionHandlerExceptionResolver")
+    public ExceptionHandlerExceptionResolver annotationExceptionHandlerExceptionResolver() {
+        final ExceptionHandlerExceptionResolver resolver = new ExceptionHandlerExceptionResolver();
+        resolver.setOrder(0);
+        return resolver;
+    }
+	@Bean(name = "restExceptionResolver")
+    public RestExceptionHandler restExceptionResolver() {
+        final RestExceptionHandler bean = new RestExceptionHandler();
+        bean.setOrder(100);
+        return bean;
+    }
 	
 	/**
 	 * filter默认配置的映射是：/*.

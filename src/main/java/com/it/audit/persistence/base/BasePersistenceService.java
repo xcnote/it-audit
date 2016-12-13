@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ksyun.live.common.persistence.base.BasePersistenceDao;
-
 public abstract class BasePersistenceService<T, PK extends Serializable> {
 
 	/**

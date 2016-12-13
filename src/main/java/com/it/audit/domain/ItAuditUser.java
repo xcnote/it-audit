@@ -4,12 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import lombok.Data;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.it.audit.enums.UserRole;
+import com.it.audit.enums.UserStatus;
+
+import lombok.Data;
 
 
 @javax.persistence.Entity
@@ -29,17 +32,25 @@ public class ItAuditUser {
 	@Column(name = "user_id")
 	private Long userId;
 	
-	//用户名
+	//用户姓名
 	@Column(name = "user_name")
 	private String userName;
 	
-	//用户类型
-	@Column(name = "user_type")
-	private String userType;
+	//用户名
+	@Column(name = "login_name", unique = true, nullable = false)
+	private String loginName;
+	
+	//密码
+	@Column(name = "password")
+	private String password;
+	
+	//用户角色
+	@Column(name = "user_role")
+	private UserRole userRole;
 	
 	//用户状态
 	@Column(name = "status")
-	private Long status;
+	private UserStatus status;
 	
 	//创建时间
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")

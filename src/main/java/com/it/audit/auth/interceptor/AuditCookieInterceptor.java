@@ -12,6 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.it.audit.auth.AuthContextHolder;
 import com.it.audit.domain.ItAuditUser;
+import com.it.audit.exception.NoLoginException;
 import com.it.audit.util.CommonUtil;
 
 import lombok.Setter;
@@ -52,9 +53,12 @@ public class AuditCookieInterceptor extends HandlerInterceptorAdapter {
 				};
 			}
 			if(StringUtils.isNotBlank(token)){
-				
+				throw new NoLoginException("not found login token in cookie");
 			}
+		} else {
+			throw new NoLoginException("not found login token in cookie");
 		}
+		
 		
 		if(user == null  /*或已停用*/){
 			
