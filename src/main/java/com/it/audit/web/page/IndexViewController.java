@@ -31,7 +31,7 @@ public class IndexViewController {
 		if(StringUtils.isNotBlank(userCookie)){
 			response.addCookie(new Cookie("it_audit", userCookie));
 		} else {
-			return new ModelAndView("login", "error", "用户名或密码不正确");
+			return buildErrorLoginPage("用户名或密码不正确");
 		}
 		return new ModelAndView("redirect:/");
 	}
@@ -39,5 +39,12 @@ public class IndexViewController {
 	@RequestMapping(value = RequestURI.INDEX_URI)
 	public String index(){
 		return "index";
+	}
+	
+	public static final ModelAndView buildErrorLoginPage(String error){
+		return new ModelAndView("login", "error", error);
+	}
+	public static final ModelAndView buildDefaultErrorPage(String error){
+		return new ModelAndView("error", "info", error);
 	}
 }

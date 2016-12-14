@@ -18,7 +18,7 @@ import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
 import com.it.audit.auth.AuthContextHolder;
-import com.it.audit.exception.NoLoginException;
+import com.it.audit.exception.NotLoginException;
 import com.it.audit.web.constants.RequestURI;
 
 import lombok.extern.slf4j.Slf4j;
@@ -90,7 +90,7 @@ public class RestExceptionHandler extends AbstractHandlerExceptionResolver imple
 //				status = 400;
 //			}
 			
-			if(ex instanceof NoLoginException){
+			if(ex instanceof NotLoginException){
 				return new ModelAndView("redirect:" + RequestURI.LOGIN_URI);
 			}
 			

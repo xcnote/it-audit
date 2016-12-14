@@ -1,10 +1,10 @@
 package com.it.audit.exception;
 
-public class NoLoginException extends RuntimeException {
+public class NotLoginException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
-
-	public NoLoginException(String message) {
+	
+	public NotLoginException(String message) {
         super(message);
     }
 }
