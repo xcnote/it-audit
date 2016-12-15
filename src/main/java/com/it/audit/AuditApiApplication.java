@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Import;
 
 import com.it.audit.config.AuditWebConfig;
 import com.it.audit.config.PropertyConfig;
+import com.it.audit.task.TaskManager;
 
 
 @Configuration
@@ -39,6 +40,9 @@ public class AuditApiApplication extends WebMvcAutoConfiguration {
 		}
 		final ApplicationContext ctx = SpringApplication.run(AuditApiApplication.class, args);
 		initStaticField(ctx);
+		
+		TaskManager taskManager = ctx.getBean(TaskManager.class);
+		taskManager.runLocalCacheExpire(60);
 	}
 	
 	private static void initStaticField(ApplicationContext ctx) {

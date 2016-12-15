@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.it.audit.common.CommonInfo;
-import com.it.audit.common.LocalCache;
+import com.it.audit.common.LocalCacheService;
 import com.it.audit.domain.ItAuditUser;
 import com.it.audit.enums.UserStatus;
 import com.it.audit.persistence.service.ItAuditUserPersistenceService;
@@ -17,7 +17,7 @@ public class UserService {
 	@Autowired
 	private ItAuditUserPersistenceService itAuditUserPersistenceService;
 	@Autowired
-	private LocalCache localCache;
+	private LocalCacheService localCache;
 
 	public String userLogin(String loginName, String password){
 		ItAuditUser user = this.itAuditUserPersistenceService.findByLoginNameAndPassword(loginName, password);
