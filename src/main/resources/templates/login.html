@@ -41,7 +41,7 @@
             </div><!--nopassword-->
             
             <div th:if="${not #strings.isEmpty(error)}" style="display: block;">
-            	<div class="loginmsg" style="color: red;">用户名或密码错误！</div>
+            	<div class="loginmsg" style="color: red;" th:text="${error}">用户名或密码错误！</div>
             </div>
             
             <form id="login" action="/login" method="post" enctype="application/json">

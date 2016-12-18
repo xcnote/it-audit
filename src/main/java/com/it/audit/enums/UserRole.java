@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum UserRole {
-	ADMIN(1 << 0, "管理员"),
-	EXECUTIVE(1 << 1, "高管"),
-	MANAGER(1 << 2, "项目经理"),
-	REVIEWER(1 << 3, "项目质量复核"),
-	AUDITOR(1 << 4, "审计师");
+	ADMIN(1 << 0, "系统管理员"),  //1
+	EXECUTIVE(1 << 1, "高管"),  //2
+	MANAGER(1 << 2, "项目经理"),  //4
+	REVIEWER(1 << 3, "项目质量复核"),  //8
+	AUDITOR(1 << 4, "审计师");  //16
 	
 	private int index;
 	private String text;
@@ -23,7 +23,7 @@ public enum UserRole {
 	 * @param indexs
 	 * @return
 	 */
-	public List<UserRole> splitRoles(int indexs){
+	public static List<UserRole> splitRoles(int indexs){
 		List<UserRole> result = new ArrayList<>();
 		UserRole[] roles = UserRole.values();
 		for(UserRole role: roles){
@@ -39,7 +39,7 @@ public enum UserRole {
 	 * @param roles
 	 * @return
 	 */
-	public int mergeRoles(List<UserRole> roles){
+	public static int mergeRoles(List<UserRole> roles){
 		int indexs = 0;
 		for(UserRole role: roles){
 			indexs = indexs | role.getIndex();

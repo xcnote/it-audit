@@ -24,8 +24,8 @@ public class SystemExceptionHandler extends AbstractHandlerExceptionResolver imp
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		this.getExceptionMapping().put(NotLoginException.class.getSimpleName(), IndexViewController.buildErrorLoginPage("登陆超时"));
-		this.getExceptionMapping().put(UserDisableException.class.getSimpleName(), IndexViewController.buildErrorLoginPage("用户失效"));
+		this.getExceptionMapping().put(NotLoginException.class.getSimpleName(), IndexViewController.buildErrorLoginPage("登陆信息已失效"));
+		this.getExceptionMapping().put(UserDisableException.class.getSimpleName(), IndexViewController.buildErrorLoginPage("用户已失效"));
 	}
 
 	@Override

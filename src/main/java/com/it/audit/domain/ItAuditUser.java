@@ -1,8 +1,11 @@
 package com.it.audit.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -46,7 +49,7 @@ public class ItAuditUser {
 	
 	//用户角色
 	@Column(name = "user_role")
-	private UserRole userRole;
+	private Integer userRole;
 	
 	//用户状态
 	@Column(name = "status")
@@ -63,4 +66,11 @@ public class ItAuditUser {
 	@DateTimeFormat
 	@Column(name = "update_time")
 	private DateTime updateTime;
+	
+	@Transient
+	private List<UserRole> roles;
+	
+	public List<UserRole> getRoles() {
+		return UserRole.splitRoles(this.userRole);
+	}
 }

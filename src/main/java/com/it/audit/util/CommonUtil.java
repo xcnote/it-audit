@@ -2,5 +2,9 @@ package com.it.audit.util;
 
 public class CommonUtil {
 
-	public static final String USER_COOKIE_KEY = "it_audit_token";
+	public static void checkAndThrowAssignException(boolean check, RuntimeException ex) throws RuntimeException{
+		if(!check){
+			throw ex;
+		}
+	}
 }

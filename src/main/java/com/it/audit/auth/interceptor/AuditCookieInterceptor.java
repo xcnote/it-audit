@@ -12,12 +12,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.it.audit.auth.AuthContextHolder;
+import com.it.audit.common.CommonInfo;
 import com.it.audit.domain.ItAuditUser;
-import com.it.audit.enums.UserStatus;
 import com.it.audit.exception.NotLoginException;
-import com.it.audit.exception.UserDisableException;
+import com.it.audit.model.UserInfo;
 import com.it.audit.service.UserService;
-import com.it.audit.util.CommonUtil;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +55,7 @@ public class AuditCookieInterceptor extends HandlerInterceptorAdapter {
 		String token = null;
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if(cookie.getName().equals(CommonUtil.USER_COOKIE_KEY)){
+				if(cookie.getName().equals(CommonInfo.USER_COOKIE_KEY)){
 					token = cookie.getValue();
 				};
 			}
@@ -69,11 +68,8 @@ public class AuditCookieInterceptor extends HandlerInterceptorAdapter {
 		if(user == null){
 			throw new NotLoginException("not found login token in cookie");
 		}
-		if(user.getStatus() == UserStatus.disable){
-			throw new UserDisableException("user login request reject because disable.");
-		}
 		
-		AuthContextHolder.get().setUserInfo(user);
+		AuthContextHolder.get().setUserInfo(new UserInfo(token, user));
 		return super.preHandle(request, response, handler);
 	}
 }

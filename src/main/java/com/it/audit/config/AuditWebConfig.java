@@ -126,7 +126,7 @@ public class AuditWebConfig extends WebMvcConfigurerAdapter{
 	@Override
     public final void configureHandlerExceptionResolvers(final List<HandlerExceptionResolver> exceptionResolvers) {
 		exceptionResolvers.add(this.annotationExceptionHandlerExceptionResolver());
-		exceptionResolvers.add(this.restExceptionResolver());
+		exceptionResolvers.add(this.systemExceptionResolver());
 	}
 	@Bean(name = "exceptionHandlerExceptionResolver")
     public ExceptionHandlerExceptionResolver annotationExceptionHandlerExceptionResolver() {
@@ -134,9 +134,9 @@ public class AuditWebConfig extends WebMvcConfigurerAdapter{
         resolver.setOrder(0);
         return resolver;
     }
-	@Bean(name = "restExceptionResolver")
-    public RestExceptionHandler restExceptionResolver() {
-        final RestExceptionHandler bean = new RestExceptionHandler();
+	@Bean(name = "systemExceptionResolver")
+    public SystemExceptionHandler systemExceptionResolver() {
+        final SystemExceptionHandler bean = new SystemExceptionHandler();
         bean.setOrder(100);
         return bean;
     }
