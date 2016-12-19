@@ -1,7 +1,22 @@
 
-<li><a href="#" class="elements">项目创建</a></li>
-<li><a href="PM-test.html" class="elements">项目管理</a></li>
-<li><a href="#" class="elements">项目报告</a></li>
-<li><a href="#" class="elements">知识库查询</a></li>
+<li th:if="${role=='ADMIN'}"><a href="#" class="elements">用户管理</a></li>
+<li th:if="${role=='ADMIN'}"><a href="PM-test.html" class="elements">知识库管理</a></li>
+
+<li th:if="${role=='EXECUTIVE'}"><a href="#" class="elements">管理层驾驶舱</a></li>
+<li th:if="${role=='EXECUTIVE'}"><a href="#" class="elements">报告调阅</a></li>
+<li th:if="${role=='EXECUTIVE'}"><a href="#" class="elements">知识库查询</a></li>
+
+<li th:if="${role=='MANAGER'}"><a href="#" class="elements">项目创建</a></li>
+<li th:if="${role=='MANAGER'}"><a href="PM-test.html" class="elements">项目管理</a></li>
+<li th:if="${role=='MANAGER'}"><a href="#" class="elements">项目报告</a></li>
+<li th:if="${role=='MANAGER'}"><a href="#" class="elements">知识库查询</a></li>
+
+<li th:if="${role=='REVIEWER'}"><a href="#" class="elements">项目复核</a></li>
+<li th:if="${role=='REVIEWER'}"><a href="#" class="elements">项目报告</a></li>
+<li th:if="${role=='REVIEWER'}"><a href="#" class="elements">知识库查询</a></li>
+
+<li th:if="${role=='AUDITOR'}"><a href="#" class="elements">项目工作</a></li>
+<li th:if="${role=='AUDITOR'}"><a href="#" class="elements">项目报告</a></li>
+<li th:if="${role=='AUDITOR'}"><a href="#" class="elements">知识库查询</a></li>
 
 

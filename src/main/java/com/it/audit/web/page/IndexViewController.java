@@ -66,15 +66,19 @@ public class IndexViewController {
 	}
 	
 	@RequestMapping(value = RequestURI.INDEX_LEFT_URI)
-	public String leftMenu(@PathVariable UserRole role){
-		System.out.println(role + "=========================left");
-		return "leftmenu";
+	public ModelAndView leftMenu(@PathVariable UserRole role){
+		return new ModelAndView("leftmenu", "role", role.name());
 	}
 	
 	@RequestMapping(value = RequestURI.INDEX_CENTER_URI)
-	public String centerContent(@PathVariable UserRole role){
-		System.out.println(role + "=========================center");
-		return "centercontent";
+	public ModelAndView centerContent(@PathVariable UserRole role){
+		switch (role) {
+		case ADMIN:
+			return new ModelAndView("user/list", "role", role.name());
+		default:
+			break;
+		}
+		return buildDefaultErrorPage("请开通所需权限");
 	}
 	
 	public static final ModelAndView buildErrorLoginPage(String error){

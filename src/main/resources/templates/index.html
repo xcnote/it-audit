@@ -78,8 +78,8 @@
     
     <div class="header">
     	<ul class="headermenu">
-        	<li class="current" th:each="roleConfig,index:${indexInfo.allRole}">
-        		<a th:class="${indexInfo.user.roles.contains(roleConfig.role)}?opened:notOpened" href="javascript:void(0);" th:onclick="'headerMenuClick(this,\''+${roleConfig.leftMenuUrl}+'\',\''+${roleConfig.centerContentUrl}+'\');'">
+        	<li id="headermenu" class="" th:each="roleConfig,index:${indexInfo.allRole}">
+        		<a th:class="${indexInfo.user.roles != null and indexInfo.user.roles.contains(roleConfig.role)}?opened:notOpened" href="javascript:void(0);" th:onclick="'headerMenuClick(this,\''+${roleConfig.leftMenuUrl}+'\',\''+${roleConfig.centerContentUrl}+'\');'">
         			<span th:class="${'icon '+roleConfig.imgClass}"></span>
         			<span th:text="${roleConfig.role.text}">功能列表</span>
         		</a>
