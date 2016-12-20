@@ -13,6 +13,7 @@ import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 import com.it.audit.auth.AuthContextHolder;
 import com.it.audit.exception.NotLoginException;
 import com.it.audit.exception.UserDisableException;
+import com.it.audit.web.ErrorViewController;
 import com.it.audit.web.page.IndexViewController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +39,10 @@ public class SystemExceptionHandler extends AbstractHandlerExceptionResolver imp
 		if(getExceptionMapping().containsKey(exName)){
 			return getExceptionMapping().get(exName);
 		}
-			
-		return IndexViewController.buildDefaultErrorPage("系统出现未知错误！");
+		
+		Map<String, Object> error = new HashMap<>();
+		error.put("errmsg", ex.getMessage());
+		return ErrorViewController.buildDefaultErrorPage(error);
 	}
 	
 	public Map<String, ModelAndView> getExceptionMapping() {
