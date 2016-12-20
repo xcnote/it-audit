@@ -339,10 +339,10 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 
 .pageheader { padding-top: 20px; background: url(../images/default/noise.white.png); position: relative; }
 .pageheader .pagetitle { 
-	margin: 0 10px; color: #485b79; font-weight: normal; font-size: 28px; font-family: 'RobotoBoldCondensed', Arial, Helvetica, sans-serif; 
+	margin: 0 10px; color: #485b79; font-weight: normal; font-size: 20px; font-family: 'RobotoBoldCondensed', Arial, Helvetica, sans-serif; 
 }
 .pageheader .pagedesc { color: #666; margin: 0 10px; }
-.notab { border-bottom: 1px solid #ddd; padding-bottom: 20px; }
+.notab { border-bottom: 1px solid #ddd; /*padding-bottom: 20px;*/ }
 
 
 /***** 9. HORIZONTAL NAVIGATION STYLES *****/

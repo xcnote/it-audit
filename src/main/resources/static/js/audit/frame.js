@@ -1,7 +1,8 @@
 jQuery(document).ready(function(){
 	jQuery("#headermenu a.opened:first").click();
 	if(jQuery("#headermenu a.opened:first").length == 0){
-		alert("您尚未开通任何角色，请联系系统管理员");
+		jAlert('您尚未开通任何角色，请联系系统管理员', '提示');
+		//alert("您尚未开通任何角色，请联系系统管理员");
 	}
 });
 
@@ -17,8 +18,10 @@ function headerMenuClick(Obj, left, center) {
 }
 
 function actionNotOpened(){
-	alert("当前功能尚未开通");
+	jAlert('当前功能尚未开通', '提示');
+	//alert("当前功能尚未开通");
 }
 function notHaveThisRole(){
-	alert("您尚未开通此角色");
+	jAlert('您尚未开通此角色', '提示');
+	//alert("您尚未开通此角色");
 }

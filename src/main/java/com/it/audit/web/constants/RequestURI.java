@@ -11,6 +11,6 @@ public class RequestURI {
 
 	public static final String ERROR_PAGE = "/404";
 	
-	public static final String[] INTERCEPT_URI = new String[]{BASE_URI, INDEX_URI, INDEX_URI + "/*", LOGOUT_URI};
+	public static final String[] INTERCEPT_URI = new String[]{BASE_URI, INDEX_URI, INDEX_URI + "/**", LOGOUT_URI};
 	public static final String[] AUTH_URI = INTERCEPT_URI;
 }

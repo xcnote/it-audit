@@ -173,7 +173,7 @@ public class AuditWebConfig extends WebMvcConfigurerAdapter{
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 		filterRegistrationBean.setFilter(itAuditFilter);
 		filterRegistrationBean.setEnabled(true);
-		filterRegistrationBean.addUrlPatterns(RequestURI.INTERCEPT_URI);
+		filterRegistrationBean.addUrlPatterns("/*");
 		return filterRegistrationBean;
 	}
 }

@@ -36,8 +36,8 @@ public class IndexViewController {
 	}
 	
 	@RequestMapping(value = RequestURI.LOGIN_URI, method = RequestMethod.GET)
-	public String login(){
-		return "login";
+	public ModelAndView login(String error){
+		return new ModelAndView("login", "error", error);
 	}
 	
 	@RequestMapping(value = RequestURI.LOGIN_URI, method = RequestMethod.POST)
@@ -78,10 +78,10 @@ public class IndexViewController {
 		default:
 			break;
 		}
-		return buildDefaultErrorPage("请开通所需权限");
+		return new ModelAndView();
 	}
 	
 	public static final ModelAndView buildErrorLoginPage(String error){
-		return new ModelAndView("login", "error", error);
+		return new ModelAndView("redirect:" + RequestURI.LOGIN_URI, "error", error);
 	}
 }
