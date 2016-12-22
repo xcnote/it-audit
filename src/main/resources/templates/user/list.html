@@ -1,5 +1,6 @@
 <script type="text/javascript">
 jQuery.getScript('js/custom/tables.js', function() {});
+//jQuery.getScript('js/custom/elements.js', function() {});
 </script>
 
 <div class="pageheader notab">
@@ -16,7 +17,7 @@ jQuery.getScript('js/custom/tables.js', function() {});
         <button class="radius3">查询</button>
         <div class="right_move">
         <button class="radius3">删除</button> &nbsp;
-        <button class="radius3">新增</button> &nbsp;
+        <button class="radius3" onclick="loadCenterContent('/index/user/create');">新增</button> &nbsp;
         </div>
     </div><!--tableoptions-->	
     <table cellpadding="0" cellspacing="0" border="0" id="table1" class="stdtable stdtablecb">
@@ -41,26 +42,32 @@ jQuery.getScript('js/custom/tables.js', function() {});
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <tr th:each="user,index:${users.page.content}">
             	<td align="center"><input type="checkbox" /></td>
-                <td>Trident</td>
-                <td>Internet Explorer 4.0</td>
-                <td>Win 95+</td>
-                <td class="center">4</td>
-                <td class="center">X</td>
-                <td class="center">X</td>
+                <td th:text="${user.userId}" class="center"></td>
+                <td th:text="${user.userName}" class="center"></td>
+                <td th:text="${user.loginName}" class="center"></td>
+                <td th:text="${user.roleNames}" class="center"></td>
+                <td th:text="${user.status.text}" class="center"></td>
+                <td th:text="${user.createTime}" class="center"></td>
             </tr>
         </tbody>
     </table>
-	<ul class="pagination">
-		<li class="first"><a href="" class="disable">&laquo;</a></li>
-		<li class="previous"><a href="" class="disable">&lsaquo;</a></li>
-		<li><a href="" class="current">1</a></li>
-		<li><a href="">2</a></li>
-		<li><a href="">3</a></li>
-		<li><a href="">4</a></li>
-		<li><a href="">5</a></li>
-		<li class="next"><a href="">&rsaquo;</a></li>
-		<li class="last"><a href="">&raquo;</a></li>
-	</ul>
+    <div class="right_padding_top">
+		<ul class="pagination">
+			<li class="first">
+				<a href="javascript:void(0);" onclick="loadCenterContent('/index/user/page?page=0');" th:class="${users.page.isFirst()}?'disable':''">&laquo;</a>
+			</li>
+			<li class="previous">
+				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${users.page.hasPrevious()?(users.page.number-1):0}+'\');'" th:class="${users.page.isFirst()}?'disable':''">&lsaquo;</a>
+			</li>
+			<li th:each="i:${#numbers.sequence(users.startpage, users.endpage)}"><a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${i-1}+'\');'" th:text="${i}" th:class="${users.page.number+1 == i}?'current':''">1</a></li>
+			<li class="next">
+				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${users.page.hasNext()?(users.page.number+1):0}+'\');'" th:class="${users.page.isLast()}?'disable':''">&rsaquo;</a>
+			</li>
+			<li class="last">
+				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${users.page.totalPages}+'\');'" th:class="${users.page.isLast()}?'disable':''">&raquo;</a>
+			</li>
+		</ul>
+	</div>
 </div><!--contentwrapper-->

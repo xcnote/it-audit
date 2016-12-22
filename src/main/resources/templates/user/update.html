@@ -1,0 +1,73 @@
+<script type="text/javascript">
+jQuery.getScript('js/custom/forms.js', function() {});
+//jQuery.getScript('js/custom/elements.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">系统管理 > 新增用户</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+   	<div id="basicform" class="subcontent">
+	<form class="stdform" method="post" action="">
+		<p>
+			<label>用户ID</label>
+		    <span class="field"><input type="text" disabled="disabled" class="smallinput disable" /></span>
+		</p>
+		
+		<p>
+			<label>用户姓名</label>
+		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		</p>
+	
+		<p>
+			<label>登陆名</label>
+		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		</p>
+		
+		<p>
+			<label>登陆密码</label>
+		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		</p>
+		
+		<p>
+			<label>登陆密码确认</label>
+		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		</p>
+	
+		<p>
+		    <label>用户角色</label>
+			<span class="formwrapper">
+				<input type="checkbox" name="check2" /> Unchecked Checkbox<br />
+				<input type="checkbox" name="check2" checked="checked" /> Checked Checkbox <br />
+			    <input type="checkbox" name="check2" disabled="disabled" /> Disabled Checkbox <br /> 
+			    <input type="checkbox" name="check2" disabled="disabled" checked="checked" /> Disabled Checked Checkbox
+			</span>
+		</p>
+	 	<!-- 
+	    <p>
+	    	<label>Location <small>You can put your own description for this field here.</small></label>
+	        <span class="field"><textarea cols="80" rows="5" name="location" id="location2" class="longinput"></textarea></span>
+	    </p>
+	     -->
+	    <p>
+	    	<label>用户状态</label>
+	        <span class="field">
+	        <select name="select" class="uniformselect">
+				<option value="">Choose One</option>
+			    <option value="">Selection One</option>
+			    <option value="">Selection Two</option>
+			    <option value="">Selection Three</option>
+			    <option value="">Selection Four</option>
+			</select>
+	        </span>
+	    </p>
+	    
+	    
+	    <p class="stdformbutton">
+	    	<button class="submit radius2">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+	</div>
+</div>

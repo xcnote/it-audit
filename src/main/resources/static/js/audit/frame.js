@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 function headerMenuClick(Obj, left, center) {
 	if(Obj.className == "opened"){
 		jQuery("#leftmenu").load(left);
-		jQuery("#centercontent").load(center)
+		//jQuery("#centercontent").load(center)
 		jQuery(Obj).parent().parent().children().removeAttr("class");
 		jQuery(Obj).parent().attr("class","current");
 	} else {

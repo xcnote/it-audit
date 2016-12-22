@@ -1,5 +1,7 @@
 package com.it.audit.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -72,5 +74,13 @@ public class ItAuditUser {
 	
 	public List<UserRole> getRoles() {
 		return UserRole.splitRoles(this.userRole);
+	}
+	public List<String> getRoleNames() {
+		if(this.getRoles() == null) return Arrays.asList("未配置任何角色");
+		List<String> roleNames = new ArrayList<String>();
+		for(UserRole role: this.getRoles()){
+			roleNames.add(role.getText());
+		}
+		return roleNames;
 	}
 }

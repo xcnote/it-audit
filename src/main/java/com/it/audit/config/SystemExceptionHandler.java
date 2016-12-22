@@ -34,7 +34,7 @@ public class SystemExceptionHandler extends AbstractHandlerExceptionResolver imp
 			HttpServletResponse response, Object handler, Exception ex) {
 		String requestId = AuthContextHolder.get().getRequestId();
 		String exName = ex.getClass().getSimpleName();
-		log.error("reqeust {} happen a exception {}. error info:{}", requestId, exName, ex.getMessage());
+		log.error("reqeust {} happen a exception {}. error:{}", requestId, exName, ex);
 		
 		if(getExceptionMapping().containsKey(exName)){
 			return getExceptionMapping().get(exName);

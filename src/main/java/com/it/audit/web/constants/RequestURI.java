@@ -8,6 +8,9 @@ public class RequestURI {
 	public static final String INDEX_URI = "/index";
 	public static final String INDEX_LEFT_URI = INDEX_URI + "/left/{role}";
 	public static final String INDEX_CENTER_URI = INDEX_URI + "/center/{role}";
+	
+	public static final String USER_PAGE = INDEX_URI + "/user/page";
+	public static final String USER_CREATE = INDEX_URI + "/user/create";
 
 	public static final String ERROR_PAGE = "/404";
 	

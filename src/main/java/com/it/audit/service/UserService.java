@@ -3,6 +3,8 @@ package com.it.audit.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.it.audit.common.CommonInfo;
@@ -61,5 +63,14 @@ public class UserService {
 	public void userLogout(String token, Long userId){
 		this.localCache.delete(String.format(CommonInfo.LOCAL_CACHE_KEY_LOGIN_FORMAT, token));
 		this.localCache.delete(String.format(CommonInfo.LOCAL_CACHE_KEY_USER_INFO, userId));
+	}
+	
+	/**
+	 * 查询用户分页
+	 * @param pageRequest
+	 * @return
+	 */
+	public Page<ItAuditUser> queryUserPage(PageRequest pageRequest){
+		return this.itAuditUserPersistenceService.findPage(pageRequest);
 	}
 }

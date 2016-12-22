@@ -72,12 +72,12 @@ public class IndexViewController {
 	
 	@RequestMapping(value = RequestURI.INDEX_CENTER_URI)
 	public ModelAndView centerContent(@PathVariable UserRole role){
-		switch (role) {
-		case ADMIN:
-			return new ModelAndView("user/list", "role", role.name());
-		default:
-			break;
-		}
+//		switch (role) {
+//		case ADMIN:
+//			return new ModelAndView("user/list", "role", role.name());
+//		default:
+//			break;
+//		}
 		return new ModelAndView();
 	}
 	
