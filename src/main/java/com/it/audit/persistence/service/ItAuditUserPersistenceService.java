@@ -26,4 +26,8 @@ public class ItAuditUserPersistenceService extends BasePersistenceService<ItAudi
 	public ItAuditUser findByUserId(Long userId){
 		return this.itAuditUserRepository.findByUserId(userId);
 	}
+
+	public ItAuditUser findByLoginName(String loginName) {
+		return this.itAuditUserRepository.findByLoginName(loginName);
+	}
 }

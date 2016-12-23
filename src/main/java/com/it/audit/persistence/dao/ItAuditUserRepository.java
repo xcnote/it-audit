@@ -8,4 +8,6 @@ public interface ItAuditUserRepository extends BasePersistenceDao<ItAuditUser, L
 	ItAuditUser findByLoginNameAndPassword(String loginName, String password);
 
 	ItAuditUser findByUserId(Long userId);
+
+	ItAuditUser findByLoginName(String loginName);
 }

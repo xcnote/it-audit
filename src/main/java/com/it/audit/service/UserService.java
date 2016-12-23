@@ -2,6 +2,7 @@ package com.it.audit.service;
 
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,18 +11,24 @@ import org.springframework.stereotype.Service;
 import com.it.audit.common.CommonInfo;
 import com.it.audit.common.LocalCacheService;
 import com.it.audit.domain.ItAuditUser;
+import com.it.audit.enums.UserRole;
 import com.it.audit.enums.UserStatus;
 import com.it.audit.exception.UserDisableException;
 import com.it.audit.persistence.service.ItAuditUserPersistenceService;
 import com.it.audit.util.CommonUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserService {
 	
 	@Autowired
 	private ItAuditUserPersistenceService itAuditUserPersistenceService;
 	@Autowired
 	private LocalCacheService localCache;
+	
+	private static final Long user_id_base = 1000000L;
 
 	/**
 	 * 用户登陆
@@ -72,5 +79,42 @@ public class UserService {
 	 */
 	public Page<ItAuditUser> queryUserPage(PageRequest pageRequest){
 		return this.itAuditUserPersistenceService.findPage(pageRequest);
+	}
+	
+	/**
+	 * 检查登陆名是否存在
+	 * @param loginName
+	 * @return
+	 */
+	public boolean checkLoginName(String loginName){
+		ItAuditUser user = this.itAuditUserPersistenceService.findByLoginName(loginName);
+		return user == null;
+	}
+	
+	/**
+	 * 添加用户
+	 * @param user
+	 * @return
+	 */
+	public String userCreate(ItAuditUser user){
+		String loginName = user.getLoginName();
+		boolean loginNameIsOk = this.checkLoginName(loginName);
+		if(!loginNameIsOk){
+			return "用户登录名已经存在，用户创建失败";
+		}
+		
+		try{
+			DateTime time = new DateTime();
+			user.setUserRole(UserRole.mergeRoles(user.getSourceRoles()));
+			user.setCreateTime(time);
+			user.setUpdateTime(time);
+			ItAuditUser result = this.itAuditUserPersistenceService.save(user);
+			result.setUserId(user_id_base + result.getId());
+			this.itAuditUserPersistenceService.save(result);
+		} catch (Exception e) {
+			log.error("create user error. user:{}", user, e);
+			return "未知错误，用户添加失败";
+		}
+		return null;
 	}
 }

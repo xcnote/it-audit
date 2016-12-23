@@ -20,9 +20,9 @@ import com.it.audit.model.UserInfo;
 import com.it.audit.service.UserService;
 import com.it.audit.util.UserRoleConfig;
 import com.it.audit.web.constants.RequestURI;
-import com.it.audit.web.dao.IndexInfo;
-import com.it.audit.web.dao.LoginInfo;
-import com.it.audit.web.dao.UserRolePage;
+import com.it.audit.web.dto.IndexInfo;
+import com.it.audit.web.dto.LoginInfo;
+import com.it.audit.web.dto.UserRolePage;
 
 @Controller
 public class IndexViewController {
@@ -62,7 +62,14 @@ public class IndexViewController {
 	public ModelAndView index(){
 		UserInfo user = AuthContextHolder.get().getUserInfo();
 		List<UserRolePage> roleConfigs = UserRoleConfig.getRolePageConfigs();
-		return new ModelAndView("index", "indexInfo", new IndexInfo(user, roleConfigs));
+		return new ModelAndView("index", "indexInfo", new IndexInfo(user, roleConfigs, null, null, null));
+	}
+	
+	@RequestMapping(value = RequestURI.INDEX_URI_RELAY)
+	public ModelAndView index(@PathVariable(value="index") Integer index, @PathVariable(value="modul") String model, @PathVariable(value="action") String action){
+		UserInfo user = AuthContextHolder.get().getUserInfo();
+		List<UserRolePage> roleConfigs = UserRoleConfig.getRolePageConfigs();
+		return new ModelAndView("index", "indexInfo", new IndexInfo(user, roleConfigs, index, model, action));
 	}
 	
 	@RequestMapping(value = RequestURI.INDEX_LEFT_URI)

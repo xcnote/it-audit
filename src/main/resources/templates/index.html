@@ -4,28 +4,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>IT Audit System | 管理系统</title>
-<link rel="stylesheet" href="css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="css/audit/custom.css" type="text/css" />
-<script type="text/javascript" src="js/plugins/jquery-1.7.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.cookie.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.validate.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.tagsinput.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.jgrowl.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.alerts.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/plugins/colorpicker.js"></script>
-<script type="text/javascript" src="js/plugins/charCount.js"></script>
-<script type="text/javascript" src="js/plugins/ui.spinner.min.js"></script>
-<script type="text/javascript" src="js/plugins/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="js/custom/general.js"></script>
-<script type="text/javascript" src="js/custom/forms.js"></script>
+<link rel="stylesheet" href="/css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="/css/audit/custom.css" type="text/css" />
+<script type="text/javascript" src="/js/plugins/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.cookie.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.jgrowl.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.alerts.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/js/plugins/colorpicker.js"></script>
+<script type="text/javascript" src="/js/plugins/charCount.js"></script>
+<script type="text/javascript" src="/js/plugins/ui.spinner.min.js"></script>
+<script type="text/javascript" src="/js/plugins/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="/js/custom/general.js"></script>
+<script type="text/javascript" src="/js/custom/forms.js"></script>
 
-<script type="text/javascript" src="js/audit/frame.js"></script>
+<script type="text/javascript" src="/js/audit/frame.js"></script>
 </head>
 
 <body class="withvernav">
+<span style="display: none;" id="toIndex" th:text="${indexInfo.index}"></span>
+<span style="display: none;" id="toModel" th:text="${indexInfo.model}"></span>
+<span style="display: none;" id="toAction" th:text="${indexInfo.action}"></span>
 <div class="bodywrapper">
     <div class="topheader">
         <div class="left">
@@ -49,13 +52,13 @@
                 <a class="count" href="ajax/notifications.html"><span>9</span></a>
         	</div> -->
             <div class="userinfo">
-            	<img src="images/thumbs/avatar.png" alt="" />
+            	<img src="/images/thumbs/avatar.png" alt="" />
                 <span th:text="${indexInfo.user.userName}">未知用户</span>
             </div><!--userinfo-->
             
             <div class="userinfodrop">
             	<div class="avatar">
-                	<a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
+                	<a href=""><img src="/images/thumbs/avatarbig.png" alt="" /></a>
                     <div class="changetheme">
                     	Change theme: <br />
                     	<a class="default"></a>
@@ -83,7 +86,7 @@
     <div class="header">
     	<ul class="headermenu">
         	<li id="headermenu" class="" th:each="roleConfig,index:${indexInfo.allRole}">
-        		<a th:class="${indexInfo.user.roles != null and indexInfo.user.roles.contains(roleConfig.role)}?opened:notOpened" href="javascript:void(0);" th:onclick="'headerMenuClick(this,\''+${roleConfig.leftMenuUrl}+'\',\''+${roleConfig.centerContentUrl}+'\');'">
+        		<a th:id="${'header' + roleConfig.role.ordinal()}" th:class="${indexInfo.user.roles != null and indexInfo.user.roles.contains(roleConfig.role)}?opened:notOpened" th:href="${'/index/'+ roleConfig.role.ordinal() +'/defalut/page'}" th:onclick="'headerMenuClick(this,\''+${roleConfig.leftMenuUrl}+'\',\''+${roleConfig.centerContentUrl}+'\');'">
         			<span th:class="${'icon '+roleConfig.imgClass}"></span>
         			<span th:text="${roleConfig.role.text}">功能列表</span>
         		</a>

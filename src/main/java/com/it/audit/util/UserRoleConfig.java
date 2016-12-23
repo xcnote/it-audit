@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.it.audit.enums.UserRole;
 import com.it.audit.web.constants.RequestURI;
-import com.it.audit.web.dao.UserRolePage;
+import com.it.audit.web.dto.UserRolePage;
 
 public class UserRoleConfig {
 	

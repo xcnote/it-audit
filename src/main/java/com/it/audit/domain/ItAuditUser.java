@@ -70,8 +70,11 @@ public class ItAuditUser {
 	private DateTime updateTime;
 	
 	@Transient
-	private List<UserRole> roles;
+	private List<UserRole> roles = new ArrayList<UserRole>();
 	
+	public List<UserRole> getSourceRoles(){
+		return this.roles;
+	}
 	public List<UserRole> getRoles() {
 		return UserRole.splitRoles(this.userRole);
 	}

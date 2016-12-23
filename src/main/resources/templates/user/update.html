@@ -1,5 +1,5 @@
 <script type="text/javascript">
-jQuery.getScript('js/custom/forms.js', function() {});
+jQuery.getScript('/js/custom/forms.js', function() {});
 //jQuery.getScript('js/custom/elements.js', function() {});
 </script>
 
@@ -9,39 +9,45 @@ jQuery.getScript('js/custom/forms.js', function() {});
 
 <div id="contentwrapper" class="contentwrapper">
    	<div id="basicform" class="subcontent">
-	<form class="stdform" method="post" action="">
+	<form class="stdform" method="post" id='userCreateOrUpdate' action="javascript:void(0);">
 		<p>
 			<label>用户ID</label>
-		    <span class="field"><input type="text" disabled="disabled" class="smallinput disable" /></span>
+		    <span class="field">
+		    	<input th:if="${userInfo.create}" type="text" disabled="disabled" class="smallinput" style="background:#eee" value="用户ID由系统自动生成"/>
+		    	<input th:if="${!userInfo.create}" type="text" disabled="disabled" class="smallinput" style="background:#eee" name="userId" th:value="${user.userId}"/>
+		    </span>
 		</p>
 		
 		<p>
 			<label>用户姓名</label>
-		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		    <span class="field">
+		    	<input type="text" name="userName" class="smallinput" th:text="${userInfo.user==null? '':userInfo.user.userName}"/>
+		    </span>
 		</p>
 	
 		<p>
 			<label>登陆名</label>
-		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		    <span class="field">
+		    	<input type="text" name="loginName" class="smallinput" th:text="${userInfo.user==null? '':userInfo.user.userName}"/>
+		    </span>
 		</p>
 		
 		<p>
 			<label>登陆密码</label>
-		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		    <span class="field"><input type="password" name="password" class="smallinput form_password_input" /></span>
 		</p>
 		
 		<p>
 			<label>登陆密码确认</label>
-		    <span class="field"><input type="text" name="lastname" id="lastname2" class="smallinput" /></span>
+		    <span class="field"><input type="password" name="password2" class="smallinput form_password_input" /></span>
 		</p>
 	
 		<p>
 		    <label>用户角色</label>
 			<span class="formwrapper">
-				<input type="checkbox" name="check2" /> Unchecked Checkbox<br />
-				<input type="checkbox" name="check2" checked="checked" /> Checked Checkbox <br />
-			    <input type="checkbox" name="check2" disabled="disabled" /> Disabled Checkbox <br /> 
-			    <input type="checkbox" name="check2" disabled="disabled" checked="checked" /> Disabled Checked Checkbox
+				<span th:each="role,index:${userInfo.roles}">
+				<input type="checkbox" th:checked="${userInfo.user!=null and userInfo.user.roles.contains(role)?'checked':false}" name="roles" th:value="${role}" th:text="${role.text}"/><br />
+				</span>
 			</span>
 		</p>
 	 	<!-- 
@@ -53,21 +59,18 @@ jQuery.getScript('js/custom/forms.js', function() {});
 	    <p>
 	    	<label>用户状态</label>
 	        <span class="field">
-	        <select name="select" class="uniformselect">
-				<option value="">Choose One</option>
-			    <option value="">Selection One</option>
-			    <option value="">Selection Two</option>
-			    <option value="">Selection Three</option>
-			    <option value="">Selection Four</option>
+	        <select name="status" class="uniformselect">
+				<option th:each="one,index:${userInfo.allStatus}" th:selected="${userInfo.user!=null and userInfo.user.status==one?'selected':false}" th:value="${one}" th:text="${one.text}"></option>
 			</select>
 	        </span>
 	    </p>
 	    
-	    
 	    <p class="stdformbutton">
-	    	<button class="submit radius2">提交</button>
+	    	<button class="submit radius2" onclick="submitForm('userCreateOrUpdate', '/index/user/create', 'index/user/page?page=0'); return false;">提交</button>
 	        <input type="reset" class="reset radius2" value="重置" />
 	    </p>
+	    
+	    <span style="display: ;" th:if="${userInfo.errmsg != null}" th:text="${userInfo.errmsg}"></span>
 	</form>
 	</div>
 </div>

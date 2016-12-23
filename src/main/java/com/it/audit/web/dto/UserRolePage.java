@@ -1,4 +1,4 @@
-package com.it.audit.web.dao;
+package com.it.audit.web.dto;
 
 import com.it.audit.enums.UserRole;
 
