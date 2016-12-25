@@ -1,0 +1,97 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+jQuery.getScript('/js/custom/elements.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">项目经理 > 项目创建</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+   	<div id="basicform" class="subcontent">
+	<form class="stdform" method="post" id='userCreateOrUpdate' action="javascript:void(0);">
+		<p>
+			<label>客户姓名</label>
+		    <span class="field">
+		    	<input type="text" name="userName" class="smallinput" required="true"/>
+		    </span>
+		</p>
+		<p>
+	    	<label>客户所处行业</label>
+	        <span class="field">
+	        <select name="status" class="uniformselect" required="true">
+				<option th:each="one,index:${industrys}" th:value="${one.id}" th:text="${one.name}"></option>
+			</select>
+	        </span>
+	    </p>
+	    <p>
+	    	<label>客户资产规模</label>
+	        <span class="field">
+	        <select name="status1" class="uniformselect" required="true">
+				<option value="1000亿以上">1000亿以上</option>
+				<option value="100-1000亿">100-1000亿</option>
+				<option value="10-100亿">10-100亿</option>
+				<option value="1-10亿">1-10亿</option>
+				<option value="1000万-1亿">1000万-1亿</option>
+				<option value="1000万以下">1000万以下</option>
+			</select>
+	        </span>
+	    </p>
+	    <p>
+	    	<label>客户风险评级</label>
+	        <span class="field">
+	        <select name="status3" class="uniformselect" required="true">
+				<option value="高">高</option>
+				<option value="中高">中高</option>
+				<option value="中">中</option>
+				<option value="中低">中低</option>
+				<option value="低">低</option>
+			</select>
+	        </span>
+	    </p>
+	
+		<p>
+			<label>项目名称</label>
+		    <span class="field">
+		    	<input type="text" name="loginName" class="smallinput" required="true"/>
+		    </span>
+		</p>
+		<p>
+		    <label>是否隶属于财务审计项目</label>
+            <span class="field">
+            	<input type="radio" name="radiofield" /> 是 &nbsp; &nbsp;
+            	<input type="radio" name="radiofield" checked="checked" /> 否 &nbsp; &nbsp;
+            </span>
+		</p>
+		<p>
+			<label>财务审计项目编号</label>
+		    <span class="field">
+		    	<input type="text" name="loginName" class="smallinput" required="true"/>
+		    </span>
+		</p>
+		<p>
+			<label>审计期间</label>
+		    <span class="field">
+		    	<input type="text" class="width100 datepicker" /> - &nbsp;
+		    	<input type="text" class="width100 datepicker" /> 
+		    </span>
+		</p>
+		<p>
+			<label>现场工作时间</label>
+		    <span class="field">
+		    	<input type="text" class="width100 datepicker" /> - &nbsp;
+		    	<input type="text" class="width100 datepicker" /> 
+		    </span>
+		</p>
+	    <p>
+	    	<label>审计目标 </label>
+	        <span class="field"><textarea cols="80" rows="5" name="location" id="location2" class="longinput"></textarea></span>
+	    </p>
+	    
+	    <p class="stdformbutton">
+	    	<button class="submit radius2" th:onclick="'submitForm(\'userCreateOrUpdate\', \'\', \'index/user/page?page=0\'); return false;'">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+	</div>
+</div>

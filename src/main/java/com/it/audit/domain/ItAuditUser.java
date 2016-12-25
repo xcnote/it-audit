@@ -19,7 +19,6 @@ import com.it.audit.enums.UserStatus;
 
 import lombok.Data;
 
-
 @javax.persistence.Entity
 @javax.persistence.Table(name = "it_audit_user", uniqueConstraints = {
       }, indexes = {

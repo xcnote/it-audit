@@ -4,12 +4,16 @@ jQuery(document).ready(function(){
 	var action = jQuery("#toAction").text();
 	if(index != null && index != ''){
 		var headerA = jQuery("#headermenu #header"+index);
+		headerA.parent().parent().children().removeAttr("class");
+		headerA.parent().attr("class","current");
+		
 		var isOpend = headerA.attr("class");
 		if("opened" != isOpend){
-			var name = headerA.find("span:eq(1)").text();
+			var name = headerA.find("span:eq(2)").text();
 			jAlert('您尚未开通【'+name+'】角色，请联系系统管理员', '提示');
 		}else{
-			headerA.click();
+			jQuery("#leftmenu").load(headerA.children(".leftMenuUrl").text());
+			//headerA.click();
 		}
 		return;
 	}
@@ -18,18 +22,22 @@ jQuery(document).ready(function(){
 		jAlert('您尚未开通任何角色，请联系系统管理员', '提示');
 		return;
 	}
-	jQuery("#headermenu a.opened:first").click();
+	var header = jQuery("#headermenu a.opened:first");
+	header.parent().parent().children().removeAttr("class");
+	header.parent().attr("class","current");
+	jQuery("#leftmenu").load(header.children(".leftMenuUrl").text());
 });
 
 function headerMenuClick(Obj, left, center) {
-	if(Obj.className == "opened"){
+	return;
+//	if(Obj.className == "opened"){
 		jQuery("#leftmenu").load(left);
 		//jQuery("#centercontent").load(center)
 		jQuery(Obj).parent().parent().children().removeAttr("class");
 		jQuery(Obj).parent().attr("class","current");
-	} else {
-		notHaveThisRole();
-	}
+//	} else {
+//		notHaveThisRole();
+//	}
 }
 
 function actionNotOpened(){

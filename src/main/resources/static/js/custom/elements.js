@@ -303,7 +303,9 @@ jQuery(document).ready(function(){
 	jQuery('#tabs').tabs();
 	
 	///// DATE PICKER /////
-	jQuery( "#datepicker" ).datepicker();
+	jQuery( ".datepicker" ).datepicker({
+		dateFormat: "yy-mm-dd"
+	});
 	
 	///// SORTABLE ITEM /////
 	jQuery("#sortable, #sortable2").sortable();

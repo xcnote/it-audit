@@ -15,6 +15,10 @@ public class RequestURI {
 	public static final String USER_CREATE = INDEX_URI + "/user/create";
 	public static final String USER_UPDATE = INDEX_URI + "/user/update";
 	public static final String USER_DELETE = INDEX_URI + "/user/delete";
+	
+	public static final String MANAGER_BASE = INDEX_URI + "/manager";
+	public static final String MANAGER_OBJECT_CREATE = MANAGER_BASE + "/create";
+	public static final String MANAGER_OBJECT_MANAGE = MANAGER_BASE + "/manage";
 
 	public static final String ERROR_PAGE = "/404";
 	
