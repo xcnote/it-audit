@@ -13,6 +13,13 @@ public class CommonUtil {
 		}
 	}
 	
+	public static Map<String, Object> buildQueryResult(String queryKey, String queryName){
+		Map<String, Object> result = new HashMap<>();
+		result.put("queryKey", queryKey);
+		result.put("queryValue", queryName);
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param page

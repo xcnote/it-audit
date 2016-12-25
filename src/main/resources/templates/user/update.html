@@ -14,32 +14,32 @@ jQuery.getScript('/js/custom/forms.js', function() {});
 			<label>用户ID</label>
 		    <span class="field">
 		    	<input th:if="${userInfo.create}" type="text" disabled="disabled" class="smallinput" style="background:#eee" value="用户ID由系统自动生成"/>
-		    	<input th:if="${!userInfo.create}" type="text" disabled="disabled" class="smallinput" style="background:#eee" name="userId" th:value="${user.userId}"/>
+		    	<input th:if="${!userInfo.create}" type="text" disabled="disabled" class="smallinput" style="background:#eee" name="userId" th:value="${userInfo.user.userId}"/>
 		    </span>
 		</p>
 		
 		<p>
 			<label>用户姓名</label>
 		    <span class="field">
-		    	<input type="text" name="userName" class="smallinput" th:text="${userInfo.user==null? '':userInfo.user.userName}"/>
+		    	<input type="text" name="userName" class="smallinput" th:value="${userInfo.user==null? '':userInfo.user.userName}" required="true"/>
 		    </span>
 		</p>
 	
 		<p>
 			<label>登陆名</label>
 		    <span class="field">
-		    	<input type="text" name="loginName" class="smallinput" th:text="${userInfo.user==null? '':userInfo.user.userName}"/>
+		    	<input type="text" name="loginName" class="smallinput" th:value="${userInfo.user==null? '':userInfo.user.loginName}" required="true"/>
 		    </span>
 		</p>
 		
 		<p>
 			<label>登陆密码</label>
-		    <span class="field"><input type="password" name="password" class="smallinput form_password_input" /></span>
+		    <span class="field"><input type="password" name="password" id="password" class="smallinput form_password_input" required="true"/></span>
 		</p>
 		
 		<p>
 			<label>登陆密码确认</label>
-		    <span class="field"><input type="password" name="password2" class="smallinput form_password_input" /></span>
+		    <span class="field"><input type="password" name="password2" id="password2" class="smallinput form_password_input" required="true" equalTo="#password"/></span>
 		</p>
 	
 		<p>
@@ -66,7 +66,7 @@ jQuery.getScript('/js/custom/forms.js', function() {});
 	    </p>
 	    
 	    <p class="stdformbutton">
-	    	<button class="submit radius2" onclick="submitForm('userCreateOrUpdate', '/index/user/create', 'index/user/page?page=0'); return false;">提交</button>
+	    	<button class="submit radius2" th:onclick="'submitForm(\'userCreateOrUpdate\', \''+(${userInfo.create}?'/index/user/create':'/index/user/update')+'\', \'index/user/page?page=0\'); return false;'">提交</button>
 	        <input type="reset" class="reset radius2" value="重置" />
 	    </p>
 	    

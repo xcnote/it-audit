@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +25,7 @@ import com.it.audit.service.UserService;
 import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
 import com.it.audit.web.dto.ResponesBase;
+import com.it.audit.web.dto.UserDelete;
 
 @Controller
 public class UserViewController {
@@ -32,9 +34,11 @@ public class UserViewController {
 	private UserService userService;
 	
 	@RequestMapping(value = RequestURI.USER_PAGE, method = RequestMethod.GET)
-	public ModelAndView userPage(Integer page){
-		Page<ItAuditUser> users = this.userService.queryUserPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")));
-		return new ModelAndView("user/list", "users", CommonUtil.buildPageParam(users, 7));
+	public ModelAndView userPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
+		Page<ItAuditUser> users = this.userService.queryUserPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
+		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
+		result.put("users", CommonUtil.buildPageParam(users, 7));
+		return new ModelAndView("user/list", result);
 	}
 	
 	@RequestMapping(value = RequestURI.USER_CREATE, method = RequestMethod.GET)
@@ -42,10 +46,30 @@ public class UserViewController {
 		return this.buildUpdetaPageView(true, null, null);
 	}
 	
+	@RequestMapping(value = RequestURI.USER_UPDATE, method = RequestMethod.GET)
+	public ModelAndView userUpdate(@RequestParam Long id){
+		ItAuditUser user = this.userService.queryUserById(id);
+		return this.buildUpdetaPageView(false, user, null);
+	}
+	
+	@RequestMapping(value = RequestURI.USER_DELETE, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<ResponesBase> userDelete(@RequestBody UserDelete userIds){
+		this.userService.userDelete(userIds.getIds());
+		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "删除成功"), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = RequestURI.USER_CREATE, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<ResponesBase> userCreate(@RequestBody ItAuditUser user){
 		String errormsg = this.userService.userCreate(user);
+		return new ResponseEntity<ResponesBase>(new ResponesBase(0, null, errormsg), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = RequestURI.USER_UPDATE, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<ResponesBase> userUpdate(@RequestBody ItAuditUser user){
+		String errormsg = this.userService.userUpdate(user);
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, errormsg), HttpStatus.OK);
 	}
 	

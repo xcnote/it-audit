@@ -1,5 +1,6 @@
 package com.it.audit.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
@@ -77,8 +78,8 @@ public class UserService {
 	 * @param pageRequest
 	 * @return
 	 */
-	public Page<ItAuditUser> queryUserPage(PageRequest pageRequest){
-		return this.itAuditUserPersistenceService.findPage(pageRequest);
+	public Page<ItAuditUser> queryUserPage(PageRequest pageRequest, String queryKey, String queryValue){
+		return this.itAuditUserPersistenceService.findByParam(pageRequest, queryKey, queryValue);
 	}
 	
 	/**
@@ -103,7 +104,7 @@ public class UserService {
 			return "用户登录名已经存在，用户创建失败";
 		}
 		
-		try{
+		try{	
 			DateTime time = new DateTime();
 			user.setUserRole(UserRole.mergeRoles(user.getSourceRoles()));
 			user.setCreateTime(time);
@@ -116,5 +117,43 @@ public class UserService {
 			return "未知错误，用户添加失败";
 		}
 		return null;
+	}
+	
+	/**
+	 * 更新用户
+	 * @param user
+	 * @return
+	 */
+	public String userUpdate(ItAuditUser user){
+		ItAuditUser old = this.itAuditUserPersistenceService.findById(user.getId());
+		if(old == null){
+			return "未查询到该用户信息";
+		}
+		String loginName = user.getLoginName();
+		if(!old.getLoginName().equals(loginName)){
+			boolean loginNameIsOk = this.checkLoginName(loginName);
+			if(!loginNameIsOk){
+				return "用户登录名已经存在，用户创建失败";
+			}
+		}
+		
+		try{	
+			DateTime time = new DateTime();
+			user.setUserRole(UserRole.mergeRoles(user.getSourceRoles()));
+			user.setUpdateTime(time);
+			this.itAuditUserPersistenceService.save(user);
+		} catch (Exception e) {
+			log.error("create user error. user:{}", user, e);
+			return "未知错误，用户更新失败";
+		}
+		return null;
+	}
+	
+	public void userDelete(List<Long> ids){
+		this.itAuditUserPersistenceService.delete(ids.toArray(new Long[]{}));
+	}
+	
+	public ItAuditUser queryUserById(Long id){
+		return this.itAuditUserPersistenceService.findById(id);
 	}
 }

@@ -40,20 +40,31 @@ function notHaveThisRole(){
 }
 
 function submitForm(formId, url, toUrl){
+	jQuery("#"+formId).validate();
+	if(!jQuery("#"+formId).valid()){
+		return;
+	}
+	
 	var param = {};
 	var paramKeyNum = {};
     var form = jQuery('#'+formId).serializeArray();
     jQuery.each(form, function() {
-    	if(param[this.name] != null){
+    	if(paramKeyNum[this.name] != null){
     		if(paramKeyNum[this.name] > 1){
-    			param[this.name][paramKeyNum[this.name]] = this.value;
-    		} else{
-    			param[this.name] = new Array(this.value, param[this.name]);
+        		param[this.name][param[this.name].length] = this.value;
+        	}else{
+        		param[this.name] = new Array(param[this.name], this.value);
+        	}
+    		paramKeyNum[this.name] = 1+paramKeyNum[this.name];
+    	} else {
+    		type = jQuery('#'+formId).find("input[name="+this.name+"]").attr("type");
+    		if("checkbox" == type){
+    			param[this.name] = new Array(this.value);
+    			paramKeyNum[this.name] = 2;
+    		} else {
+    			param[this.name] = this.value;
+    			paramKeyNum[this.name] = 1;
     		}
-    		paramKeyNum[this.name] = paramKeyNum[this.name] + 1;
-    	}else{
-    		param[this.name] = this.value;
-    		paramKeyNum[this.name] = 1;
     	}
     });
     
@@ -69,9 +80,20 @@ function submitForm(formId, url, toUrl){
     	success:function(data){
     		if(data.msg != null){
     			jAlert(data.msg, '提示');
-    		} else if(toUrl != null){
+    		} else if(error != null){
+    			jAlert(data.msg, '警告');
+    			return;
+    		} else{
+    			jAlert("发生未知错误，请求失败", '警告');
+    			return;
+    		}
+    		
+    		if(toUrl != null){
     			jQuery("#centercontent").load(toUrl);
     		}
-    	}                   
+    	},
+    	error:function(request, error, e){
+    		jAlert("发生未知错误，请求失败", '警告');
+    	}
     });
 }

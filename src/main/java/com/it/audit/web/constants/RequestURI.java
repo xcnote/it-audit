@@ -13,6 +13,8 @@ public class RequestURI {
 	//模块对应关系：index-用户角色枚举， model-角色模块（如user），action-模块功能（如page）
 	public static final String USER_PAGE = INDEX_URI + "/user/page";
 	public static final String USER_CREATE = INDEX_URI + "/user/create";
+	public static final String USER_UPDATE = INDEX_URI + "/user/update";
+	public static final String USER_DELETE = INDEX_URI + "/user/delete";
 
 	public static final String ERROR_PAGE = "/404";
 	
