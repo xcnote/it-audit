@@ -18,7 +18,7 @@ jQuery(document).ready(function(){
 	<div class="tableoptions">
         <select class="radius3" id="query_param_key">
         	<option value="">请选择</option>
-        	<option value="userName" th:selected="${queryKey == 'name'}?'selected':false">用户名</option>
+        	<option value="userName" th:selected="${queryKey == 'userName'}?'selected':false">用户名</option>
         </select> &nbsp;
         <input type="text" id="query_param_value" class="search_input" th:value="${queryValue}"/>
         <button class="radius3" onclick="loadCenterContentQuery('/index/user/page?page=0');">查询</button>

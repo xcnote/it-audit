@@ -24,9 +24,9 @@ jQuery.getScript('/js/custom/widgets.js', function() {});
 			            </tr>
 			        </thead>
 			        <tbody>
-			            <tr>
-			                <td>01/12/12</td>
-			                <td>10</td>
+			            <tr th:each="objInfo,index:${exec}">
+			                <td th:text="${objInfo.name}"></td>
+			                <td th:text="${#calendars.format(objInfo.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
 			            </tr>
 			        </tbody>
 			    </table>
@@ -50,9 +50,9 @@ jQuery.getScript('/js/custom/widgets.js', function() {});
 			            </tr>
 			        </thead>
 			        <tbody>
-			            <tr>
-			                <td>01/12/12</td>
-			                <td>10</td>
+			            <tr th:each="objInfo,index:${finish}">
+			                <td th:text="${objInfo.name}"></td>
+			                <td th:text="${#calendars.format(objInfo.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
 			            </tr>
 			        </tbody>
 			    </table>

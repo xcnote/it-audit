@@ -19,6 +19,7 @@ public class RequestURI {
 	public static final String MANAGER_BASE = INDEX_URI + "/manager";
 	public static final String MANAGER_OBJECT_CREATE = MANAGER_BASE + "/create";
 	public static final String MANAGER_OBJECT_MANAGE = MANAGER_BASE + "/manage";
+	public static final String MANAGER_OBJECT_PAGE = MANAGER_BASE + "/page";
 
 	public static final String ERROR_PAGE = "/404";
 	

@@ -11,7 +11,7 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 
 <li style="display: none;" th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/');" class="elements">主页</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/create');" class="elements">项目创建</a></li>
-<li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/manage');" class="elements">项目管理</a></li>
+<li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/page?page=0');" class="elements">项目管理</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目报告</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 

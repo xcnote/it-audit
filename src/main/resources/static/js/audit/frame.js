@@ -47,7 +47,18 @@ function notHaveThisRole(){
 	jAlert('您尚未开通此角色', '提示');
 }
 
+
+function submitFormByConfrim(formId, url, toUrl, follow){
+	jConfirm('是否提交?', '提示', function(r) {
+		if(r){
+			submitForm(formId, url, toUrl, follow);
+		}
+	});
+}
 function submitForm(formId, url, toUrl){
+	submitForm(formId, url, toUrl, function(){});
+}
+function submitForm(formId, url, toUrl, follow){
 	jQuery("#"+formId).validate();
 	if(!jQuery("#"+formId).valid()){
 		return;
@@ -86,17 +97,20 @@ function submitForm(formId, url, toUrl){
     	dataType:"json",
     	cache : false,
     	success:function(data){
-    		if(data.msg != null){
-    			jAlert(data.msg, '提示');
-    		} else if(error != null){
-    			jAlert(data.msg, '警告');
+    		if(data.code == 0){
+    			if(data.msg!=null){
+    				jAlert(data.msg, '提示');
+    			}
+    			follow();
+    		} else if(data.error != null){
+    			jAlert(data.error, '警告');
     			return;
     		} else{
     			jAlert("发生未知错误，请求失败", '警告');
     			return;
     		}
     		
-    		if(toUrl != null){
+    		if(toUrl != null && toUrl != ''){
     			jQuery("#centercontent").load(toUrl);
     		}
     	},
