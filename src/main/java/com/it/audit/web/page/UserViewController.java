@@ -24,8 +24,8 @@ import com.it.audit.enums.UserStatus;
 import com.it.audit.service.UserService;
 import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
+import com.it.audit.web.dto.DeleteDTO;
 import com.it.audit.web.dto.ResponesBase;
-import com.it.audit.web.dto.UserDelete;
 
 @Controller
 public class UserViewController {
@@ -54,7 +54,7 @@ public class UserViewController {
 	
 	@RequestMapping(value = RequestURI.USER_DELETE, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<ResponesBase> userDelete(@RequestBody UserDelete userIds){
+	public ResponseEntity<ResponesBase> userDelete(@RequestBody DeleteDTO userIds){
 		this.userService.userDelete(userIds.getIds());
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "删除成功"), HttpStatus.OK);
 	}

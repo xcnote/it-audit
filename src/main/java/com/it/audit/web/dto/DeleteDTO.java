@@ -5,6 +5,6 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class UserDelete {
+public class DeleteDTO {
 	private List<Long> ids;
 }

@@ -20,6 +20,14 @@ public class RequestURI {
 	public static final String MANAGER_OBJECT_CREATE = MANAGER_BASE + "/create";
 	public static final String MANAGER_OBJECT_MANAGE = MANAGER_BASE + "/manage";
 	public static final String MANAGER_OBJECT_PAGE = MANAGER_BASE + "/page";
+	
+	public static final String MANAGER_OBJECT_TEST_RANGE = MANAGER_BASE + "/test/range";
+	public static final String MANAGER_OBJECT_TEST_GCLIST = MANAGER_BASE + "/test/gclist";
+	public static final String MANAGER_OBJECT_TEST_GCIMPORT = MANAGER_BASE + "/test/gcImport";
+	public static final String MANAGER_OBJECT_TEST_GCUPDATE = MANAGER_BASE + "/test/gcUpdate";
+	public static final String MANAGER_OBJECT_TEST_GCDELETE = MANAGER_BASE + "/test/gcDelete";
+	public static final String MANAGER_OBJECT_TEST_AC = MANAGER_BASE + "/test/ac";
+	public static final String MANAGER_OBJECT_TEST_DA = MANAGER_BASE + "/test/da";
 
 	public static final String ERROR_PAGE = "/404";
 	

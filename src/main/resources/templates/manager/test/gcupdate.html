@@ -1,0 +1,64 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+</script>
+
+<div id="basicform" class="subcontent">
+	<form class="stdform" method="post" id='testGCUpdate' action="javascript:void(0);">
+		<input type="text" style="display: none;" name="id" th:value="${gc.id}"/>
+		<input type="text" style="display: none;" id="objectId" name="objectId" th:value="${gc.objectId}"/>
+		<p>
+			<label>风险编号</label>
+		    <span class="field">
+		    	<input type="text" name="riskNumber" class="smallinput" th:value="${gc.riskNumber}" required="true"/>
+		    </span>
+		</p>
+		<p>
+	    	<label>IT风险描述</label>
+	        <span class="field">
+	        	<textarea cols="80" rows="5" name="riskDesc" class="longinput" th:text="${gc.riskDesc}"></textarea>
+	        </span>
+	    </p>
+	    <p>
+			<label>控制编号</label>
+		    <span class="field">
+		    	<input type="text" name="controlNumber" class="smallinput" th:value="${gc.controlNumber}" required="true"/>
+		    </span>
+		</p>
+		<p>
+			<label>一级控制域</label>
+		    <span class="field">
+		    	<input type="text" name="firstRegion" class="smallinput" th:value="${gc.firstRegion}" required="true"/>
+		    </span>
+		</p>
+		<p>
+			<label>二级控制域</label>
+		    <span class="field">
+		    	<input type="text" name="secondRegion" class="smallinput" th:value="${gc.secondRegion}" required="true"/>
+		    </span>
+		</p>
+		<p>
+			<label>风险初步评价</label>
+		    <span class="field">
+		    	<input type="text" name="riskEstimate" class="smallinput" th:value="${gc.riskEstimate}" required="true"/>
+		    </span>
+		</p>
+		<p>
+			<label>监管指引</label>
+		    <span class="field">
+		    	<textarea cols="80" rows="5" name="supervise" class="longinput" th:text="${gc.supervise}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>审计程序</label>
+		    <span class="field">
+		    	<textarea cols="80" rows="5" name="audit" class="longinput" th:text="${gc.audit}"></textarea>
+		    </span>
+		</p>
+	    
+	    <p class="stdformbutton">
+	    	<button class="submit radius2" onclick="submitFormByConfrim('testGCUpdate', '/index/manager/test/gcUpdate', '', function(){loadTabContent('tabs-2', '/index/manager/test/gclist?page=0&amp;objectId='+jQuery('#basicform #objectId').val());}); return false;">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+</div>

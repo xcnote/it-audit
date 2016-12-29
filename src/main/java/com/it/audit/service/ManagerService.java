@@ -88,4 +88,8 @@ public class ManagerService {
 		Long userId = AuthContextHolder.get().getUserInfo().getUserId();
 		return this.itAuditObjectPersistenceService.findByParam(pageRequest, queryKey, queryValue, userId);
 	}
+	
+	public ItAuditObject queryObjectDetail(Long id){
+		return this.itAuditObjectPersistenceService.findById(id);
+	}
 }

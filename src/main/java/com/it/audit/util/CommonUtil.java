@@ -33,7 +33,9 @@ public class CommonUtil {
 		int half = (showPageSize-1)/2;
 		int showStart = 1;
 		int showEnd = showPageSize;
-		if(total > showPageSize){
+		if(total == 0){
+			showEnd = 1;
+		} else if(total > showPageSize){
 			if(number > (half+1)){
 				if(total-number > half){
 					showStart = number-half;

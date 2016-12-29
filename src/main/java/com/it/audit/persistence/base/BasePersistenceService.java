@@ -39,8 +39,8 @@ public abstract class BasePersistenceService<T, PK extends Serializable> {
 	 * 批量更新实体
 	 * @param entityList 实体列表
 	 */
-	public void save(List<T> entityList){
-		getPersistenceDao().save(entityList);
+	public List<T> save(List<T> entityList){
+		return getPersistenceDao().save(entityList);
 	}
 	
 	

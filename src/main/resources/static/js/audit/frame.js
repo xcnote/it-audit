@@ -56,7 +56,7 @@ function submitFormByConfrim(formId, url, toUrl, follow){
 	});
 }
 function submitForm(formId, url, toUrl){
-	submitForm(formId, url, toUrl, function(){});
+	submitForm(formId, url, toUrl, function(){return;});
 }
 function submitForm(formId, url, toUrl, follow){
 	jQuery("#"+formId).validate();

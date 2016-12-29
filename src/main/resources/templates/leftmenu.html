@@ -11,7 +11,17 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 
 <li style="display: none;" th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/');" class="elements">主页</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/create');" class="elements">项目创建</a></li>
-<li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/page?page=0');" class="elements">项目管理</a></li>
+<li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/page?page=0');disableSubMenu('objectId')" class="elements">项目管理</a>
+	<span class="arrow"></span>
+	<span style="display: none;" id="objectId"></span>
+	<ul id="objectManage">
+   		<li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/manager/manage?id='+jQuery('#objectId').text());return false;">项目测试范围</a></li>
+        <li><a href="#">项目成员管理</a></li>
+        <li><a href="#">工作任务分配</a></li>
+        <li><a href="#">工作复核</a></li>
+        <li><a href="#">项目基本信息</a></li>
+    </ul>
+</li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目报告</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
