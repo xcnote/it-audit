@@ -1,10 +1,12 @@
 package com.it.audit.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,11 +15,16 @@ import org.springframework.stereotype.Service;
 
 import com.it.audit.auth.AuthContextHolder;
 import com.it.audit.domain.ItAuditObject;
+import com.it.audit.domain.ItAuditObjectUser;
+import com.it.audit.domain.ItAuditUser;
 import com.it.audit.enums.ObjectStatus;
+import com.it.audit.enums.ObjectUserRole;
 import com.it.audit.persistence.service.ConstantIndustryPersistenceService;
 import com.it.audit.persistence.service.ItAuditObjectPersistenceService;
+import com.it.audit.persistence.service.ItAuditObjectUserPersistenceService;
 import com.it.audit.util.DateUtils;
 import com.it.audit.web.dto.ObjectCreate;
+import com.it.audit.web.dto.ObjectUser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +36,10 @@ public class ManagerService {
 	private ConstantIndustryPersistenceService industryPersistenceService;
 	@Autowired
 	private ItAuditObjectPersistenceService itAuditObjectPersistenceService;
+	@Autowired
+	private ItAuditObjectUserPersistenceService objectUserPersistenceService;
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 项目经理主页数据
@@ -89,7 +100,50 @@ public class ManagerService {
 		return this.itAuditObjectPersistenceService.findByParam(pageRequest, queryKey, queryValue, userId);
 	}
 	
-	public ItAuditObject queryObjectDetail(Long id){
-		return this.itAuditObjectPersistenceService.findById(id);
+	/**
+	 * 查询项目详情
+	 * @param id
+	 * @return
+	 */
+	public ItAuditObject queryObjectDetail(Long objectId){
+		return this.itAuditObjectPersistenceService.findById(objectId);
+	}
+	
+	/**
+	 * 查询项目成员
+	 * @param objectId
+	 * @return
+	 */
+	public List<ObjectUser> queryAllObjectUser(Long objectId){
+		Map<Long, ObjectUser> id2ObjectUser = new HashMap<>();
+		
+		ItAuditObject object = this.queryObjectDetail(objectId);
+		Long partnerUserId = object.getPartnerUserId();
+		Long reviewUserId = object.getReviewUserId();
+		if(partnerUserId != null){
+			id2ObjectUser.put(partnerUserId, new ObjectUser(null, partnerUserId, null, objectId, ObjectUserRole.PARTNER, null));
+		}
+		if(reviewUserId != null){
+			id2ObjectUser.put(reviewUserId, new ObjectUser(null, reviewUserId, null, objectId, ObjectUserRole.REVIEW, null));
+		}
+		
+		List<ItAuditObjectUser> objectUsers = this.objectUserPersistenceService.findByObjectId(objectId);
+		if(CollectionUtils.isNotEmpty(objectUsers)){
+			for(ItAuditObjectUser objectUser: objectUsers){
+				id2ObjectUser.put(objectUser.getUserId(), new ObjectUser(objectUser, null));
+			}
+		}
+		if(id2ObjectUser.isEmpty()){
+			return null;
+		}
+		
+		List<ObjectUser> result = new ArrayList<ObjectUser>();
+		List<ItAuditUser> users = this.userService.queryUsersByUserIds(id2ObjectUser.keySet());
+		for(ItAuditUser user: users){
+			ObjectUser info = id2ObjectUser.get(user.getUserId());
+			info.setUserName(user.getUserName());
+			result.add(info);
+		}
+		return result;
 	}
 }

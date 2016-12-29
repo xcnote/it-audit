@@ -14,17 +14,17 @@ import com.it.audit.enums.ObjectTestStatus;
 import lombok.Data;
 
 /**
- * GC测试表
+ * DA测试表
  * @author wangx
  *
  */
 @javax.persistence.Entity
-@javax.persistence.Table(name = "it_audit_test_gc", uniqueConstraints = {
+@javax.persistence.Table(name = "it_audit_test_da", uniqueConstraints = {
       }, indexes = {
       })
 @javax.persistence.EntityListeners(AuditingEntityListener.class)
 @Data
-public class ItAuditTestGC {
+public class ItAuditTestDA {
 
 	@Id
 	@GeneratedValue
@@ -35,77 +35,37 @@ public class ItAuditTestGC {
 	@Column(name = "number")
 	private String number;
 	
-	//风险编号
-	@Column(name = "risk_number")
-	private String riskNumber;
-	
-	//IT风险描述
+	//风险描述
 	@Column(name = "risk_desc", length = 1000)
 	private String riskDesc;
 	
-	//控制编号
-	@Column(name = "control_number")
-	private String controlNumber;
+	//DA测试内容
+	@Column(name = "da_content", length = 1000)
+	private String daContent;
 	
-	//一级控制域
-	@Column(name = "first_region")
-	private String firstRegion;
+	//DA测试方法
+	@Column(name = "da_method", length = 1000)
+	private String daMethod;
 	
-	//二级控制域
-	@Column(name = "second_region")
-	private String secondRegion;
+	//问题样本金额
+	@Column(name = "problem_amount")
+	private Double problemAmount;
 	
-	//风险初步评价
-	@Column(name = "risk_estimate", length = 1000)
-	private String riskEstimate;
+	//样本金额
+	@Column(name = "sample_amount")
+	private Double sampleAmount;
 	
-	//监管指引
-	@Column(name = "supervise", length = 500)
-	private String supervise;
+	//DA测试记录
+	@Column(name = "da_record", length = 500)
+	private String daRecord;
 	
-	//审计程序
-	@Column(name = "audit", length = 1000)
-	private String audit;
+	//DA测试结论
+	@Column(name = "da_result", length = 500)
+	private String daResult;
 	
-	//访谈对象
-	@Column(name = "interview")
-	private String interview;
-	
-	//交叉访谈对象
-	@Column(name = "cross_interview")
-	private String crossInterview;
-	
-	//制度文件
-	@Column(name = "regime_file")
-	private String regimeFile;
-	
-	//D&I有效性测试记录
-	@Column(name = "di_record", length = 500)
-	private String diRecord;
-	
-	//D&I有效性结论
-	@Column(name = "di_result", length = 500)
-	private String diResult;
-	
-	//OE是否测试
-	@Column(name = "oe")
-	private Boolean oe;
-	
-	//OE测试样本数量
-	@Column(name = "oe_test_num")
-	private Integer oeTestNum;
-	
-	//OE测试无效样本数量
-	@Column(name = "oe_invalid_num")
-	private Integer oeInvalidNum;
-	
-	//OE测试记录
-	@Column(name = "oe_record", length = 500)
-	private String oeRecord;
-	
-	//OE测试结论
-	@Column(name = "oe_result", length = 500)
-	private String oeResult;
+	//问题金额比例
+	@Column(name = "problem_ratio")
+	private Double problemRatio;
 	
 	//测试人
 	@Column(name = "test_userid")

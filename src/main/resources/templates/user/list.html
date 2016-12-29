@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
             </tr>
         </thead>
         <tbody>
-            <tr th:each="user,index:${users.page.content}">
+            <tr th:each="user,index:${page.content}">
             	<td align="center"><input type="checkbox" name="ids" th:value="${user.id}" required="true" minlength="1"/></td>
                 <td class="center">
                 	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContent(\'/index/user/update?id='+${user.id}+'\');'" th:text="${user.userId}"></a>
@@ -64,21 +64,7 @@ jQuery(document).ready(function(){
         </tbody>
     </table>
     </form>
-    <div class="right_padding_top">
-		<ul class="pagination">
-			<li class="first">
-				<a href="javascript:void(0);" onclick="loadCenterContent('/index/user/page?page=0');" th:class="${users.page.isFirst()}?'disable':''">&laquo;</a>
-			</li>
-			<li class="previous">
-				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${users.page.hasPrevious()?(users.page.number-1):0}+'\');'" th:class="${users.page.isFirst()}?'disable':''">&lsaquo;</a>
-			</li>
-			<li th:each="i:${#numbers.sequence(users.startpage, users.endpage)}"><a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${i-1}+'\');'" th:text="${i}" th:class="${users.page.number+1 == i}?'current':''">1</a></li>
-			<li class="next">
-				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${users.page.hasNext()?(users.page.number+1):0}+'\');'" th:class="${users.page.isLast()}?'disable':''">&rsaquo;</a>
-			</li>
-			<li class="last">
-				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/user/page?page='+${users.page.totalPages}+'\');'" th:class="${users.page.isLast()}?'disable':''">&raquo;</a>
-			</li>
-		</ul>
+    <div class="right_padding_top" th:include="page::centerPageNumberSet(${page}, ${'/index/user/page?'})">
+		<!-- 分页页码 -->
 	</div>
 </div><!--contentwrapper-->

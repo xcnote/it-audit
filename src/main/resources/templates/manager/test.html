@@ -37,8 +37,8 @@ jQuery(document).ready(function(){
 				<ul>
 					<li><a href="#tabs-1" th:onclick="'loadTabContent(\'tabs-1\', \'/index/manager/test/range?objectId='+${info.id}+'\');'">测试范围</a></li>
 					<li><a href="#tabs-2" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page=0&amp;objectId='+${info.id}+'\');'">一般性控制测试（GC）</a></li>
-					<li><a href="#tabs-3">自动化控制测试（AC）</a></li>
-					<li><a href="#tabs-4">数据分析测试（DA）</a></li>
+					<li><a href="#tabs-3" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/test/aclist?page=0&amp;objectId='+${info.id}+'\');'">自动化控制测试（AC）</a></li>
+					<li><a href="#tabs-4" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/test/dalist?page=0&amp;objectId='+${info.id}+'\');'">数据分析测试（DA）</a></li>
 				</ul>
 				<div id="tabs-1">
 					
@@ -46,95 +46,11 @@ jQuery(document).ready(function(){
 				<div id="tabs-2" class="tables">
 					
 				</div>
-				<div id="tabs-3">
-					<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
-						<colgroup>
-							<col class="con0" />
-							<col class="con1" />
-							<col class="con0" />
-							<col class="con1" />
-							<col class="con0" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th class="head0">Rendering engine</th>
-								<th class="head1">Browser</th>
-								<th class="head0">Platform(s)</th>
-								<th class="head1">Engine version</th>
-								<th class="head0">CSS grade</th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th class="head0">Rendering engine</th>
-								<th class="head1">Browser</th>
-								<th class="head0">Platform(s)</th>
-								<th class="head1">Engine version</th>
-								<th class="head0">CSS grade</th>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr>
-								<td>Trident</td>
-								<td>Internet Explorer 4.0</td>
-								<td>Win 95+</td>
-								<td class="center">4</td>
-								<td class="center">X</td>
-							</tr>
-							<tr>
-								<td>Trident</td>
-								<td>Internet Explorer 5.0</td>
-								<td>Win 95+</td>
-								<td class="center">5</td>
-								<td class="center">C</td>
-							</tr>
-						</tbody>
-					</table>
+				<div id="tabs-3" class="tables">
+					
 				</div>
 				<div id="tabs-4">
-					<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
-						<colgroup>
-							<col class="con0" />
-							<col class="con1" />
-							<col class="con0" />
-							<col class="con1" />
-							<col class="con0" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th class="head0">Rendering engine</th>
-								<th class="head1">Browser</th>
-								<th class="head0">Platform(s)</th>
-								<th class="head1">Engine version</th>
-								<th class="head0">CSS grade</th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th class="head0">Rendering engine</th>
-								<th class="head1">Browser</th>
-								<th class="head0">Platform(s)</th>
-								<th class="head1">Engine version</th>
-								<th class="head0">CSS grade</th>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr>
-								<td>Trident</td>
-								<td>Internet Explorer 4.0</td>
-								<td>Win 95+</td>
-								<td class="center">4</td>
-								<td class="center">X</td>
-							</tr>
-							<tr>
-								<td>Trident</td>
-								<td>Internet Explorer 5.0</td>
-								<td>Win 95+</td>
-								<td class="center">5</td>
-								<td class="center">C</td>
-							</tr>
-						</tbody>
-					</table>
+					
 				</div>
 			</div><!--#tabs-->
 		<!--</div>widgetcontent-->

@@ -8,6 +8,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
 
+/**
+ * GC测试模板表
+ * @author wangx
+ *
+ */
 @javax.persistence.Entity
 @javax.persistence.Table(name = "it_audit_test_gc_template", uniqueConstraints = {
       }, indexes = {

@@ -1,6 +1,7 @@
 package com.it.audit.persistence.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -38,6 +39,10 @@ public class ItAuditUserPersistenceService extends BasePersistenceService<ItAudi
 	
 	public ItAuditUser findByUserId(Long userId){
 		return this.itAuditUserRepository.findByUserId(userId);
+	}
+	
+	public ItAuditUser findByUserIds(Collection<Long> userIds){
+		return this.itAuditUserRepository.findByUserIdIn(userIds);
 	}
 
 	public ItAuditUser findByLoginName(String loginName) {

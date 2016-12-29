@@ -16,7 +16,7 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 	<span style="display: none;" id="objectId"></span>
 	<ul id="objectManage">
    		<li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/manager/manage?id='+jQuery('#objectId').text());return false;">项目测试范围</a></li>
-        <li><a href="#">项目成员管理</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/manager/user/list?objectId='+jQuery('#objectId').text());return false;">项目成员管理</a></li>
         <li><a href="#">工作任务分配</a></li>
         <li><a href="#">工作复核</a></li>
         <li><a href="#">项目基本信息</a></li>

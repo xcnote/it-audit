@@ -36,7 +36,7 @@ jQuery.getScript('/js/custom/tables.js', function() {});
             </tr>
         </thead>
         <tbody>
-            <tr th:each="objInfo,index:${objectList.page.content}">
+            <tr th:each="objInfo,index:${page.content}">
                 <td class="center">
                 	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentBySubLeft(\'objectId\',\''+${objInfo.id}+'\');'" th:text="${objInfo.objectNumber}"></a>
                 </td>
@@ -50,21 +50,7 @@ jQuery.getScript('/js/custom/tables.js', function() {});
         </tbody>
     </table>
     </form>
-    <div class="right_padding_top">
-		<ul class="pagination">
-			<li class="first">
-				<a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/page?page=0');" th:class="${objectList.page.isFirst()}?'disable':''">&laquo;</a>
-			</li>
-			<li class="previous">
-				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/manager/page?page='+${objectList.page.hasPrevious()?(objectList.page.number-1):0}+'\');'" th:class="${objectList.page.isFirst()}?'disable':''">&lsaquo;</a>
-			</li>
-			<li th:each="i:${#numbers.sequence(objectList.startpage, objectList.endpage)}"><a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/manager/page?page='+${i-1}+'\');'" th:text="${i}" th:class="${objectList.page.number+1 == i}?'current':''">1</a></li>
-			<li class="next">
-				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/manager/page?page='+${objectList.page.hasNext()?(objectList.page.number+1):0}+'\');'" th:class="${objectList.page.isLast()}?'disable':''">&rsaquo;</a>
-			</li>
-			<li class="last">
-				<a href="javascript:void(0);" th:onclick="'loadCenterContent(\'/index/manager/page?page='+${objectList.page.totalPages}+'\');'" th:class="${objectList.page.isLast()}?'disable':''">&raquo;</a>
-			</li>
-		</ul>
+    <div class="right_padding_top" th:include="page::centerPageNumberSet(${page}, ${'/index/manager/page?'})">
+		<!-- 分页页码 -->
 	</div>
 </div><!--contentwrapper-->

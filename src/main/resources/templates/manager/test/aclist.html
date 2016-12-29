@@ -1,0 +1,57 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	jQuery("#acList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何AC记录", '提示');
+		}
+	});
+	limitTableTd("aclistTable", 20);
+});
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<button class="radius3">导出列表</button>
+	<div class="right_move">
+		<button class="radius3" th:onclick="'submitFormByConfrim(\'acList\', \'/index/manager/test/acDelete\', \'\', function(){loadTabContent(\'tabs-3\', \'/index/manager/test/aclist?page=0&amp;objectId='+${objectId}+'\');});'">删除</button> &nbsp;
+		<button class="radius3" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/test/acUpdate?objectId='+${objectId}+'\');'">新增</button> &nbsp;
+    </div>
+</div><!--tableoptions-->	
+<form method="post" id="acList" action="javascript:void(0);">
+<table cellpadding="0" cellspacing="0" border="0" id="aclistTable" class="stdtable stdtablecb">
+    <colgroup>
+        <col class="con0" style="width: 4%" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+      </colgroup>
+      <thead>
+          <tr>
+          	<th class="head0"><input type="checkbox" class="checkall" /></th>
+              <th class="head1">AC测试编号</th>
+              <th class="head0">风险描述</th>
+              <th class="head1">AC测试内容</th>
+              <th class="head0">AC测试方法</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="ac,index:${page.content}">
+			<td align="center"><input type="checkbox" name="ids" th:value="${ac.id}" required="true" minlength="1"/></td>
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/test/acUpdate?id='+${ac.id}+'\');'" th:text="${ac.number}"></a>
+              </td>
+              <td th:text="${ac.riskDesc}" class="center limit"></td>
+              <td th:text="${ac.acContent}" class="center limit"></td>
+              <td th:text="${ac.acMethod}" class="center limit"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-3'}, ${'/index/manager/test/aclist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

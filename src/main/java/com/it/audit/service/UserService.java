@@ -1,5 +1,6 @@
 package com.it.audit.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -155,5 +156,10 @@ public class UserService {
 	
 	public ItAuditUser queryUserById(Long id){
 		return this.itAuditUserPersistenceService.findById(id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ItAuditUser> queryUsersByUserIds(Collection<Long> userIds){
+		return (List<ItAuditUser>) this.itAuditUserPersistenceService.findByUserIds(userIds);
 	}
 }

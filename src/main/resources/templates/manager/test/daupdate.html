@@ -1,0 +1,34 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+</script>
+
+<div id="basicform" class="subcontent">
+	<form class="stdform" method="post" id='testDAUpdate' action="javascript:void(0);">
+		<input type="text" style="display: none;" name="id" th:value="${da.id}"/>
+		<input type="text" style="display: none;" id="objectId" name="objectId" th:value="${da.objectId}"/>
+		<p>
+	    	<label>风险描述</label>
+	        <span class="field">
+	        	<textarea cols="80" rows="5" name="riskDesc" class="longinput" th:text="${da.riskDesc}"></textarea>
+	        </span>
+	    </p>
+		<p>
+			<label>DA测试内容</label>
+		    <span class="field">
+		    	<textarea cols="80" rows="5" name="daContent" class="longinput" th:text="${da.daContent}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>DA测试方法</label>
+		    <span class="field">
+		    	<textarea cols="80" rows="5" name="daMethod" class="longinput" th:text="${da.daMethod}"></textarea>
+		    </span>
+		</p>
+	    
+	    <p class="stdformbutton">
+	    	<button class="submit radius2" onclick="submitFormByConfrim('testDAUpdate', '/index/manager/test/daUpdate', '', function(){loadTabContent('tabs-4', '/index/manager/test/dalist?page=0&amp;objectId='+jQuery('#basicform #objectId').val());}); return false;">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+</div>

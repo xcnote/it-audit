@@ -1,0 +1,37 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/tables.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">项目经理 > 项目管理 > 项目成员管理</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables" style="width: 40%">
+	<div class="tableoptions">
+		<button class="radius3">新增</button> &nbsp;
+		<button class="radius3">删除</button> &nbsp;
+    </div><!--tableoptions-->	
+    <form method="post" action="javascript:void(0);">
+    <table cellpadding="0" cellspacing="0" border="0" id="table1" class="stdtable stdtablecb">
+        <colgroup>
+        	<col class="con0" style="width: 4%" />
+            <col class="con1" />
+            <col class="con0" />
+        </colgroup>
+        <thead>
+            <tr>
+            	<th class="head0"><input type="checkbox" class="checkall" /></th>
+                <th class="head1">姓名</th>
+                <th class="head0">职责</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user,index:${users}">
+            	<td align="center"><input type="checkbox" name="ids" th:value="${user.id}" required="true" minlength="1"/></td>
+                <td th:text="${user.userName}" class="center"></td>
+                <td th:text="${user.role.text}" class="center"></td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+</div><!--contentwrapper-->

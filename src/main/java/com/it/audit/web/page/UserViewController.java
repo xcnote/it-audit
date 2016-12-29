@@ -37,7 +37,7 @@ public class UserViewController {
 	public ModelAndView userPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
 		Page<ItAuditUser> users = this.userService.queryUserPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
 		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
-		result.put("users", CommonUtil.buildPageParam(users, 7));
+		result.putAll(CommonUtil.buildPageParam(users, 7));
 		return new ModelAndView("user/list", result);
 	}
 	

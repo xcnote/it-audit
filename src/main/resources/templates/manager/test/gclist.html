@@ -1,6 +1,11 @@
 <script type="text/javascript">
 /*<![CDATA[*/
 jQuery(document).ready(function(){
+	jQuery("#gcList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何GC记录", '提示');
+		}
+	});
 	limitTableTd("gclistTable", 20);
 });
 function testGCImport(id, url){
@@ -25,7 +30,8 @@ function testGCImport(id, url){
 		<option value="">请选择</option>
 		<option th:each="group,index:${templateGroups}" th:value="${group.id}" th:text="${group.name}"></option>
 	</select> &nbsp;
-	<button class="radius3" th:onclick="'testGCImport(\'tabs-2\', \'/index/manager/test/gcImport?objectId='+${objectId}+'\');'">导入</button>
+	<button class="radius3" th:onclick="'testGCImport(\'tabs-2\', \'/index/manager/test/gcImport?objectId='+${objectId}+'\');'">导入模板</button> &nbsp;&nbsp;
+	<button class="radius3">导出列表</button>
 	<div class="right_move">
 		<button class="radius3" th:onclick="'submitFormByConfrim(\'gcList\', \'/index/manager/test/gcDelete\', \'\', function(){loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page=0&amp;objectId='+${objectId}+'\');});'">删除</button> &nbsp;
 		<button class="radius3" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gcUpdate?objectId='+${objectId}+'\');'">新增</button> &nbsp;
@@ -33,8 +39,8 @@ function testGCImport(id, url){
 </div><!--tableoptions-->	
 <form method="post" id="gcList" action="javascript:void(0);">
 <table cellpadding="0" cellspacing="0" border="0" id="gclistTable" class="stdtable stdtablecb">
-    <colgroup>
-        <col class="con0" style="width: 4%" />
+   	<colgroup>
+  		  <col class="con0" style="width: 4%" />
           <col class="con1" />
           <col class="con0" />
           <col class="con1" />
@@ -54,7 +60,7 @@ function testGCImport(id, url){
           </tr>
       </thead>
       <tbody>
-          <tr th:each="gc,index:${gcList.page.content}">
+          <tr th:each="gc,index:${page.content}">
 			<td align="center"><input type="checkbox" name="ids" th:value="${gc.id}" required="true" minlength="1"/></td>
               <td class="center">
               	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gcUpdate?id='+${gc.id}+'\');'" th:text="${gc.number}"></a>
@@ -68,20 +74,6 @@ function testGCImport(id, url){
       </tbody>
   </table>
 </form>
-<div class="right_padding_top">
-	<ul class="pagination" style="">
-		<li class="first" style="padding-left:0;">
-			<a href="javascript:void(0);" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page=0&amp;objectId='+${objectId}+'\');'" th:class="${gcList.page.isFirst()}?'disable':''">&laquo;</a>
-		</li>
-		<li class="previous" style="padding-left:0;">
-			<a href="javascript:void(0);" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page='+${gcList.page.hasPrevious()?(gcList.page.number-1):0}+'&amp;objectId='+${objectId}+'\');'" th:class="${gcList.page.isFirst()}?'disable':''">&lsaquo;</a>
-		</li>
-		<li th:each="i:${#numbers.sequence(gcList.startpage, gcList.endpage)}" style="padding-left:0;"><a href="javascript:void(0);" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page='+${i-1}+'&amp;objectId='+${objectId}+'\');'" th:text="${i}" th:class="${gcList.page.number+1 == i}?'current':''">1</a></li>
-		<li class="next" style="padding-left:0;">
-			<a href="javascript:void(0);" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page='+${gcList.page.hasNext()?(gcList.page.number+1):0}+'&amp;objectId='+${objectId}+'\');'" th:class="${gcList.page.isLast()}?'disable':''">&rsaquo;</a>
-		</li>
-		<li class="last" style="padding-left:0;">
-			<a href="javascript:void(0);" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page='+${gcList.page.totalPages}+'&amp;objectId='+${objectId}+'\');'" th:class="${gcList.page.isLast()}?'disable':''">&raquo;</a>
-		</li>
-	</ul>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-2'}, ${'/index/manager/test/gclist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
 </div>

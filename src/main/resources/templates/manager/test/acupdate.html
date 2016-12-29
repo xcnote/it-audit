@@ -1,0 +1,34 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+</script>
+
+<div id="basicform" class="subcontent">
+	<form class="stdform" method="post" id='testACUpdate' action="javascript:void(0);">
+		<input type="text" style="display: none;" name="id" th:value="${ac.id}"/>
+		<input type="text" style="display: none;" id="objectId" name="objectId" th:value="${ac.objectId}"/>
+		<p>
+	    	<label>风险描述</label>
+	        <span class="field">
+	        	<textarea cols="80" rows="5" name="riskDesc" class="longinput" th:text="${ac.riskDesc}"></textarea>
+	        </span>
+	    </p>
+		<p>
+			<label>AC测试内容</label>
+		    <span class="field">
+		    	<textarea cols="80" rows="5" name="acContent" class="longinput" th:text="${ac.acContent}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>AC测试方法</label>
+		    <span class="field">
+		    	<textarea cols="80" rows="5" name="acMethod" class="longinput" th:text="${ac.acMethod}"></textarea>
+		    </span>
+		</p>
+	    
+	    <p class="stdformbutton">
+	    	<button class="submit radius2" onclick="submitFormByConfrim('testACUpdate', '/index/manager/test/acUpdate', '', function(){loadTabContent('tabs-3', '/index/manager/test/aclist?page=0&amp;objectId='+jQuery('#basicform #objectId').val());}); return false;">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+</div>

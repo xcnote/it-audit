@@ -75,7 +75,7 @@ public class ManagerViewController {
 	public ModelAndView userPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
 		Page<ItAuditObject> objectList = this.managerService.queryObjectPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
 		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
-		result.put("objectList", CommonUtil.buildPageParam(objectList, 7));
+		result.putAll(CommonUtil.buildPageParam(objectList, 7));
 		return new ModelAndView("manager/list", result);
 	}
 	

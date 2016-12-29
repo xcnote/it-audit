@@ -1,0 +1,39 @@
+<div th:fragment="centerPageNumberSet (page, centerUrl)">
+	<ul class="pagination">
+		<li class="first">
+			<a href="javascript:void(0);" th:onclick="'loadCenterContent(\''+${centerUrl}+'page=0\');'" th:class="${page.isFirst()}?'disable':''">&laquo;</a>
+		</li>
+		<li class="previous">
+			<a href="javascript:void(0);" th:onclick="'loadCenterContent(\''+${centerUrl}+'page='+${page.hasPrevious()?(page.number-1):0}+'\');'" th:class="${page.isFirst()}?'disable':''">&lsaquo;</a>
+		</li>
+		<li th:each="i:${#numbers.sequence(startpage, endpage)}">
+			<a href="javascript:void(0);" th:onclick="'loadCenterContent(\''+${centerUrl}+'page='+${i-1}+'\');'" th:text="${i}" th:class="${page.number+1 == i}?'current':''">1</a>
+		</li>
+		<li class="next">
+			<a href="javascript:void(0);" th:onclick="'loadCenterContent(\''+${centerUrl}+'page='+${page.hasNext()?(page.number+1):0}+'\');'" th:class="${page.isLast()}?'disable':''">&rsaquo;</a>
+		</li>
+		<li class="last">
+			<a href="javascript:void(0);" th:onclick="'loadCenterContent(\''+${centerUrl}+'page='+${page.totalPages}+'\');'" th:class="${page.isLast()}?'disable':''">&raquo;</a>
+		</li>
+	</ul>
+</div>
+
+<div th:fragment="tabPageNumberSet (page, tabId, taburl)">
+	<ul class="pagination" style="">
+		<li class="first" style="padding-left:0;">
+			<a href="javascript:void(0);" th:onclick="'loadTabContent(\''+${tabId}+'\', \''+${taburl}+'page=0\');'" th:class="${page.isFirst()}?'disable':''">&laquo;</a>
+		</li>
+		<li class="previous" style="padding-left:0;">
+			<a href="javascript:void(0);" th:onclick="'loadTabContent(\''+${tabId}+'\', \''+${taburl}+'page='+${page.hasPrevious()?(page.number-1):0}+'\');'" th:class="${page.isFirst()}?'disable':''">&lsaquo;</a>
+		</li>
+		<li th:each="i:${#numbers.sequence(startpage, endpage)}" style="padding-left:0;">
+			<a href="javascript:void(0);" th:onclick="'loadTabContent(\''+${tabId}+'\', \''+${taburl}+'page='+${i-1}+'\');'" th:text="${i}" th:class="${page.number+1 == i}?'current':''">1</a>
+		</li>
+		<li class="next" style="padding-left:0;">
+			<a href="javascript:void(0);" th:onclick="'loadTabContent(\''+${tabId}+'\', \''+${taburl}+'page='+${page.hasNext()?(page.number+1):page.number}+'\');'" th:class="${page.isLast()}?'disable':''">&rsaquo;</a>
+		</li>
+		<li class="last" style="padding-left:0;">
+			<a href="javascript:void(0);" th:onclick="'loadTabContent(\''+${tabId}+'\', \''+${taburl}+'page='+${page.totalPages-1}+'\');'" th:class="${page.isLast()}?'disable':''">&raquo;</a>
+		</li>
+	</ul>
+</div>
