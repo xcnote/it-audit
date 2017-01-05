@@ -124,34 +124,42 @@ public class ManagerService {
 	 * @return
 	 */
 	public List<ObjectUser> queryAllObjectUser(Long objectId){
-		Map<Long, ObjectUser> id2ObjectUser = new HashMap<>();
+		Map<Long, ItAuditUser> userId2ObjectUser = new HashMap<>();
+		List<ObjectUser> result = new ArrayList<ObjectUser>();
 		
 		ItAuditObject object = this.queryObjectDetail(objectId);
 		Long partnerUserId = object.getPartnerUserId();
 		Long reviewUserId = object.getReviewUserId();
 		if(partnerUserId != null){
-			id2ObjectUser.put(partnerUserId, new ObjectUser(null, partnerUserId, null, objectId, ObjectUserRole.PARTNER, null));
+			userId2ObjectUser.put(partnerUserId, null);
 		}
 		if(reviewUserId != null){
-			id2ObjectUser.put(reviewUserId, new ObjectUser(null, reviewUserId, null, objectId, ObjectUserRole.REVIEW, null));
+			userId2ObjectUser.put(reviewUserId, null);
 		}
 		
 		List<ItAuditObjectUser> objectUsers = this.objectUserPersistenceService.findByObjectId(objectId);
 		if(CollectionUtils.isNotEmpty(objectUsers)){
 			for(ItAuditObjectUser objectUser: objectUsers){
-				id2ObjectUser.put(objectUser.getUserId(), new ObjectUser(objectUser, null));
+				userId2ObjectUser.put(objectUser.getUserId(), null);
 			}
 		}
-		if(id2ObjectUser.isEmpty()){
+		if(userId2ObjectUser.isEmpty()){
 			return null;
 		}
 		
-		List<ObjectUser> result = new ArrayList<ObjectUser>();
-		List<ItAuditUser> users = this.userService.queryUsersByUserIds(id2ObjectUser.keySet());
+		List<ItAuditUser> users = this.userService.queryUsersByUserIds(userId2ObjectUser.keySet());
 		for(ItAuditUser user: users){
-			ObjectUser info = id2ObjectUser.get(user.getUserId());
-			info.setUserName(user.getUserName());
-			result.add(info);
+			userId2ObjectUser.put(user.getUserId(), user);
+		}
+		
+		if(partnerUserId != null){
+			result.add(new ObjectUser(null, partnerUserId, userId2ObjectUser.get(partnerUserId).getUserName(), objectId, ObjectUserRole.PARTNER, null));
+		}
+		if(reviewUserId != null){
+			result.add(new ObjectUser(null, reviewUserId, userId2ObjectUser.get(reviewUserId).getUserName(), objectId, ObjectUserRole.REVIEW, null));
+		}
+		for(ItAuditObjectUser objectUser: objectUsers){
+			result.add(new ObjectUser(objectUser, userId2ObjectUser.get(objectUser.getUserId())));
 		}
 		return result;
 	}

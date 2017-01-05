@@ -41,7 +41,7 @@ public class ItAuditUserPersistenceService extends BasePersistenceService<ItAudi
 		return this.itAuditUserRepository.findByUserId(userId);
 	}
 	
-	public ItAuditUser findByUserIds(Collection<Long> userIds){
+	public List<ItAuditUser> findByUserIds(Collection<Long> userIds){
 		return this.itAuditUserRepository.findByUserIdIn(userIds);
 	}
 

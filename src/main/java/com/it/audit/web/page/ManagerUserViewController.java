@@ -1,5 +1,6 @@
 package com.it.audit.web.page;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.it.audit.auth.AuthContextHolder;
+import com.it.audit.domain.ItAuditUser;
 import com.it.audit.enums.ObjectUserRole;
 import com.it.audit.service.ManagerService;
 import com.it.audit.service.UserService;
@@ -54,8 +57,17 @@ public class ManagerUserViewController {
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_USER_ADD, method = RequestMethod.GET)
 	public ModelAndView managerObjectUserAdd(@RequestParam Long objectId){
+		Long currUserId = AuthContextHolder.get().getUserInfo().getUserId();
+		List<ItAuditUser> users = this.userService.queryAll();
+		List<ItAuditUser> showUsers = new ArrayList<>();
+		for(ItAuditUser user: users){
+			if(user.getUserId().compareTo(currUserId) != 0){
+				showUsers.add(user);
+			}
+		}
+		
 		Map<String, Object> result = new HashMap<>();
-		result.put("users", this.userService.queryAll());
+		result.put("users", showUsers);
 		result.put("objectUserRoles", ObjectUserRole.values());
 		result.put("objectId", objectId);
 		return new ModelAndView("manager/user/add", result);
@@ -68,9 +80,11 @@ public class ManagerUserViewController {
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_USER_ADD, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<ResponesBase> managerObjectUserAdd(@RequestBody ObjectUser user){
-		String result = this.managerService.addObjectUser(user);
-		result = StringUtils.isNotEmpty(result)? result: "新增成功";
-		return new ResponseEntity<ResponesBase>(new ResponesBase(0, result), HttpStatus.OK);
+		String error = this.managerService.addObjectUser(user);
+		if(StringUtils.isNotEmpty(error)){
+			return new ResponseEntity<ResponesBase>(new ResponesBase(-1, "", error), HttpStatus.OK);
+		}
+		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "新增成功"), HttpStatus.OK);
 	}
 	
 	/**
@@ -80,8 +94,10 @@ public class ManagerUserViewController {
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_USER_DELETE, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<ResponesBase> managerObjectUserDelete(@RequestBody DeleteDTO ids){
-		String result = this.managerService.deleteObjectUser(ids.getIds());
-		result = StringUtils.isNotEmpty(result)? result: "删除成功";
-		return new ResponseEntity<ResponesBase>(new ResponesBase(0, result), HttpStatus.OK);
+		String error = this.managerService.deleteObjectUser(ids.getIds());
+		if(StringUtils.isNotEmpty(error)){
+			return new ResponseEntity<ResponesBase>(new ResponesBase(-1, "", error), HttpStatus.OK);
+		}
+		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "删除成功"), HttpStatus.OK);
 	}
 }

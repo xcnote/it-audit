@@ -162,9 +162,8 @@ public class UserService {
 		return this.itAuditUserPersistenceService.findByUserId(userId);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<ItAuditUser> queryUsersByUserIds(Collection<Long> userIds){
-		return (List<ItAuditUser>) this.itAuditUserPersistenceService.findByUserIds(userIds);
+		return this.itAuditUserPersistenceService.findByUserIds(userIds);
 	}
 	
 	public List<ItAuditUser> queryAll(){
