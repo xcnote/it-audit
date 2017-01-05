@@ -1,15 +1,29 @@
 <script type="text/javascript">
 jQuery.getScript('/js/custom/tables.js', function() {});
+jQuery(document).ready(function(){
+	jQuery("#managerUserList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何用户", '提示');
+		}
+	});
+});
 </script>
 
 <div class="pageheader notab">
     <h1 class="pagetitle">项目经理 > 项目管理 > 项目成员管理</h1>
 </div><!--pageheader-->
 
-<div id="contentwrapper" class="contentwrapper tables" style="width: 40%">
+<div id="contentwrapper" class="contentwrapper tables" style="width: 60%">
+	<span class="pagedesc">被审计单位：<span th:text="${info.customName}"></span></span>
+	<span class="pagedesc">项目名称：<span th:text="${info.name}"></span></span>
+	<span class="pagedesc">审计期间：
+		<span th:text="${info.auditStartTime != null?#calendars.format(info.auditStartTime,'yyyy-MM-dd'):'-'}"></span> 
+		至 
+		<span th:text="${info.auditEndTime !=null?#calendars.format(info.auditEndTime,'yyyy-MM-dd'):'-'}"></span>
+	</span>
 	<div class="tableoptions">
-		<button class="radius3" th:onclick="'loadCenterContent(\'/index/manager/user/add?objectId='+${objectId}+'\');'">新增</button> &nbsp;
-		<button class="radius3" th:onclick="'submitFormByConfrim(\'managerUserList\', \'/index/manager/user/delete\', \'\', function(){loadCenterContent(\'/index/manager/user/list?objectId='+${objectId}+'\');});'">删除</button> &nbsp;
+		<button class="radius3" th:onclick="'loadCenterContent(\'/index/manager/user/add?objectId='+${info.id}+'\');'">新增</button> &nbsp;
+		<button class="radius3" th:onclick="'submitFormByConfrim(\'managerUserList\', \'/index/manager/user/delete\', \'\', function(){loadCenterContent(\'/index/manager/user/list?objectId='+${info.id}+'\');});'">删除</button> &nbsp;
     </div><!--tableoptions-->	
     <form method="post" id="managerUserList" action="javascript:void(0);">
     <table cellpadding="0" cellspacing="0" border="0" id="table1" class="stdtable stdtablecb">

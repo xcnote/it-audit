@@ -1,0 +1,76 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	jQuery("#gcList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何GC记录", '提示');
+		}
+	});
+	limitTableTd("gclistTable", 20);
+});
+function taskallot(objectid){
+	userSelected = jQuery("#userToTask :selected");
+	if(userSelected == null || userSelected.val() == ''){
+		jAlert("请选择分配成员", '提示');
+		return false;
+	}
+	submitFormByConfrim('gcList', '/index/manager/task/allot', '', function(){loadTabContent('tabs-2', '/index/manager/task/gclist?page=0&amp;unallocated=0&amp;objectId='+objectid);});
+}
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<label>分配至：</label>
+	<select class="radius3" id="userToTask">
+		<option value="">请选择</option>
+		<option th:each="user,index:${objectUsers}" th:value="${user.userId}" th:text="${user.userName}"></option>
+	</select> &nbsp;
+	<button class="radius3" th:onclick="'taskallot(\''+${objectId}+'\');'">分配任务</button> &nbsp;&nbsp;
+	<div class="right_move">
+		<button class="radius3" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/task/gclist?page=0&amp;unallocated=1&amp;objectId='+${objectId}+'\');'">只显示未分配任务</button> &nbsp;
+    </div>
+</div><!--tableoptions-->	
+<form method="post" id="gcList" action="javascript:void(0);">
+<table cellpadding="0" cellspacing="0" border="0" id="gclistTable" class="stdtable stdtablecb">
+   	<colgroup>
+  		  <col class="con0" style="width: 4%" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+      </colgroup>
+      <thead>
+          <tr>
+          	<th class="head0"><input type="checkbox" class="checkall" /></th>
+              <th class="head1">测试编号</th>
+              <th class="head0">一级控制域</th>
+              <th class="head1">二级控制域</th>
+              <th class="head0">IT风险描述</th>
+              <th class="head1">风险初步评价</th>
+              <th class="head0">审计程序</th>
+              <th class="head1">测试人</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="gc,index:${page.content}">
+			<td align="center"><input type="checkbox" name="ids" th:value="${gc.id}" required="true" minlength="1"/></td>
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gcUpdate?id='+${gc.id}+'\');'" th:text="${gc.number}"></a>
+              </td>
+              <td th:text="${gc.firstRegion}" class="center limit"></td>
+              <td th:text="${gc.secondRegion}" class="center limit"></td>
+              <td th:text="${gc.riskDesc}" class="center limit"></td>
+              <td th:text="${gc.riskEstimate}" class="center limit"></td>
+              <td th:text="${gc.audit}" class="center limit"></td>
+              <td th:text="${gc.testUserId == null or userMap.get(gc.testUserId) == null ?'':userMap.get(gc.testUserId).userName}" class="center"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-2'}, ${'/index/manager/test/gclist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

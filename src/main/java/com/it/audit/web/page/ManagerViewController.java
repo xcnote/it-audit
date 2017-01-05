@@ -88,4 +88,14 @@ public class ManagerViewController {
 		ItAuditObject object = this.managerService.queryObjectDetail(id);
 		return new ModelAndView("manager/test", "info", object);
 	}
+	
+	/**
+	 * 项目管理-工作任务分配
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.MANAGER_OBJECT_TASK_ALLOT, method = RequestMethod.GET)
+	public ModelAndView objectTaskAllot(@RequestParam Long id){
+		ItAuditObject object = this.managerService.queryObjectDetail(id);
+		return new ModelAndView("manager/task/task", "info", object);
+	}
 }

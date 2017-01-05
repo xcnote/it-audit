@@ -1,0 +1,42 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/widgets.js', function() {});
+jQuery(document).ready(function(){
+	jQuery("#tabs ul:eq(0) li:eq(0) a").click();
+});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">项目经理 > 项目管理 > 工作任务分配</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+	<div id="basicform" class="subcontent widgetbox">
+		<!--<div class="title"><h3>Tabbed Widget</h3></div>-->
+		<span class="pagedesc">被审计单位：<span th:text="${info.customName}"></span></span>
+		<span class="pagedesc">项目名称：<span th:text="${info.name}"></span></span>
+		<span class="pagedesc">审计期间：
+			<span th:text="${info.auditStartTime != null?#calendars.format(info.auditStartTime,'yyyy-MM-dd'):'-'}"></span> 
+			至 
+			<span th:text="${info.auditEndTime !=null?#calendars.format(info.auditEndTime,'yyyy-MM-dd'):'-'}"></span>
+		</span>
+		<!--<div class="widgetcontent">-->
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-2" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/task/gclist?page=0&amp;unallocated=0&amp;objectId='+${info.id}+'\');'">一般性控制测试（GC）</a></li>
+					<li><a href="#tabs-3" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/task/aclist?page=0&amp;unallocated=0&amp;objectId='+${info.id}+'\');'">自动化控制测试（AC）</a></li>
+					<li><a href="#tabs-4" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/task/dalist?page=0&amp;unallocated=0&amp;objectId='+${info.id}+'\');'">数据分析测试（DA）</a></li>
+				</ul>
+				<div id="tabs-2" class="tables">
+					
+				</div>
+				<div id="tabs-3" class="tables">
+					
+				</div>
+				<div id="tabs-4">
+					
+				</div>
+			</div><!--#tabs-->
+		<!--</div>widgetcontent-->
+	</div><!--widgetbox-->
+
+</div><!--contentwrapper-->

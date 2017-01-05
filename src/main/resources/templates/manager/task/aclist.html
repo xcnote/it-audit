@@ -1,0 +1,72 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	jQuery("#acList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何AC记录", '提示');
+		}
+	});
+	limitTableTd("aclistTable", 20);
+});
+function taskallot(objectid){
+	userSelected = jQuery("#userToTask :selected");
+	if(userSelected == null || userSelected.val() == ''){
+		jAlert("请选择分配成员", '提示');
+		return false;
+	}
+	submitFormByConfrim('acList', '/index/manager/task/allot', '', function(){loadTabContent('tabs-3', '/index/manager/task/aclist?page=0&amp;unallocated=0&amp;objectId='+objectid);});
+}
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<label>分配至：</label>
+	<select class="radius3" id="userToTask">
+		<option value="">请选择</option>
+		<option th:each="user,index:${objectUsers}" th:value="${user.userId}" th:text="${user.userName}"></option>
+	</select> &nbsp;
+	<button class="radius3" th:onclick="'taskallot(\''+${objectId}+'\');'">分配任务</button> &nbsp;&nbsp;
+	<div class="right_move">
+		<button class="radius3" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/task/aclist?page=0&amp;unallocated=1&amp;objectId='+${objectId}+'\');'">只显示未分配任务</button> &nbsp;
+    </div>
+</div><!--tableoptions-->	
+<form method="post" id="acList" action="javascript:void(0);">
+<table cellpadding="0" cellspacing="0" border="0" id="aclistTable" class="stdtable stdtablecb">
+    <colgroup>
+        <col class="con0" style="width: 4%" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+      </colgroup>
+      <thead>
+          <tr>
+          	<th class="head0"><input type="checkbox" class="checkall" /></th>
+              <th class="head1">AC测试编号</th>
+              <th class="head0">风险描述</th>
+              <th class="head1">AC测试内容</th>
+              <th class="head0">AC测试方法</th>
+              <th class="head1">测试人</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="ac,index:${page.content}">
+			<td align="center"><input type="checkbox" name="ids" th:value="${ac.id}" required="true" minlength="1"/></td>
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/test/acUpdate?id='+${ac.id}+'\');'" th:text="${ac.number}"></a>
+              </td>
+              <td th:text="${ac.riskDesc}" class="center limit"></td>
+              <td th:text="${ac.acContent}" class="center limit"></td>
+              <td th:text="${ac.acMethod}" class="center limit"></td>
+              <td th:text="${ac.testUserId == null or userMap.get(ac.testUserId) == null ?'':userMap.get(ac.testUserId).userName}" class="center"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-3'}, ${'/index/manager/test/aclist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

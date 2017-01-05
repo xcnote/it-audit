@@ -38,6 +38,9 @@ public class ObjectTestGCService {
 	public Page<ItAuditTestGC> queryTestGCList(PageRequest pageRequest, Long objectId){
 		return this.testGCPersistenceService.findByParam(pageRequest, null, null, objectId);
 	}
+	public Page<ItAuditTestGC> queryTestGCList(PageRequest pageRequest, Long objectId, String queryKey, Object queryValue){
+		return this.testGCPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId);
+	}
 	
 	/**
 	 * gc导入模板

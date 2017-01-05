@@ -38,6 +38,11 @@ public class RequestURI {
 	public static final String MANAGER_OBJECT_USER_LIST = MANAGER_BASE + "/user/list";
 	public static final String MANAGER_OBJECT_USER_ADD = MANAGER_BASE + "/user/add";
 	public static final String MANAGER_OBJECT_USER_DELETE = MANAGER_BASE + "/user/delete";
+	//项目经理-项目管理-任务分配
+	public static final String MANAGER_OBJECT_TASK_ALLOT = MANAGER_BASE + "/task/allot";
+	public static final String MANAGER_OBJECT_TASK_GCLIST = MANAGER_BASE + "/task/gclist";
+	public static final String MANAGER_OBJECT_TASK_ACLIST = MANAGER_BASE + "/task/aclist";
+	public static final String MANAGER_OBJECT_TASK_DALIST = MANAGER_BASE + "/task/dalist";
 
 	public static final String ERROR_PAGE = "/404";
 	

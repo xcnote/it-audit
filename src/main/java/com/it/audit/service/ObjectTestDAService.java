@@ -35,6 +35,9 @@ public class ObjectTestDAService {
 	public Page<ItAuditTestDA> queryTestDAList(PageRequest pageRequest, Long objectId){
 		return this.testDAPersistenceService.findByParam(pageRequest, null, null, objectId);
 	}
+	public Page<ItAuditTestDA> queryTestDAList(PageRequest pageRequest, Long objectId, String queryKey, Object queryValue){
+		return this.testDAPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId);
+	}
 	
 	public void deleteDAs(List<Long> ids){
 		this.testDAPersistenceService.delete(ids.toArray(new Long[]{}));

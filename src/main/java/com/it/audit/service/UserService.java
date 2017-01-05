@@ -1,7 +1,9 @@
 package com.it.audit.service;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
@@ -168,5 +170,13 @@ public class UserService {
 	
 	public List<ItAuditUser> queryAll(){
 		return this.itAuditUserPersistenceService.findAll();
+	}
+	public Map<Long, ItAuditUser> queryAllToMap(){
+		Map<Long, ItAuditUser> map = new HashMap<Long, ItAuditUser>();
+		List<ItAuditUser> users = this.itAuditUserPersistenceService.findAll();
+		for(ItAuditUser user: users){
+			map.put(user.getUserId(), user);
+		}
+		return map;
 	}
 }

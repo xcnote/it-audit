@@ -163,6 +163,29 @@ public class ManagerService {
 		}
 		return result;
 	}
+	public List<ObjectUser> queryObjectUserByRole(Long objectId, ObjectUserRole role){
+		Map<Long, ItAuditUser> userId2ObjectUser = new HashMap<>();
+		List<ObjectUser> result = new ArrayList<ObjectUser>();
+		List<ItAuditObjectUser> objectUsers = this.objectUserPersistenceService.findByObjectIdAndRole(objectId, role);
+		if(CollectionUtils.isNotEmpty(objectUsers)){
+			for(ItAuditObjectUser objectUser: objectUsers){
+				userId2ObjectUser.put(objectUser.getUserId(), null);
+			}
+		}
+		
+		if(userId2ObjectUser.isEmpty()){
+			return null;
+		}
+		
+		List<ItAuditUser> users = this.userService.queryUsersByUserIds(userId2ObjectUser.keySet());
+		for(ItAuditUser user: users){
+			userId2ObjectUser.put(user.getUserId(), user);
+		}
+		for(ItAuditObjectUser objectUser: objectUsers){
+			result.add(new ObjectUser(objectUser, userId2ObjectUser.get(objectUser.getUserId())));
+		}
+		return result;
+	}
 	
 	/**
 	 * 新增项目成员

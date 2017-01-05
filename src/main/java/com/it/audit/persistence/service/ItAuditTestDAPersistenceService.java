@@ -40,7 +40,7 @@ public class ItAuditTestDAPersistenceService extends BasePersistenceService<ItAu
 		return this.itAuditTestDARepository.findByObjectIdAndTestUserId(objectId, userId);
 	}
 	
-	public Page<ItAuditTestDA> findByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long objectId){
+	public Page<ItAuditTestDA> findByParam(PageRequest pageRequest, final String queryKey, final Object queryValue, final Long objectId){
 		return this.itAuditTestDARepository.findAll(new Specification<ItAuditTestDA>() {
 			@Override
 			public Predicate toPredicate(Root<ItAuditTestDA> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -53,6 +53,14 @@ public class ItAuditTestDAPersistenceService extends BasePersistenceService<ItAu
 					if("name".equals(queryKey)){
 						Path<String> name = root.get("name");
 						predicates.add(cb.like(name, "%" + queryValue +"%"));
+					}
+					if("testUserId".equals(queryKey)){
+						Path<Long> name = root.get("testUserId");
+						if("-1".equals(queryValue.toString())){
+							predicates.add(cb.isNull(name));
+						} else {
+							predicates.add(cb.equal(name, queryValue));
+						}
 					}
 				}
 				Path<Long> objectIdPath = root.get("objectId");
