@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import com.it.audit.auth.AuthContextHolder;
 import com.it.audit.domain.ItAuditObject;
 import com.it.audit.domain.ItAuditObjectUser;
+import com.it.audit.domain.ItAuditTestAC;
+import com.it.audit.domain.ItAuditTestDA;
+import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.domain.ItAuditUser;
 import com.it.audit.enums.ObjectStatus;
 import com.it.audit.enums.ObjectUserRole;
@@ -38,6 +41,12 @@ public class ManagerService {
 	private ItAuditObjectPersistenceService itAuditObjectPersistenceService;
 	@Autowired
 	private ItAuditObjectUserPersistenceService objectUserPersistenceService;
+	@Autowired
+	private ObjectTestGCService objectTestGCService;
+	@Autowired
+	private ObjectTestACService objectTestACService;
+	@Autowired
+	private ObjectTestDAService objectTestDAService;
 	@Autowired
 	private UserService userService;
 	
@@ -145,5 +154,57 @@ public class ManagerService {
 			result.add(info);
 		}
 		return result;
+	}
+	
+	/**
+	 * 新增项目成员
+	 * @param objectUser 经理人不可为项目合伙人，经理人不可为质量复核人
+	 * @return 错误信息
+	 */
+	public String addObjectUser(ObjectUser objectUser){
+		Long currUserId = AuthContextHolder.get().getUserInfo().getUserId();
+		Long objectId = objectUser.getObjectId();
+		List<ItAuditObjectUser> users = this.objectUserPersistenceService.findByObjectIdAndRole(objectId, ObjectUserRole.MANAGER);
+		List<Long> managers = new ArrayList<>();
+		managers.add(currUserId);
+		if(CollectionUtils.isNotEmpty(users)){
+			for(ItAuditObjectUser user: users){
+				managers.add(user.getUserId());
+			}
+		}
+		
+		ObjectUserRole role = objectUser.getRole();
+		Long userId = objectUser.getUserId();
+		if(managers.contains(userId) && (role == ObjectUserRole.PARTNER || role == ObjectUserRole.REVIEW)){
+			return "存在不相容权限，请重新分配";
+		}
+		ItAuditObjectUser itObjectUser = new ItAuditObjectUser();
+		itObjectUser.setUserId(userId);
+		itObjectUser.setRole(role);
+		itObjectUser.setObjectId(objectId);
+		this.objectUserPersistenceService.save(itObjectUser);
+		return null;
+	}
+	
+	/**
+	 * 删除项目成员， 存在任务不执行
+	 * @param ids
+	 * @return
+	 */
+	public String deleteObjectUser(List<Long> ids){
+		List<ItAuditObjectUser> users = this.objectUserPersistenceService.findByIdIn(ids);
+		for(ItAuditObjectUser user: users){
+			Long userId = user.getUserId();
+			Long objectId = user.getObjectId();
+			
+			List<ItAuditTestGC> gcs = this.objectTestGCService.queryTestGCByTestUser(userId, objectId);
+			List<ItAuditTestAC> acs = this.objectTestACService.queryTestACByTestUser(userId, objectId);
+			List<ItAuditTestDA> das = this.objectTestDAService.queryTestDAByTestUser(userId, objectId);
+			if(CollectionUtils.isNotEmpty(gcs) || CollectionUtils.isNotEmpty(acs) || CollectionUtils.isNotEmpty(das)){
+				return this.userService.queryUserByUserId(userId).getUserName() + "存在已分配任务，请取消后重试";
+			}
+		}
+		this.objectUserPersistenceService.delete(ids.toArray(new Long[]{}));
+		return null;
 	}
 }

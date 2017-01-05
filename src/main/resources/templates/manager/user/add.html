@@ -1,0 +1,38 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">项目经理 > 项目管理 > 项目成员管理</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables" style="width: 40%">
+	<div id="basicform" class="subcontent">
+		<form class="stdform" method="post" id='objectUserAdd' action="javascript:void(0);">
+			<input type="text" style="display: none;" id="objectId" name="objectId" th:value="${objectId}"/>
+			<p>
+				<label>姓名</label>
+			    <span class="field">
+			    <select name="userId" class="uniformselect" required="true">
+					<option th:each="one,index:${users}" th:value="${one.userId}" th:text="${one.userName}"></option>
+				</select>
+			    </span>
+			</p>
+			
+			<p>
+				<label>职责</label>
+			    <span class="field">
+			    <select name="role" class="uniformselect" required="true">
+					<option th:each="one,index:${objectUserRoles}" th:value="${one.name()}" th:text="${one.text}"></option>
+				</select>
+			    </span>
+			</p>
+		    
+		    <p class="stdformbutton">
+		    	<button class="submit radius2" onclick="submitFormByConfrim('objectUserAdd', '/index/manager/user/add', '', function(){loadCenterContent('/index/manager/user/list?objectId='+jQuery('#basicform #objectId').val());}); return false;">提交</button>
+		        <input type="reset" class="reset radius2" onclick="loadCenterContent('/index/manager/user/list?objectId='+jQuery('#basicform #objectId').val());" value="返回" />
+		    </p>
+		</form>
+	</div>
+</div>

@@ -82,6 +82,16 @@ public class ObjectTestGCService {
 		this.testGCPersistenceService.save(result);
 	}
 	
+	/**
+	 * 查询指定项目和测试人下的GC测试
+	 * @param userId
+	 * @param objectId
+	 * @return
+	 */
+	public List<ItAuditTestGC> queryTestGCByTestUser(Long userId, Long objectId){
+		return this.testGCPersistenceService.findByObjectIdAndTestUserId(objectId, userId);
+	}
+	
 	private ItAuditTestGC buildTestGC(ItAuditTestGCTemplate template){
 		ItAuditTestGC gc = new ItAuditTestGC();
 		gc.setRiskNumber(template.getRiskNumber());

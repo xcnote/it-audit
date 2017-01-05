@@ -57,4 +57,14 @@ public class ObjectTestDAService {
 		}
 		this.testDAPersistenceService.save(result);
 	}
+	
+	/**
+	 * 查询指定项目和测试人下的DA测试
+	 * @param userId
+	 * @param objectId
+	 * @return
+	 */
+	public List<ItAuditTestDA> queryTestDAByTestUser(Long userId, Long objectId){
+		return this.testDAPersistenceService.findByObjectIdAndTestUserId(objectId, userId);
+	}
 }

@@ -36,6 +36,8 @@ public class RequestURI {
 	public static final String MANAGER_OBJECT_TEST_DADELETE = MANAGER_BASE + "/test/daDelete";
 	//项目经理-项目管理-成员管理
 	public static final String MANAGER_OBJECT_USER_LIST = MANAGER_BASE + "/user/list";
+	public static final String MANAGER_OBJECT_USER_ADD = MANAGER_BASE + "/user/add";
+	public static final String MANAGER_OBJECT_USER_DELETE = MANAGER_BASE + "/user/delete";
 
 	public static final String ERROR_PAGE = "/404";
 	

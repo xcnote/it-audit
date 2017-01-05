@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.it.audit.domain.ItAuditTestAC;
+import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.persistence.service.ItAuditTestACPersistenceService;
 
 @Service
@@ -57,5 +58,15 @@ public class ObjectTestACService {
 			ac.setNumber(number);
 		}
 		this.testACPersistenceService.save(result);
+	}
+	
+	/**
+	 * 查询指定项目和测试人下的AC测试
+	 * @param userId
+	 * @param objectId
+	 * @return
+	 */
+	public List<ItAuditTestAC> queryTestACByTestUser(Long userId, Long objectId){
+		return this.testACPersistenceService.findByObjectIdAndTestUserId(objectId, userId);
 	}
 }

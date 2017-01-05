@@ -158,8 +158,16 @@ public class UserService {
 		return this.itAuditUserPersistenceService.findById(id);
 	}
 	
+	public ItAuditUser queryUserByUserId(Long userId){
+		return this.itAuditUserPersistenceService.findByUserId(userId);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<ItAuditUser> queryUsersByUserIds(Collection<Long> userIds){
 		return (List<ItAuditUser>) this.itAuditUserPersistenceService.findByUserIds(userIds);
+	}
+	
+	public List<ItAuditUser> queryAll(){
+		return this.itAuditUserPersistenceService.findAll();
 	}
 }

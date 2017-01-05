@@ -36,6 +36,10 @@ public class ItAuditTestACPersistenceService extends BasePersistenceService<ItAu
 		return this.itAuditTestACRepository.findCountByObjectId(objectId);
 	}
 	
+	public List<ItAuditTestAC> findByObjectIdAndTestUserId(Long objectId, Long userId) {
+		return this.itAuditTestACRepository.findByObjectIdAndTestUserId(objectId, userId);
+	}
+	
 	public Page<ItAuditTestAC> findByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long objectId){
 		return this.itAuditTestACRepository.findAll(new Specification<ItAuditTestAC>() {
 			@Override
