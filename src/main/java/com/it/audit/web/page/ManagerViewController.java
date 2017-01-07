@@ -26,6 +26,7 @@ import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
 import com.it.audit.web.dto.ObjectCreate;
 import com.it.audit.web.dto.ResponesBase;
+
 /**
  * 项目经理视图
  * @author wangx
@@ -97,5 +98,15 @@ public class ManagerViewController {
 	public ModelAndView objectTaskAllot(@RequestParam Long id){
 		ItAuditObject object = this.managerService.queryObjectDetail(id);
 		return new ModelAndView("manager/task/task", "info", object);
+	}
+	
+	/**
+	 * 项目管理-工作复核
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.MANAGER_OBJECT_REVIEW_INDEX, method = RequestMethod.GET)
+	public ModelAndView objectTaskReview(@RequestParam Long id){
+		ItAuditObject object = this.managerService.queryObjectDetail(id);
+		return new ModelAndView("manager/review/index", "info", object);
 	}
 }

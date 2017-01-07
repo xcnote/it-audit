@@ -59,9 +59,7 @@ function taskallot(objectid){
       <tbody>
           <tr th:each="da,index:${page.content}">
 			  <td align="center"><input type="checkbox" name="taskIds" th:value="${da.id}" required="true" minlength="1"/></td>
-              <td class="center">
-              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/test/daUpdate?id='+${da.id}+'\');'" th:text="${da.number}"></a>
-              </td>
+              <td th:text="${da.number}" class="center"></td>
               <td th:text="${da.riskDesc}" class="center limit"></td>
               <td th:text="${da.daContent}" class="center limit"></td>
               <td th:text="${da.daMethod}" class="center limit"></td>
@@ -70,6 +68,6 @@ function taskallot(objectid){
       </tbody>
   </table>
 </form>
-<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-4'}, ${'/index/manager/test/dalist?objectId='+objectId+'&amp;'})">
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-4'}, ${'/index/manager/task/dalist?objectId='+objectId+'&amp;'})">
 	<!-- 分页页码 -->
 </div>

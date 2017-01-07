@@ -60,10 +60,8 @@ function taskallot(objectid){
       </thead>
       <tbody>
           <tr th:each="gc,index:${page.content}">
-			<td align="center"><input type="checkbox" name="taskIds" th:value="${gc.id}" required="true" minlength="1"/></td>
-              <td class="center">
-              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gcUpdate?id='+${gc.id}+'\');'" th:text="${gc.number}"></a>
-              </td>
+			  <td align="center"><input type="checkbox" name="taskIds" th:value="${gc.id}" required="true" minlength="1"/></td>
+              <td class="center" th:text="${gc.number}"></td>
               <td th:text="${gc.firstRegion}" class="center limit"></td>
               <td th:text="${gc.secondRegion}" class="center limit"></td>
               <td th:text="${gc.riskDesc}" class="center limit"></td>
@@ -74,6 +72,6 @@ function taskallot(objectid){
       </tbody>
   </table>
 </form>
-<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-2'}, ${'/index/manager/test/gclist?objectId='+objectId+'&amp;'})">
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-2'}, ${'/index/manager/task/gclist?objectId='+objectId+'&amp;'})">
 	<!-- 分页页码 -->
 </div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.domain.ItAuditTestGCTemplate;
+import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.persistence.service.ItAuditTestGCPersistenceService;
 
 @Service
@@ -36,10 +37,13 @@ public class ObjectTestGCService {
 	 * @return
 	 */
 	public Page<ItAuditTestGC> queryTestGCList(PageRequest pageRequest, Long objectId){
-		return this.testGCPersistenceService.findByParam(pageRequest, null, null, objectId);
+		return this.testGCPersistenceService.findByParam(pageRequest, null, null, objectId, null);
+	}
+	public Page<ItAuditTestGC> queryTestGCList(PageRequest pageRequest, Long objectId, List<ObjectTestStatus> status){
+		return this.testGCPersistenceService.findByParam(pageRequest, null, null, objectId, status);
 	}
 	public Page<ItAuditTestGC> queryTestGCList(PageRequest pageRequest, Long objectId, String queryKey, Object queryValue){
-		return this.testGCPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId);
+		return this.testGCPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId, null);
 	}
 	
 	/**
@@ -114,7 +118,7 @@ public class ObjectTestGCService {
 		ItAuditTestGC gc = new ItAuditTestGC();
 		gc.setRiskNumber(template.getRiskNumber());
 		gc.setRiskDesc(template.getRiskDesc());
-		gc.setControlNumber(template.getControlNumber());
+		gc.setControlActivity(template.getControlActivity());
 		gc.setFirstRegion(template.getFirstRegion());
 		gc.setSecondRegion(template.getSecondRegion());
 		gc.setRiskEstimate(template.getRiskEstimate());

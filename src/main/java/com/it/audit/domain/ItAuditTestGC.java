@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
+import com.it.audit.util.CommonUtil;
 
 import lombok.Data;
 
@@ -43,9 +45,9 @@ public class ItAuditTestGC {
 	@Column(name = "risk_desc", length = 1000)
 	private String riskDesc;
 	
-	//控制编号
-	@Column(name = "control_number")
-	private String controlNumber;
+	//控制活动
+	@Column(name = "control_activity", length = 1000)
+	private String controlActivity;
 	
 	//一级控制域
 	@Column(name = "first_region")
@@ -56,7 +58,7 @@ public class ItAuditTestGC {
 	private String secondRegion;
 	
 	//风险初步评价
-	@Column(name = "risk_estimate", length = 1000)
+	@Column(name = "risk_estimate")
 	private String riskEstimate;
 	
 	//监管指引
@@ -122,8 +124,8 @@ public class ItAuditTestGC {
 	private String managerOpinion;
 	
 	//缺陷评价
-	@Column(name = "imperfection", length = 500)
-	private String imperfection;
+	@Column(name = "imperfection")
+	private TestImperfectionType imperfection;
 	
 	//经理批注
 	@Column(name = "manager_postil", length = 500)
@@ -138,6 +140,15 @@ public class ItAuditTestGC {
 	@Column(name = "create_time")
 	private DateTime createTime = new DateTime();
 	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@DateTimeFormat
+	@Column(name = "update_time")
+	private DateTime updateTime;
+	
 	@Column(name = "object_id")
 	private Long objectId;
+	
+	public String getManagerOpinionToChinese(){
+		return CommonUtil.managerOpinionToChinese(managerOpinion);
+	}
 }

@@ -9,6 +9,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.it.audit.domain.ItAuditTestAC;
+import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.persistence.base.BasePersistenceDao;
 import com.it.audit.persistence.base.BasePersistenceService;
 import com.it.audit.persistence.dao.ItAuditTestACRepository;
@@ -44,7 +46,7 @@ public class ItAuditTestACPersistenceService extends BasePersistenceService<ItAu
 		this.itAuditTestACRepository.updateTestUserId(userId, ids);
 	}
 	
-	public Page<ItAuditTestAC> findByParam(PageRequest pageRequest, final String queryKey, final Object queryValue, final Long objectId){
+	public Page<ItAuditTestAC> findByParam(PageRequest pageRequest, final String queryKey, final Object queryValue, final Long objectId, final List<ObjectTestStatus> status){
 		return this.itAuditTestACRepository.findAll(new Specification<ItAuditTestAC>() {
 			@Override
 			public Predicate toPredicate(Root<ItAuditTestAC> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -66,6 +68,10 @@ public class ItAuditTestACPersistenceService extends BasePersistenceService<ItAu
 							predicates.add(cb.equal(name, queryValue));
 						}
 					}
+				}
+				if(CollectionUtils.isNotEmpty(status)){
+					Path<ObjectTestStatus> name = root.get("status");
+					predicates.add(name.in(status));
 				}
 				Path<Long> objectIdPath = root.get("objectId");
 				predicates.add(cb.equal(objectIdPath, objectId));

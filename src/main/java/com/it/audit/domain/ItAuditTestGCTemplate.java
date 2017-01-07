@@ -35,8 +35,8 @@ public class ItAuditTestGCTemplate {
 	private String riskDesc;
 	
 	//控制编号
-	@Column(name = "control_number")
-	private String controlNumber;
+	@Column(name = "control_activity")
+	private String controlActivity;
 	
 	//一级控制域
 	@Column(name = "first_region")

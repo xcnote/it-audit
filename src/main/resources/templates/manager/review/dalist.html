@@ -1,0 +1,52 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	limitTableTd("dalistTable", 20);
+});
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/review/dalist?page=0&amp;unpass=1&amp;objectId='+${objectId}+'\');'">只显示未通过问题</button> &nbsp;
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/review/dalist?page=0&amp;unsubmit=1&amp;objectId='+${objectId}+'\');'">只显示未提交测试</button> &nbsp;
+</div><!--tableoptions-->	
+<form method="post" id="daList" action="javascript:void(0);">
+<input type="text" value="DA" name="type" style="display: none;"/>
+<input type="text" value="" name="userId" id="daUserId" style="display: none;"/>
+<table cellpadding="0" cellspacing="0" border="0" id="dalistTable" class="stdtable stdtablecb">
+    <colgroup>
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+      </colgroup>
+      <thead>
+          <tr>
+              <th class="head1">测试编号</th>
+              <th class="head0">DA测试结论</th>
+              <th class="head1">问题金额比例</th>
+              <th class="head0">测试人</th>
+              <th class="head1">最后提交日期</th>
+              <th class="head0">经理意见</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="da,index:${page.content}">
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/review/update?testId='+${da.id}+'&amp;type=DA\');'" th:text="${da.number}"></a>
+              </td>
+              <td th:text="${da.daResult}" class="center limit"></td>
+              <td th:text="${da.problemRatio}" class="center limit"></td>
+              <td th:text="${da.testUserId == null or userMap.get(da.testUserId) == null ?'':userMap.get(da.testUserId).userName}" class="center"></td>
+              <td th:text="${da.submitTime == null ?'':#calendars.format(da.submitTime,'yyyy-MM-dd HH:mm:ss')}" class="center"></td>
+              <td th:text="${da.managerOpinionToChinese}" class="center limit"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-4'}, ${'/index/manager/review/dalist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

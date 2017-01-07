@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
+import com.it.audit.enums.ObjectTestStatus;
+
 public class CommonUtil {
 	
 	public static void checkAndThrowAssignException(boolean check, RuntimeException ex) throws RuntimeException{
@@ -18,6 +20,14 @@ public class CommonUtil {
 		result.put("queryKey", queryKey);
 		result.put("queryValue", queryName);
 		return result;
+	}
+	
+	public static String managerOpinionToChinese(String managerOpinion){
+		ObjectTestStatus status = ObjectTestStatus.updateObjectTestStatus(managerOpinion);
+		if(status != null){
+			return status.getText();
+		}
+		return null;
 	}
 	
 	/**

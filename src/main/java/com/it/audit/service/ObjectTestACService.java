@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.it.audit.domain.ItAuditTestAC;
+import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.persistence.service.ItAuditTestACPersistenceService;
 
 @Service
@@ -33,10 +34,13 @@ public class ObjectTestACService {
 	 * @return
 	 */
 	public Page<ItAuditTestAC> queryTestACList(PageRequest pageRequest, Long objectId){
-		return this.testACPersistenceService.findByParam(pageRequest, null, null, objectId);
+		return this.testACPersistenceService.findByParam(pageRequest, null, null, objectId, null);
+	}
+	public Page<ItAuditTestAC> queryTestACList(PageRequest pageRequest, Long objectId, List<ObjectTestStatus> status){
+		return this.testACPersistenceService.findByParam(pageRequest, null, null, objectId, status);
 	}
 	public Page<ItAuditTestAC> queryTestACList(PageRequest pageRequest, Long objectId, String queryKey, Object queryValue){
-		return this.testACPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId);
+		return this.testACPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId, null);
 	}
 	
 	

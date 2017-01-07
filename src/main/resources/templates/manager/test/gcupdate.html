@@ -20,9 +20,9 @@ jQuery.getScript('/js/custom/forms.js', function() {});
 	        </span>
 	    </p>
 	    <p>
-			<label>控制编号</label>
+			<label>控制活动</label>
 		    <span class="field">
-		    	<input type="text" name="controlNumber" class="smallinput" th:value="${gc.controlNumber}" required="true"/>
+		    	<textarea cols="80" rows="5" name="controlActivity" class="longinput" th:text="${gc.controlActivity}"></textarea>
 		    </span>
 		</p>
 		<p>

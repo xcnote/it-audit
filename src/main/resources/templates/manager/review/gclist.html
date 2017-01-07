@@ -1,0 +1,55 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	limitTableTd("gclistTable", 20);
+});
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/review/gclist?page=0&amp;unpass=1&amp;objectId='+${objectId}+'\');'">只显示未通过问题</button> &nbsp;
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/review/gclist?page=0&amp;unsubmit=1&amp;objectId='+${objectId}+'\');'">只显示未提交测试</button> &nbsp;
+</div><!--tableoptions-->	
+<form method="post" id="gcList" action="javascript:void(0);">
+<input type="text" value="GC" name="type" style="display: none;"/>
+<input type="text" value="" name="userId" id="gcUserId" style="display: none;"/>
+<table cellpadding="0" cellspacing="0" border="0" id="gclistTable" class="stdtable stdtablecb">
+   	<colgroup>
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+      </colgroup>
+      <thead>
+          <tr>
+              <th class="head1">测试编号</th>
+              <th class="head0">控制活动</th>
+              <th class="head1">D&amp;I有效性</th>
+              <th class="head0">OE有效性</th>
+              <th class="head1">测试人</th>
+              <th class="head0">最后提交时间</th>
+              <th class="head1">经理意见</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="gc,index:${page.content}">
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/review/update?testId='+${gc.id}+'&amp;type=GC\');'" th:text="${gc.number}"></a>
+              </td>
+              <td th:text="${gc.controlActivity}" class="center limit"></td>
+              <td th:text="${gc.diResult}" class="center limit"></td>
+              <td th:text="${gc.oeResult}" class="center limit"></td>
+              <td th:text="${gc.testUserId == null or userMap.get(gc.testUserId) == null ?'':userMap.get(gc.testUserId).userName}" class="center"></td>
+              <td th:text="${gc.submitTime == null ?'':#calendars.format(gc.submitTime,'yyyy-MM-dd HH:mm:ss')}" class="center"></td>
+              <td th:text="${gc.managerOpinionToChinese}" class="center limit"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-2'}, ${'/index/manager/review/gclist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

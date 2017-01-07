@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
+import com.it.audit.util.CommonUtil;
 
 import lombok.Data;
 
@@ -82,8 +84,8 @@ public class ItAuditTestDA {
 	private String managerOpinion;
 	
 	//缺陷评价
-	@Column(name = "imperfection", length = 500)
-	private String imperfection;
+	@Column(name = "imperfection")
+	private TestImperfectionType imperfection;
 	
 	//经理批注
 	@Column(name = "manager_postil", length = 500)
@@ -98,6 +100,15 @@ public class ItAuditTestDA {
 	@Column(name = "create_time")
 	private DateTime createTime = new DateTime();
 	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@DateTimeFormat
+	@Column(name = "update_time")
+	private DateTime updateTime;
+	
 	@Column(name = "object_id")
 	private Long objectId;
+	
+	public String getManagerOpinionToChinese(){
+		return CommonUtil.managerOpinionToChinese(managerOpinion);
+	}
 }

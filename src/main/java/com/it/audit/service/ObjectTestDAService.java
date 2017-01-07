@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.it.audit.domain.ItAuditTestDA;
+import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.persistence.service.ItAuditTestDAPersistenceService;
 
 @Service
@@ -33,10 +34,13 @@ public class ObjectTestDAService {
 	 * @return
 	 */
 	public Page<ItAuditTestDA> queryTestDAList(PageRequest pageRequest, Long objectId){
-		return this.testDAPersistenceService.findByParam(pageRequest, null, null, objectId);
+		return this.testDAPersistenceService.findByParam(pageRequest, null, null, objectId, null);
+	}
+	public Page<ItAuditTestDA> queryTestDAList(PageRequest pageRequest, Long objectId, List<ObjectTestStatus> status){
+		return this.testDAPersistenceService.findByParam(pageRequest, null, null, objectId, status);
 	}
 	public Page<ItAuditTestDA> queryTestDAList(PageRequest pageRequest, Long objectId, String queryKey, Object queryValue){
-		return this.testDAPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId);
+		return this.testDAPersistenceService.findByParam(pageRequest, queryKey, queryValue, objectId, null);
 	}
 	
 	public void deleteDAs(List<Long> ids){

@@ -1,0 +1,92 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+</script>
+
+<div id="basicform" class="subcontent widgetpage">
+	<form class="stdform width90form" method="post" id='testACUpdate' action="javascript:void(0);">
+		<input type="text" style="display: none;" name="id" th:value="${ac.id}"/>
+		<input type="text" style="display: none;" id="objectId" name="objectId" th:value="${ac.objectId}"/>
+		<div class="one_half" style="width: 75%; margin-right: 0;">
+		<div class="one_half" style="width: 50%; margin-right: 0;">
+			<p>
+		    	<label>风险描述</label>
+		        <span class="field">
+		        	<textarea cols="50" rows="5" name="riskDesc" class="longinput" th:text="${ac.riskDesc}"></textarea>
+		        </span>
+		    </p>
+			<p>
+				<label>AC测试内容</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="5" name="acContent" class="longinput" th:text="${ac.acContent}"></textarea>
+			    </span>
+			</p>
+			<p>
+				<label>AC测试方法</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="5" name="acMethod" class="longinput" th:text="${ac.acMethod}"></textarea>
+			    </span>
+			</p>
+		</div>
+		<div class="one_half last" style="width: 50%; margin-right: 0;">
+			<p>
+		    	<label>AC测试结论</label>
+		        <span class="field">
+		        	<input type="text" name="acResult" class="longinput" th:value="${ac.acResult}" required="true"/>
+		        </span>
+		    </p>
+			<p>
+				<label>AC测试记录</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="5" name="acRecord" class="longinput" th:text="${ac.acRecord}"></textarea>
+			    </span>
+			</p>
+			<p>
+				<label>差异金额</label>
+			    <span class="field">
+			    	<input type="number" name="disAmount" class="longinput" th:value="${ac.disAmount}"/>
+			    </span>
+			</p>
+			<p>
+				<label>样本金额</label>
+			    <span class="field">
+			    	<input type="number" name="sampleAmount" class="longinput" th:value="${ac.sampleAmount}"/>
+			    </span>
+			</p>
+			<p>
+				<label>OE测试附件</label>
+			    <span class="field">
+			    	
+			    </span>
+			</p>
+		</div>
+		</div>
+		<div class="one_half last width50form" style="width: 25%; margin-right: 0;">
+			<p>
+				<label>经理意见</label>
+			    <span class="field">
+			    	<input type="radio" name="managerOpinion" th:checked="${ac.managerOpinion == 'pass'}?'checked':'false'" value="pass"/> 通过 &nbsp; &nbsp;
+	            	<input type="radio" name="managerOpinion" th:checked="${ac.managerOpinion == 'sendback'}?'checked':'false'" value="sendback"/> 退回 &nbsp; &nbsp;
+			    </span>
+			</p>
+			<p>
+		    	<label>缺陷评价</label>
+		    	<span class="field">
+		        <span class="field" style="margin-left: 10px" th:each="type,index:${imperfectionTyps}">
+		        	<input type="radio" name="imperfection" th:checked="${ac.imperfection == type}?'checked':'false'" th:value="${type}" th:text="${type.actext}"/>
+		        </span>
+		        </span>
+		    </p>
+		    <p>
+				<label>经理批注</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="20" name="managerPostil" class="longinput" th:text="${ac.managerPostil}"></textarea>
+			    </span>
+			</p>
+		</div>
+	    <p class="stdformbutton left_centent" style="margin-left: 40%;">
+	    	<button class="submit radius2" onclick="submitFormByConfrim('testACUpdate', '/index/manager/review/acupdate', '', function(){loadTabContent('tabs-3', '/index/manager/review/aclist?page=0&amp;objectId='+jQuery('#basicform #objectId').val());}); return false;">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+</div>

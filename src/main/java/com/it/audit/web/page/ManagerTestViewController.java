@@ -117,7 +117,7 @@ public class ManagerTestViewController {
 	}
 	
 	/**
-	 * GC 添加
+	 * GC 添加 TODO 更新时会将多余内容覆盖
 	 * @param gcIds
 	 * @return
 	 */

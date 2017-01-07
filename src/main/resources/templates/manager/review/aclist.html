@@ -1,0 +1,52 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	limitTableTd("aclistTable", 20);
+});
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/review/dalist?page=0&amp;unpass=1&amp;objectId='+${objectId}+'\');'">只显示未通过问题</button> &nbsp;
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-4\', \'/index/manager/review/dalist?page=0&amp;unsubmit=1&amp;objectId='+${objectId}+'\');'">只显示未提交测试</button> &nbsp;
+</div><!--tableoptions-->	
+<form method="post" id="acList" action="javascript:void(0);">
+<input type="text" value="AC" name="type" style="display: none;"/>
+<input type="text" value="" name="userId" id="acUserId" style="display: none;"/>
+<table cellpadding="0" cellspacing="0" border="0" id="aclistTable" class="stdtable stdtablecb">
+    <colgroup>
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+      </colgroup>
+      <thead>
+          <tr>
+              <th class="head1">AC测试编号</th>
+              <th class="head0">AC测试结论</th>
+              <th class="head1">差异比例</th>
+              <th class="head0">测试人</th>
+              <th class="head1">最后提交日期</th>
+              <th class="head0">经理意见</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="ac,index:${page.content}">
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/review/update?testId='+${ac.id}+'&amp;type=AC\');'" th:text="${ac.number}"></a>
+              </td>
+              <td th:text="${ac.acResult}" class="center limit"></td>
+              <td th:text="${ac.disRatio}" class="center limit"></td>
+              <td th:text="${ac.testUserId == null or userMap.get(ac.testUserId) == null ?'':userMap.get(ac.testUserId).userName}" class="center"></td>
+              <td th:text="${ac.submitTime == null ?'':#calendars.format(ac.submitTime,'yyyy-MM-dd HH:mm:ss')}" class="center"></td>
+              <td th:text="${ac.managerOpinionToChinese}" class="center limit"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-3'}, ${'/index/manager/review/aclist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

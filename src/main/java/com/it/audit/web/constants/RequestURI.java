@@ -43,6 +43,15 @@ public class RequestURI {
 	public static final String MANAGER_OBJECT_TASK_GCLIST = MANAGER_BASE + "/task/gclist";
 	public static final String MANAGER_OBJECT_TASK_ACLIST = MANAGER_BASE + "/task/aclist";
 	public static final String MANAGER_OBJECT_TASK_DALIST = MANAGER_BASE + "/task/dalist";
+	//项目经理-项目管理-工作复核
+	public static final String MANAGER_OBJECT_REVIEW_INDEX = MANAGER_BASE + "/review/index";
+	public static final String MANAGER_OBJECT_REVIEW_GCLIST = MANAGER_BASE + "/review/gclist";
+	public static final String MANAGER_OBJECT_REVIEW_ACLIST = MANAGER_BASE + "/review/aclist";
+	public static final String MANAGER_OBJECT_REVIEW_DALIST = MANAGER_BASE + "/review/dalist";
+	public static final String MANAGER_OBJECT_REVIEW_UPDATE = MANAGER_BASE + "/review/update";
+	public static final String MANAGER_OBJECT_REVIEW_GCUPDATE = MANAGER_BASE + "/review/gcupdate";
+	public static final String MANAGER_OBJECT_REVIEW_ACUPDATE = MANAGER_BASE + "/review/acupdate";
+	public static final String MANAGER_OBJECT_REVIEW_DAUPDATE = MANAGER_BASE + "/review/daupdate";
 
 	public static final String ERROR_PAGE = "/404";
 	
