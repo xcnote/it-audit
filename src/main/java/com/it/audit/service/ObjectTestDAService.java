@@ -70,4 +70,19 @@ public class ObjectTestDAService {
 	public List<ItAuditTestDA> queryTestDAByTestUser(Long userId, Long objectId){
 		return this.testDAPersistenceService.findByObjectIdAndTestUserId(objectId, userId);
 	}
+
+	/**
+	 * DA任务分配
+	 * @param userId
+	 * @param gcIds
+	 * @return
+	 */
+	public String allotDATask(Long userId, List<Long> daIds) {
+		List<ItAuditTestDA> acs = this.testDAPersistenceService.findAll(daIds);
+		if(acs.size() != daIds.size()){
+			return "存在已删除的任务，请重新分配";
+		}
+		this.testDAPersistenceService.updateTestUserId(userId, daIds);
+		return null;
+	}
 }

@@ -71,4 +71,19 @@ public class ObjectTestACService {
 	public List<ItAuditTestAC> queryTestACByTestUser(Long userId, Long objectId){
 		return this.testACPersistenceService.findByObjectIdAndTestUserId(objectId, userId);
 	}
+
+	/**
+	 * AC任务分配
+	 * @param userId
+	 * @param gcIds
+	 * @return
+	 */
+	public String allotACTask(Long userId, List<Long> acIds) {
+		List<ItAuditTestAC> acs = this.testACPersistenceService.findAll(acIds);
+		if(acs.size() != acIds.size()){
+			return "存在已删除的任务，请重新分配";
+		}
+		this.testACPersistenceService.updateTestUserId(userId, acIds);
+		return null;
+	}
 }

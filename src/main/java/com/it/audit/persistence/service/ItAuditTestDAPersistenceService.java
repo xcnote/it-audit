@@ -40,6 +40,10 @@ public class ItAuditTestDAPersistenceService extends BasePersistenceService<ItAu
 		return this.itAuditTestDARepository.findByObjectIdAndTestUserId(objectId, userId);
 	}
 	
+	public void updateTestUserId(Long userId, List<Long> ids) {
+		this.itAuditTestDARepository.updateTestUserId(userId, ids);
+	}
+	
 	public Page<ItAuditTestDA> findByParam(PageRequest pageRequest, final String queryKey, final Object queryValue, final Long objectId){
 		return this.itAuditTestDARepository.findAll(new Specification<ItAuditTestDA>() {
 			@Override

@@ -40,6 +40,10 @@ public class ItAuditTestGCPersistenceService extends BasePersistenceService<ItAu
 		return this.itAuditTestGCRepository.findByObjectIdAndTestUserId(objectId, testUserId);
 	}
 	
+	public void updateTestUserId(Long userId, List<Long> ids){
+		this.itAuditTestGCRepository.updateTestUserId(userId, ids);
+	}
+	
 	public Page<ItAuditTestGC> findByParam(PageRequest pageRequest, final String queryKey, final Object queryValue, final Long objectId){
 		return this.itAuditTestGCRepository.findAll(new Specification<ItAuditTestGC>() {
 			@Override

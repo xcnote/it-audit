@@ -95,6 +95,21 @@ public class ObjectTestGCService {
 		return this.testGCPersistenceService.findByObjectIdAndTestUserId(objectId, userId);
 	}
 	
+	/**
+	 * GC任务分配
+	 * @param userId
+	 * @param gcIds
+	 * @return
+	 */
+	public String allotGCTask(Long userId, List<Long> gcIds){
+		List<ItAuditTestGC> gcs = this.testGCPersistenceService.findAll(gcIds);
+		if(gcs.size() != gcIds.size()){
+			return "存在已删除的任务，请重新分配";
+		}
+		this.testGCPersistenceService.updateTestUserId(userId, gcIds);
+		return null;
+	}
+	
 	private ItAuditTestGC buildTestGC(ItAuditTestGCTemplate template){
 		ItAuditTestGC gc = new ItAuditTestGC();
 		gc.setRiskNumber(template.getRiskNumber());
