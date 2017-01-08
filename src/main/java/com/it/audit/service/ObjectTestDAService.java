@@ -89,4 +89,13 @@ public class ObjectTestDAService {
 		this.testDAPersistenceService.updateTestUserId(userId, daIds);
 		return null;
 	}
+	
+	/**
+	 * 更新任务状态
+	 * @param ids
+	 * @param status
+	 */
+	public void updateTaskStatus(List<Long> ids, ObjectTestStatus status){
+		this.testDAPersistenceService.updateTestStatus(ids, status);
+	}
 }

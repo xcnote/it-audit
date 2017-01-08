@@ -13,4 +13,6 @@ public interface ItAuditObjectUserRepository extends BasePersistenceDao<ItAuditO
 	List<ItAuditObjectUser> findByObjectIdAndRole(Long objectId, ObjectUserRole role);
 
 	List<ItAuditObjectUser> findByIdIn(List<Long> ids);
+
+	List<ItAuditObjectUser> findByUserIdAndRole(Long userId, ObjectUserRole role);
 }

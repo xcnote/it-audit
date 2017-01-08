@@ -114,6 +114,15 @@ public class ObjectTestGCService {
 		return null;
 	}
 	
+	/**
+	 * 更新任务状态
+	 * @param ids
+	 * @param status
+	 */
+	public void updateTaskStatus(List<Long> ids, ObjectTestStatus status){
+		this.testGCPersistenceService.updateTestStatus(ids, status);
+	}
+	
 	private ItAuditTestGC buildTestGC(ItAuditTestGCTemplate template){
 		ItAuditTestGC gc = new ItAuditTestGC();
 		gc.setRiskNumber(template.getRiskNumber());

@@ -56,4 +56,12 @@ public class ReviewACUpdate {
 		ac.setUpdateTime(new DateTime());
 		return ac;
 	}
+	public ItAuditTestAC updateItAuditTestACToAudit(ItAuditTestAC ac) {
+		ac.setDisAmount(disAmount);
+		ac.setSampleAmount(sampleAmount);
+		ac.setAcRecord(acRecord);
+		ac.setAcResult(acResult);
+		ac.setUpdateTime(new DateTime());
+		return ac;
+	}
 }

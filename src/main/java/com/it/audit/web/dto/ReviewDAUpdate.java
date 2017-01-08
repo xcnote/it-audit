@@ -56,4 +56,12 @@ public class ReviewDAUpdate {
 		da.setUpdateTime(new DateTime());
 		return da;
 	}
+	public ItAuditTestDA updateItAuditTestDAToAudit(ItAuditTestDA da) {
+		da.setProblemAmount(problemAmount);
+		da.setSampleAmount(sampleAmount);
+		da.setDaRecord(daRecord);
+		da.setDaResult(daResult);
+		da.setUpdateTime(new DateTime());
+		return da;
+	}
 }

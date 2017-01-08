@@ -1,0 +1,60 @@
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery(document).ready(function(){
+	jQuery("#daList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何任务", '提示');
+		}
+	});
+	limitTableTd("dalistTable", 20);
+});
+/*]]>*/
+</script>
+
+
+<div class="tableoptions">
+	<input type="text" th:value="${objectId}" id="DATaskObjectId" name="type" style="display: none;"/>
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-4\', \'/index/auditor/task/dalist?page=0&amp;unsubmit=1&amp;objectId='+${objectId}+'\');'">只显示未提交的测试</button> &nbsp;
+	<button class="radius3" th:onclick="'loadTabContent(\'tabs-4\', \'/index/auditor/task/dalist?page=0&amp;sendback=1&amp;objectId='+${objectId}+'\');'">只显示退回的测试</button> &nbsp;
+	<div class="right_move">
+        <button class="radius3" onclick="submitFormByConfrim('daList', '/index/auditor/task/submit', '', function(){loadTabContent('tabs-4', '/index/auditor/task/dalist?page=0&amp;objectId='+jQuery('#DATaskObjectId').val());});">提交测试至经理</button> &nbsp;
+    </div>
+</div><!--tableoptions-->	
+<form method="post" id="daList" action="javascript:void(0);">
+<input type="text" value="DA" name="type" style="display: none;"/>
+<table cellpadding="0" cellspacing="0" border="0" id="dalistTable" class="stdtable stdtablecb">
+    <colgroup>
+    	  <col class="con0" style="width: 4%" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+          <col class="con0" />
+          <col class="con1" />
+      </colgroup>
+      <thead>
+          <tr>
+          	  <th class="head0"><input type="checkbox" class="checkall" /></th>
+              <th class="head1">测试编号</th>
+              <th class="head0">DA测试结论</th>
+              <th class="head1">问题金额比例</th>
+              <th class="head0">状态</th>
+              <th class="head0">经理意见</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="da,index:${page.content}">
+          	  <td align="center"><input type="checkbox" name="taskIds" th:value="${da.id}" required="true" minlength="1"/></td>
+              <td class="center">
+              	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadTabContent(\'tabs-4\', \'/index/auditor/task/update?testId='+${da.id}+'&amp;type=DA\');'" th:text="${da.number}"></a>
+              </td>
+              <td th:text="${da.daResult}" class="center limit"></td>
+              <td th:text="${da.problemRatio}" class="center limit"></td>
+              <td th:text="${da.status.text}" class="center"></td>
+              <td th:text="${da.managerOpinionToChinese}" class="center limit"></td>
+          </tr>
+      </tbody>
+  </table>
+</form>
+<div class="right_padding_top" th:include="page::tabPageNumberSet(${page}, ${'tabs-4'}, ${'/index/auditor/task/dalist?objectId='+objectId+'&amp;'})">
+	<!-- 分页页码 -->
+</div>

@@ -51,7 +51,15 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 <li th:if="${role=='REVIEWER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
 <!-- 审计师 -->
-<li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目工作</a></li>
+<li style="display: none;" th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/auditor/');" class="elements">主页</a></li>
+<li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/auditor/page?page=0');disableSubMenu('objectId');" class="elements">项目工作</a>
+	<span class="arrow"></span>
+	<span style="display: none;" id="objectId"></span>
+	<ul id="objectManage">
+   		<li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/auditor/objectinfo?objectId='+jQuery('#objectId').text());return false;">项目基本信息</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/auditor/task/index?objectId='+jQuery('#objectId').text());return false;">项目工作任务</a></li>
+    </ul>
+</li>
 <li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目报告</a></li>
 <li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 

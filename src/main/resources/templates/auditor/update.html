@@ -1,0 +1,114 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+jQuery.getScript('/js/custom/elements.js', function() {});
+jQuery(document).ready(function(){
+	var customAssetValue = jQuery("#customAssetValue").val();
+	jQuery("#customAssetSelect").val(customAssetValue);
+	jQuery("#customAssetValue").remove();
+	var customRateValue = jQuery("#customRateValue").val();
+	jQuery("#customRateSelect").val(customRateValue);
+	jQuery("#customRateValue").remove();
+	
+	jQuery("#objectUpdate").find("input").attr("disabled","disabled").attr("style","background:#eee");
+	jQuery("#objectUpdate").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
+});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">审计师 > 项目工作 > 项目基本信息</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+   	<div id="basicform" class="subcontent">
+	<form class="stdform" method="post" id='objectUpdate' action="javascript:void(0);">
+		<p>
+			<label>客户姓名</label>
+		    <span class="field">
+		    	<input type="text" name="customName" class="smallinput" required="true" th:value="${info.customName}"/>
+		    </span>
+		</p>
+		<p>
+	    	<label>客户所处行业</label>
+	        <span class="field">
+	        <select name="customTrade" class="uniformselect" required="true">
+				<option th:each="one,index:${industrys}" th:selected="${info.customTrade == one.name}?'selected':'false'" th:value="${one.name}" th:text="${one.name}"></option>
+			</select>
+	        </span>
+	    </p>
+	    <p>
+	    	<label>客户资产规模</label>
+	        <span class="field">
+	        <select id="customAssetSelect"  name="customAsset" class="uniformselect" required="true">
+				<option  value="1000亿以上">1000亿以上</option>
+				<option value="100-1000亿">100-1000亿</option>
+				<option value="10-100亿">10-100亿</option>
+				<option value="1-10亿">1-10亿</option>
+				<option value="1000万-1亿">1000万-1亿</option>
+				<option value="1000万以下">1000万以下</option>
+			</select>
+			<input type="text" id="customAssetValue" style="display: none;" th:value="${info.customAsset}"/>
+	        </span>
+	    </p>
+	    <p>
+	    	<label>客户风险评级</label>
+	        <span class="field">
+	        <select id="customRateSelect"  name="customRate" class="uniformselect" required="true">
+				<option value="高">高</option>
+				<option value="中高">中高</option>
+				<option value="中">中</option>
+				<option value="中低">中低</option>
+				<option value="低">低</option>
+			</select>
+			<input type="text" id="customRateValue" style="display: none;" th:value="${info.customRate}"/>
+	        </span>
+	    </p>
+	
+		<p>
+			<label>项目名称</label>
+		    <span class="field">
+		    	<input type="text" name="name" class="smallinput" required="true" th:value="${info.name}"/>
+		    </span>
+		</p>
+		<p>
+			<label>项目状态</label>
+		    <span class="field">
+		    	<input type="text" name="status" class="smallinput" disabled="disabled" style="background:#eee" required="true" th:value="${info.status.text}"/>
+		    </span>
+		</p>
+		<p>
+		    <label>是否隶属于财务审计项目</label>
+            <span class="field">
+            	<input type="radio" name="financeAudit" th:checked="${info.financeAudit}?'checked':'false'" value="true"/> 是 &nbsp; &nbsp;
+            	<input type="radio" name="financeAudit" th:checked="${!info.financeAudit}?'checked':'false'" value="false"/> 否 &nbsp; &nbsp;
+            </span>
+		</p>
+		<p>
+			<label>财务审计项目编号</label>
+		    <span class="field">
+		    	<input type="text" name="financeNumber" class="smallinput" th:value="${info.financeNumber}"/>
+		    </span>
+		</p>
+		<p>
+			<label>审计期间</label>
+		    <span class="field">
+		    	<input type="text" name="auditStartTime" class="width100 datepicker" th:value="${#calendars.format(info.auditStartTime,'yyyy-MM-dd')}"/> - &nbsp;
+		    	<input type="text" name="auditEndTime" class="width100 datepicker" th:value="${#calendars.format(info.auditEndTime,'yyyy-MM-dd')}"/> 
+		    </span>
+		</p>
+		<p>
+			<label>现场工作时间</label>
+		    <span class="field">
+		    	<input type="text" name="workStratTime" class="width100 datepicker" th:value="${#calendars.format(info.workStratTime,'yyyy-MM-dd')}"/> - &nbsp;
+		    	<input type="text" name="workEndTime" class="width100 datepicker" th:value="${#calendars.format(info.workEndTime,'yyyy-MM-dd')}"/> 
+		    </span>
+		</p>
+	    <p>
+	    	<label>审计目标 </label>
+	        <span class="field">
+	        	<textarea cols="80" rows="5" name="target" class="longinput" th:text="${info.target}"></textarea>
+	        </span>
+	    </p>
+	    
+	</form>
+	</div>
+</div>

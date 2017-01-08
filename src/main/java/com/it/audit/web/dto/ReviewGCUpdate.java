@@ -88,4 +88,16 @@ public class ReviewGCUpdate {
 		gc.setUpdateTime(new DateTime());
 		return gc;
 	}
+	public ItAuditTestGC updateItAuditTestGCToAudit(ItAuditTestGC gc) {
+		gc.setInterview(interview);
+		gc.setCrossInterview(crossInterview);
+		gc.setRegimeFile(regimeFile);
+		gc.setDiRecord(diRecord);
+		gc.setDiResult(diResult);
+		gc.setOeTestNum(oeTestNum);
+		gc.setOeInvalidNum(oeInvalidNum);
+		gc.setOeResult(oeResult);
+		gc.setUpdateTime(new DateTime());
+		return gc;
+	}
 }

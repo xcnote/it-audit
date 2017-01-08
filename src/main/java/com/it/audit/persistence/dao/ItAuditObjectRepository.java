@@ -15,4 +15,7 @@ public interface ItAuditObjectRepository extends BasePersistenceDao<ItAuditObjec
 
 	List<ItAuditObject> findByReviewUserIdAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(Long managerUserId,
 			ObjectStatus status, DateTime startTime, DateTime endTime);
+
+	List<ItAuditObject> findByIdInAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(List<Long> ids,
+			ObjectStatus status, DateTime startTime, DateTime endTime);
 }

@@ -37,18 +37,23 @@ public class ItAuditObjectPersistenceService extends BasePersistenceService<ItAu
 	public List<ItAuditObject> findByCreateTime(Long managerUserId, ObjectStatus status, DateTime startTime, DateTime endTime){
 		return this.itAuditObjectRepository.findByManagerUserIdAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(managerUserId, status, startTime, endTime);
 	}
-	
 	public List<ItAuditObject> findReviewerByCreateTime(Long reviewUserId, ObjectStatus status, DateTime startTime, DateTime endTime){
 		return this.itAuditObjectRepository.findByReviewUserIdAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(reviewUserId, status, startTime, endTime);
 	}
+	public List<ItAuditObject> findByIdsAndCreateTime(List<Long> ids, ObjectStatus status, DateTime startTime, DateTime endTime){
+		return this.itAuditObjectRepository.findByIdInAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(ids, status, startTime, endTime);
+	}
 	
+	public Page<ItAuditObject> findAuditByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final List<Long> ids){
+		return this.findByParam(pageRequest, queryKey, queryValue, null, null, ids);
+	}
 	public Page<ItAuditObject> findReviewerByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long reviewId){
-		return this.findByParam(pageRequest, queryKey, queryValue, null, reviewId);
+		return this.findByParam(pageRequest, queryKey, queryValue, null, reviewId, null);
 	}
 	public Page<ItAuditObject> findManagerByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long userId){
-		return this.findByParam(pageRequest, queryKey, queryValue, userId, null);
+		return this.findByParam(pageRequest, queryKey, queryValue, userId, null, null);
 	}
-	public Page<ItAuditObject> findByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long userId, final Long reviewId){
+	public Page<ItAuditObject> findByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long userId, final Long reviewId, final List<Long> ids){
 		return this.itAuditObjectRepository.findAll(new Specification<ItAuditObject>() {
 			@Override
 			public Predicate toPredicate(Root<ItAuditObject> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -70,6 +75,10 @@ public class ItAuditObjectPersistenceService extends BasePersistenceService<ItAu
 				if(reviewId != null){
 					Path<Long> reviewUserId = root.get("reviewUserId");
 					predicates.add(cb.equal(reviewUserId, reviewId));
+				}
+				if(ids != null){
+					Path<Long> id = root.get("id");
+					predicates.add(id.in(ids));
 				}
 				
 	            if (predicates.size() > 0) {  

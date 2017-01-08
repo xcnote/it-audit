@@ -77,6 +77,21 @@ public class RequestURI {
 	//质量复核 - 项目复核 - 反馈意见
 	public static final String REVIEWER_OBJECT_FEEDBACK = REVIEWER_BASE + "/feedback";
 	
+	//审计师
+	public static final String AUDITOR_BASE = INDEX_URI + "/auditor";
+	public static final String AUDITOR_OBJECT_LIST = AUDITOR_BASE + "/page";
+	public static final String AUDITOR_OBJECT_INFO = AUDITOR_BASE + "/objectinfo";
+	//审计师-项目工作-工作任务
+	public static final String AUDITOR_OBJECT_TASK_INDEX = AUDITOR_BASE + "/task/index";
+	public static final String AUDITOR_OBJECT_TASK_GCLIST = AUDITOR_BASE + "/task/gclist";
+	public static final String AUDITOR_OBJECT_TASK_ACLIST = AUDITOR_BASE + "/task/aclist";
+	public static final String AUDITOR_OBJECT_TASK_DALIST = AUDITOR_BASE + "/task/dalist";
+	public static final String AUDITOR_OBJECT_TASK_UPDATE = AUDITOR_BASE + "/task/update";
+	public static final String AUDITOR_OBJECT_TASK_GCUPDATE = AUDITOR_BASE + "/task/gcupdate";
+	public static final String AUDITOR_OBJECT_TASK_ACUPDATE = AUDITOR_BASE + "/task/acupdate";
+	public static final String AUDITOR_OBJECT_TASK_DAUPDATE = AUDITOR_BASE + "/task/daupdate";
+	public static final String AUDITOR_OBJECT_TASK_SUBMIT = AUDITOR_BASE + "/task/submit";
+	
 	public static final String ERROR_PAGE = "/404";
 	
 	public static final String[] INTERCEPT_URI = new String[]{BASE_URI, INDEX_URI, INDEX_URI + "/**", LOGOUT_URI};

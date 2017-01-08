@@ -90,4 +90,13 @@ public class ObjectTestACService {
 		this.testACPersistenceService.updateTestUserId(userId, acIds);
 		return null;
 	}
+	
+	/**
+	 * 更新任务状态
+	 * @param ids
+	 * @param status
+	 */
+	public void updateTaskStatus(List<Long> ids, ObjectTestStatus status){
+		this.testACPersistenceService.updateTestStatus(ids, status);
+	}
 }

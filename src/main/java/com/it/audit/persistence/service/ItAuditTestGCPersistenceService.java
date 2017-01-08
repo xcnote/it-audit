@@ -46,6 +46,10 @@ public class ItAuditTestGCPersistenceService extends BasePersistenceService<ItAu
 		this.itAuditTestGCRepository.updateTestUserId(userId, ids);
 	}
 	
+	public void updateTestStatus(List<Long> ids, ObjectTestStatus status) {
+		this.itAuditTestGCRepository.updateTestStatus(ids, status);
+	}
+	
 	public Page<ItAuditTestGC> findByParam(PageRequest pageRequest, final String queryKey, final Object queryValue, final Long objectId, final List<ObjectTestStatus> status){
 		return this.itAuditTestGCRepository.findAll(new Specification<ItAuditTestGC>() {
 			@Override

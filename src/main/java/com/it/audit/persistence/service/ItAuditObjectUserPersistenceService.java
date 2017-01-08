@@ -33,4 +33,8 @@ public class ItAuditObjectUserPersistenceService extends BasePersistenceService<
 	public List<ItAuditObjectUser> findByIdIn(List<Long> ids){
 		return this.itAuditObjectUserRepository.findByIdIn(ids);
 	}
+
+	public List<ItAuditObjectUser> findByUserIdAndRole(Long userId, ObjectUserRole role) {
+		return this.itAuditObjectUserRepository.findByUserIdAndRole(userId, role);
+	}
 }
