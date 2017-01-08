@@ -31,6 +31,9 @@ import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
 import com.it.audit.web.dto.DeleteDTO;
 import com.it.audit.web.dto.ResponesBase;
+import com.it.audit.web.dto.TestACUpdate;
+import com.it.audit.web.dto.TestDAUpdate;
+import com.it.audit.web.dto.TestGCUpdate;
 
 @Controller
 public class ManagerTestViewController {
@@ -123,8 +126,12 @@ public class ManagerTestViewController {
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_TEST_GCUPDATE, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<ResponesBase> managerObjectGCUpdate(@RequestBody ItAuditTestGC gc){
-		this.objectTestGCService.save(gc);
+	public ResponseEntity<ResponesBase> managerObjectGCUpdate(@RequestBody TestGCUpdate update){
+		ItAuditTestGC gc = new ItAuditTestGC();
+		if(update.getId() != null) {
+			gc = this.objectTestGCService.queryById(update.getId());
+		}
+		this.objectTestGCService.save(update.updateItAuditTestGC(gc));
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "提交成功"), HttpStatus.OK);
 	}
 	
@@ -180,8 +187,12 @@ public class ManagerTestViewController {
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_TEST_ACUPDATE, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<ResponesBase> managerObjectACUpdate(@RequestBody ItAuditTestAC ac){
-		this.objectTestACService.save(ac);
+	public ResponseEntity<ResponesBase> managerObjectACUpdate(@RequestBody TestACUpdate update){
+		ItAuditTestAC ac = new ItAuditTestAC();
+		if(ac.getId() != null){
+			ac = this.objectTestACService.queryById(ac.getId());
+		}
+		this.objectTestACService.save(update.updateItAuditTestAC(ac));
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "提交成功"), HttpStatus.OK);
 	}
 	
@@ -237,8 +248,12 @@ public class ManagerTestViewController {
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_TEST_DAUPDATE, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<ResponesBase> managerObjectDAUpdate(@RequestBody ItAuditTestDA da){
-		this.objectTestDAService.save(da);
+	public ResponseEntity<ResponesBase> managerObjectDAUpdate(@RequestBody TestDAUpdate update){
+		ItAuditTestDA da = new ItAuditTestDA();
+		if(update.getId() != null){
+			da = this.objectTestDAService.queryById(update.getId());
+		}
+		this.objectTestDAService.save(update.updateItAuditTestDA(da));
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "提交成功"), HttpStatus.OK);
 	}
 }
