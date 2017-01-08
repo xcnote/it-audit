@@ -20,6 +20,7 @@ public class RequestURI {
 	//项目经理-项目创建与列表
 	public static final String MANAGER_BASE = INDEX_URI + "/manager";
 	public static final String MANAGER_OBJECT_CREATE = MANAGER_BASE + "/create";
+	public static final String MANAGER_OBJECT_UPDATE = MANAGER_BASE + "/update";
 	public static final String MANAGER_OBJECT_MANAGE = MANAGER_BASE + "/manage";
 	public static final String MANAGER_OBJECT_PAGE = MANAGER_BASE + "/page";
 	//项目经理-项目管理-测试范围

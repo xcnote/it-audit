@@ -25,6 +25,7 @@ import com.it.audit.service.ManagerService;
 import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
 import com.it.audit.web.dto.ObjectCreate;
+import com.it.audit.web.dto.ObjectUpdate;
 import com.it.audit.web.dto.ResponesBase;
 
 /**
@@ -108,5 +109,29 @@ public class ManagerViewController {
 	public ModelAndView objectTaskReview(@RequestParam Long id){
 		ItAuditObject object = this.managerService.queryObjectDetail(id);
 		return new ModelAndView("manager/review/index", "info", object);
+	}
+	
+	/**
+	 * 项目管理 - 项目基本信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.MANAGER_OBJECT_UPDATE, method = RequestMethod.GET)
+	public ModelAndView objectUpdate(@RequestParam Long id){
+		ItAuditObject object = this.managerService.queryObjectDetail(id);
+		Map<String, Object> result = this.managerService.buildCreateParam();
+		result.put("info", object);
+		return new ModelAndView("manager/update", result);
+	}
+	
+	/**
+	 * 项目管理 - 项目基本信息更新
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.MANAGER_OBJECT_UPDATE, method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<ResponesBase> objectUpdate(@RequestBody @Valid ObjectUpdate updateInfo){
+		String result = this.managerService.updateObject(updateInfo);
+		return new ResponseEntity<ResponesBase>(new ResponesBase(0, result == null?"项目创建成功": null, result), HttpStatus.OK);
 	}
 }

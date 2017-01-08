@@ -27,6 +27,7 @@ import com.it.audit.persistence.service.ItAuditObjectPersistenceService;
 import com.it.audit.persistence.service.ItAuditObjectUserPersistenceService;
 import com.it.audit.util.DateUtils;
 import com.it.audit.web.dto.ObjectCreate;
+import com.it.audit.web.dto.ObjectUpdate;
 import com.it.audit.web.dto.ObjectUser;
 
 import lombok.extern.slf4j.Slf4j;
@@ -97,6 +98,26 @@ public class ManagerService {
 			log.error("create Object error by userId:{}", userId, e);
 		}
 		return false;
+	}
+	
+	/**
+	 * 项目更新
+	 * @param updateInfo
+	 * @return
+	 */
+	public String updateObject(ObjectUpdate updateInfo){
+		String result = "未查询到该项目信息";
+		ItAuditObject object = null;
+		if(updateInfo.getId() != null){
+			object = this.itAuditObjectPersistenceService.findById(updateInfo.getId());
+			if(object != null){
+				result = null;
+			}
+		}
+		if(result == null){
+			this.itAuditObjectPersistenceService.save(updateInfo.updateItAuditObject(object));
+		}
+		return result;
 	}
 	
 	/**
