@@ -59,6 +59,24 @@ public class RequestURI {
 	public static final String MANAGER_OBJECT_REPORT_CREATE = MANAGER_BASE + "/report/create";
 	public static final String MANAGER_OBJECT_PUSHREVIEW = MANAGER_BASE + "/pushreview";
 	
+	//质量复核
+	public static final String REVIEWER_BASE = INDEX_URI + "/reviewer";
+	public static final String REVIEWER_OBJECT_LIST = REVIEWER_BASE + "/page";
+	//质量复核 - 项目复核 - 底稿 
+	public static final String REVIEWER_OBJECT_TEST_INDEX = REVIEWER_BASE + "/test/index";
+	public static final String REVIEWER_OBJECT_TEST_GCLIST = REVIEWER_BASE + "/test/gclist";
+	public static final String REVIEWER_OBJECT_TEST_ACLIST = REVIEWER_BASE + "/test/aclist";
+	public static final String REVIEWER_OBJECT_TEST_DALIST = REVIEWER_BASE + "/test/dalist";
+	public static final String REVIEWER_OBJECT_TEST_DEATIL = REVIEWER_BASE + "/test/detail";
+	//质量复核 - 项目复核 - 报告
+	public static final String REVIEWER_OBJECT_REPORT_INDEX = REVIEWER_BASE + "/report/index";
+	public static final String REVIEWER_OBJECT_REPORT_INFO = REVIEWER_BASE + "/report/info";
+	public static final String REVIEWER_OBJECT_REPORT_DOWN = REVIEWER_BASE + "/report/down";
+	//质量复核 - 项目复核 - 基本信息
+	public static final String REVIEWER_OBJECT_INFO = REVIEWER_BASE + "/objectinfo";
+	//质量复核 - 项目复核 - 反馈意见
+	public static final String REVIEWER_OBJECT_FEEDBACK = REVIEWER_BASE + "/feedback";
+	
 	public static final String ERROR_PAGE = "/404";
 	
 	public static final String[] INTERCEPT_URI = new String[]{BASE_URI, INDEX_URI, INDEX_URI + "/**", LOGOUT_URI};

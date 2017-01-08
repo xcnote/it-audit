@@ -109,6 +109,7 @@ public class UserService {
 		
 		try{	
 			DateTime time = new DateTime();
+			user.setId(null);
 			user.setUserRole(UserRole.mergeRoles(user.getSourceRoles()));
 			user.setCreateTime(time);
 			user.setUpdateTime(time);
@@ -142,6 +143,8 @@ public class UserService {
 		
 		try{	
 			DateTime time = new DateTime();
+			user.setUserId(old.getUserId());
+			user.setCreateTime(old.getCreateTime());
 			user.setUserRole(UserRole.mergeRoles(user.getSourceRoles()));
 			user.setUpdateTime(time);
 			this.itAuditUserPersistenceService.save(user);

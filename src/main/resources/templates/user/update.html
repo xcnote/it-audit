@@ -10,6 +10,7 @@ jQuery.getScript('/js/custom/forms.js', function() {});
 <div id="contentwrapper" class="contentwrapper">
    	<div id="basicform" class="subcontent">
 	<form class="stdform" method="post" id='userCreateOrUpdate' action="javascript:void(0);">
+		<input type="text" style="display: none;" name="id" th:value="${userInfo.user==null? '':userInfo.user.id}"/>
 		<p>
 			<label>用户ID</label>
 		    <span class="field">

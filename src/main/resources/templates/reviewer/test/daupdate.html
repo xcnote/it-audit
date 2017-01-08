@@ -1,0 +1,90 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+jQuery(document).ready(function(){
+	jQuery("#testDAUpdate").find("input").attr("disabled","disabled").attr("style","background:#eee");
+	jQuery("#testDAUpdate").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
+});
+</script>
+
+<div id="basicform" class="subcontent widgetpage">
+	<form class="stdform width90form" method="post" id='testDAUpdate' action="javascript:void(0);">
+		<div class="one_half" style="width: 75%; margin-right: 0;">
+		<div class="one_half" style="width: 50%; margin-right: 0;">
+			<p>
+		    	<label>风险描述</label>
+		        <span class="field">
+		        	<textarea cols="50" rows="5" name="riskDesc" class="longinput" th:text="${da.riskDesc}"></textarea>
+		        </span>
+		    </p>
+			<p>
+				<label>DA测试内容</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="5" name="daContent" class="longinput" th:text="${da.daContent}"></textarea>
+			    </span>
+			</p>
+			<p>
+				<label>DA测试方法</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="5" name="daMethod" class="longinput" th:text="${da.daMethod}"></textarea>
+			    </span>
+			</p>
+		</div>
+		<div class="one_half last" style="width: 50%; margin-right: 0;">
+			<p>
+		    	<label>DA测试结论</label>
+		        <span class="field">
+		        	<input type="text" name="daResult" class="longinput" th:value="${da.daResult}"/>
+		        </span>
+		    </p>
+			<p>
+				<label>DA测试记录</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="5" name="daRecord" class="longinput" th:text="${da.daRecord}"></textarea>
+			    </span>
+			</p>
+			<p>
+				<label>问题样本金额</label>
+			    <span class="field">
+			    	<input type="number" name="problemAmount" class="longinput" th:value="${da.problemAmount}"/>
+			    </span>
+			</p>
+			<p>
+				<label>样本金额</label>
+			    <span class="field">
+			    	<input type="number" name="sampleAmount" class="longinput" th:value="${da.sampleAmount}"/>
+			    </span>
+			</p>
+			<p>
+				<label>附件</label>
+			    <span class="field">
+			    	
+			    </span>
+			</p>
+		</div>
+		</div>
+		<div class="one_half last width50form" style="width: 25%; margin-right: 0;">
+	    	<p>
+				<label>经理意见</label>
+			    <span class="field">
+			    	<input type="radio" name="managerOpinion" th:checked="${da.managerOpinion == 'pass'}?'checked':'false'" value="pass"/> 通过 &nbsp; &nbsp;
+	            	<input type="radio" name="managerOpinion" th:checked="${da.managerOpinion == 'sendback'}?'checked':'false'" value="sendback"/> 退回 &nbsp; &nbsp;
+			    </span>
+			</p>
+			<p>
+		    	<label>缺陷评价</label>
+		    	<span class="field">
+		        <span class="field" style="margin-left: 10px" th:each="type,index:${imperfectionTyps}">
+		        	<input type="radio" name="imperfection" th:checked="${da.imperfection == type}?'checked':'false'" th:value="${type}" th:text="${type.datext}"/>
+		        </span>
+		        </span>
+		    </p>
+		    <p>
+				<label>经理批注</label>
+			    <span class="field">
+			    	<textarea cols="50" rows="20" name="managerPostil" class="longinput" th:text="${da.managerPostil}"></textarea>
+			    </span>
+			</p>
+		</div>
+	</form>
+</div>

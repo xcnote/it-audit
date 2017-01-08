@@ -3,7 +3,7 @@ jQuery(document).ready(function(){
 	var model = jQuery("#toModel").text();
 	var action = jQuery("#toAction").text();
 	if(index != null && index != ''){
-		var headerA = jQuery("#headermenu #header"+index);
+		var headerA = jQuery("#header"+index);
 		headerA.parent().parent().children().removeAttr("class");
 		headerA.parent().attr("class","current");
 		
@@ -18,11 +18,11 @@ jQuery(document).ready(function(){
 		return;
 	}
 	
-	if(jQuery("#headermenu a.opened:first").length == 0){
+	if(jQuery(".headermenu li a.opened:first").length == 0){
 		jAlert('您尚未开通任何角色，请联系系统管理员', '提示');
 		return;
 	}
-	var header = jQuery("#headermenu a.opened:first");
+	var header = jQuery(".headermenu li a.opened:first");
 	header.parent().parent().children().removeAttr("class");
 	header.parent().attr("class","current");
 	jQuery("#leftmenu").load(header.children(".leftMenuUrl").text());

@@ -1,0 +1,138 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+//jQuery.getScript('/js/custom/elements.js', function() {});
+jQuery(document).ready(function(){
+	jQuery("#testGCUpdate").find("input").attr("disabled","disabled").attr("style","background:#eee");
+	jQuery("#testGCUpdate").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
+});
+</script>
+
+<div id="basicform" class="subcontent widgetpage">
+	<form class="stdform width90form" method="post" id='testGCUpdate' action="javascript:void(0);">
+	<div class="one_half" style="width: 75%; margin-right: 0;">
+	<div class="one_half" style="width: 50%; margin-right: 0;">
+		<p>
+			<label>一级控制域</label>
+		    <span class="field">
+		    	<input type="text" name="firstRegion" class="longinput" th:value="${gc.firstRegion}" required="true"/>
+		    </span>
+		</p>
+		<p>
+			<label>二级控制域</label>
+		    <span class="field">
+		    	<input type="text" name="secondRegion" class="longinput" th:value="${gc.secondRegion}" required="true"/>
+		    </span>
+		</p>
+		<p>
+	    	<label>IT风险描述</label>
+	        <span class="field">
+	        	<textarea cols="50" rows="5" name="riskDesc" class="longinput" th:text="${gc.riskDesc}"></textarea>
+	        </span>
+	    </p>
+		<p>
+			<label>风险初步评价</label>
+		    <span class="field">
+		    	<input type="text" name="riskEstimate" class="longinput" th:value="${gc.riskEstimate}" required="true"/>
+		    </span>
+		</p>
+	    <p>
+			<label>控制活动</label>
+		    <span class="field">
+		    	<textarea cols="50" rows="5" name="controlActivity" class="longinput" th:text="${gc.controlActivity}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>监管指引</label>
+		    <span class="field">
+		    	<textarea cols="50" rows="5" name="supervise" class="longinput" th:text="${gc.supervise}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>审计程序</label>
+		    <span class="field">
+		    	<textarea cols="50" rows="8" name="audit" class="longinput" th:text="${gc.audit}"></textarea>
+		    </span>
+		</p>
+	</div>
+	<div class="one_half last" style="width: 50%; margin-right: 0;">
+		<p>
+			<label>访谈对象</label>
+		    <span class="field">
+		    	<input type="text" name="interview" class="longinput" th:value="${gc.interview}"/>
+		    </span>
+		</p>
+		<p>
+	    	<label>交叉访谈对象</label>
+	        <span class="field">
+	        	<input type="text" name="crossInterview" class="longinput" th:value="${gc.crossInterview}"/>
+	        </span>
+	    </p>
+	    <p>
+			<label>制度文件</label>
+		    <span class="field">
+		    	<textarea cols="50" rows="5" name="regimeFile" class="longinput" th:text="${gc.regimeFile}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>D&amp;I有效性记录</label>
+		    <span class="field">
+		    	<textarea cols="50" rows="5" name="diRecord" class="longinput" th:text="${gc.diRecord}"></textarea>
+		    </span>
+		</p>
+		<p>
+			<label>D&amp;I有效性结论</label>
+		    <span class="field">
+		    	<input type="text" name="diResult" class="longinput" th:value="${gc.diResult}"/>
+		    </span>
+		</p>
+		<p>
+			<label>OE样本数量</label>
+		    <span class="field">
+		    	<input type="number" name="oeTestNum" class="longinput" th:value="${gc.oeTestNum}"/>
+		    </span>
+		</p>
+		<p>
+			<label>OE无效样本数量</label>
+		    <span class="field">
+		    	<input type="number" name="oeInvalidNum" class="longinput" th:value="${gc.oeInvalidNum}"/>
+		    </span>
+		</p>
+		<p>
+			<label>OE测试结论</label>
+		    <span class="field">
+		    	<input type="text" name="oeResult" class="longinput" th:value="${gc.oeResult}"/>
+		    </span>
+		</p>
+		<p>
+			<label>OE测试附件</label>
+		    <span class="field">
+		    	
+		    </span>
+		</p>
+	</div>
+	</div>
+	<div class="one_half last width50form" style="width: 25%; margin-right: 0;">
+		<p>
+			<label>经理意见</label>
+		    <span class="field">
+		    	<input type="radio" name="managerOpinion" th:checked="${gc.managerOpinion == 'pass'}?'checked':'false'" value="pass"/> 通过 &nbsp; &nbsp;
+            	<input type="radio" name="managerOpinion" th:checked="${gc.managerOpinion == 'sendback'}?'checked':'false'" value="sendback"/> 退回 &nbsp; &nbsp;
+		    </span>
+		</p>
+		<p>
+	    	<label>缺陷评价</label>
+	    	<span class="field">
+	        <span class="field" style="margin-left: 10px" th:each="type,index:${imperfectionTyps}">
+	        	<input type="radio" name="imperfection" th:checked="${gc.imperfection == type}?'checked':'false'" th:value="${type}" th:text="${type.gctext}"/>
+	        </span>
+	        </span>
+	    </p>
+	    <p>
+			<label>经理批注</label>
+		    <span class="field">
+		    	<textarea cols="50" rows="20" name="managerPostil" class="longinput" th:text="${gc.managerPostil}"></textarea>
+		    </span>
+		</p>
+	</div>
+	</form>
+</div>

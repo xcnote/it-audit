@@ -38,7 +38,17 @@ public class ItAuditObjectPersistenceService extends BasePersistenceService<ItAu
 		return this.itAuditObjectRepository.findByManagerUserIdAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(managerUserId, status, startTime, endTime);
 	}
 	
-	public Page<ItAuditObject> findByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long userId){
+	public List<ItAuditObject> findReviewerByCreateTime(Long reviewUserId, ObjectStatus status, DateTime startTime, DateTime endTime){
+		return this.itAuditObjectRepository.findByReviewUserIdAndStatusAndCreateTimeBetweenOrderByCreateTimeDesc(reviewUserId, status, startTime, endTime);
+	}
+	
+	public Page<ItAuditObject> findReviewerByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long reviewId){
+		return this.findByParam(pageRequest, queryKey, queryValue, null, reviewId);
+	}
+	public Page<ItAuditObject> findManagerByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long userId){
+		return this.findByParam(pageRequest, queryKey, queryValue, userId, null);
+	}
+	public Page<ItAuditObject> findByParam(PageRequest pageRequest, final String queryKey, final String queryValue, final Long userId, final Long reviewId){
 		return this.itAuditObjectRepository.findAll(new Specification<ItAuditObject>() {
 			@Override
 			public Predicate toPredicate(Root<ItAuditObject> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -53,8 +63,14 @@ public class ItAuditObjectPersistenceService extends BasePersistenceService<ItAu
 						predicates.add(cb.like(name, "%" + queryValue +"%"));
 					}
 				}
-				Path<Long> managerUserId = root.get("managerUserId");
-				predicates.add(cb.equal(managerUserId, userId));
+				if(userId != null){
+					Path<Long> managerUserId = root.get("managerUserId");
+					predicates.add(cb.equal(managerUserId, userId));
+				}
+				if(reviewId != null){
+					Path<Long> reviewUserId = root.get("reviewUserId");
+					predicates.add(cb.equal(reviewUserId, reviewId));
+				}
 				
 	            if (predicates.size() > 0) {  
 	                return cb.and(predicates.toArray(new Predicate[predicates.size()]));  

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.it.audit.auth.AuthContextHolder;
 import com.it.audit.domain.ItAuditObject;
 import com.it.audit.domain.ItAuditUser;
 import com.it.audit.enums.ObjectUserRole;
@@ -59,13 +58,13 @@ public class ManagerUserViewController {
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_USER_ADD, method = RequestMethod.GET)
 	public ModelAndView managerObjectUserAdd(@RequestParam Long objectId){
-		Long currUserId = AuthContextHolder.get().getUserInfo().getUserId();
+//		Long currUserId = AuthContextHolder.get().getUserInfo().getUserId();
 		List<ItAuditUser> users = this.userService.queryAll();
 		List<ItAuditUser> showUsers = new ArrayList<>();
 		for(ItAuditUser user: users){
-			if(user.getUserId().compareTo(currUserId) != 0){
+//			if(user.getUserId().compareTo(currUserId) != 0){
 				showUsers.add(user);
-			}
+//			}
 		}
 		
 		Map<String, Object> result = new HashMap<>();

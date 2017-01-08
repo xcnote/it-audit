@@ -1,0 +1,57 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/tables.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">质量复核 > 项目复核 > 反馈意见</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables">
+	<div id="basicform" class="subcontent widgetbox">
+		<!--<div class="title"><h3>Tabbed Widget</h3></div>-->
+		<span class="pagedesc">被审计单位：<span th:text="${info.customName}"></span></span>
+		<span class="pagedesc">项目名称：<span th:text="${info.name}"></span></span>
+		<span class="pagedesc">审计期间：
+			<span th:text="${info.auditStartTime != null?#calendars.format(info.auditStartTime,'yyyy-MM-dd'):'-'}"></span> 
+			至 
+			<span th:text="${info.auditEndTime !=null?#calendars.format(info.auditEndTime,'yyyy-MM-dd'):'-'}"></span>
+		</span>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+			<colgroup>
+				<col class="con0" />
+				<col class="con1" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="head0" style="text-align: center;"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="center">
+						<form class="stdform" method="post" action="javascript:void(0);">
+							<p>
+								<label>项目状态</label>
+							    <span class="field">
+							    	<input type="text" name="customName" class="smallinput" th:value="${info.status.text}" disabled="disabled" style="background:#eee"/>
+							    </span>
+							</p>
+					    </form>
+					</td>
+				</tr>
+				<tr>
+					<td class="center">
+						<form class="stdform" method="post" id='feedback' action="javascript:void(0);">
+						<input type="text" style="display: none;" name="objectId" th:value="${info.id}"/>
+						<input type="text" style="display: none;" name="status" id="feedbackStatus"/>
+						<p class="stdformbutton left_centent">
+					    	<button class="submit radius2" onclick="jQuery('#feedbackStatus').val('finish');submitFormByConfrim('feedback', '/index/reviewer/feedback', '', function(){jQuery('#leftmenu').children('li:eq(1)').children('a:eq(0)').click();}); return false;">通过</button> &nbsp;&nbsp;&nbsp;
+					    	<button class="radius2" onclick="jQuery('#feedbackStatus').val('revise');submitFormByConfrim('feedback', '/index/reviewer/feedback', '', function(){jQuery('#leftmenu').children('li:eq(1)').children('a:eq(0)').click();}); return false;">退回</button>
+					    </p>
+					    </form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div><!--contentwrapper-->

@@ -2,13 +2,16 @@
 jQuery.getScript('/js/audit/leftmenu.js', function() {});
 </script>
 
+<!-- 系统管理员 -->
 <li th:if="${role=='ADMIN'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/user/page?page=0');" class="elements">用户管理</a></li>
 <li th:if="${role=='ADMIN'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库管理</a></li>
 
+<!-- 高管 -->
 <li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">管理层驾驶舱</a></li>
 <li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">报告调阅</a></li>
 <li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
+<!-- 项目经理 -->
 <li style="display: none;" th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/');" class="elements">主页</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/create');" class="elements">项目创建</a></li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/manager/page?page=0');disableSubMenu('objectId')" class="elements">项目管理</a>
@@ -33,10 +36,21 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 </li>
 <li th:if="${role=='MANAGER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
-<li th:if="${role=='REVIEWER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目复核</a></li>
-<li th:if="${role=='REVIEWER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目报告</a></li>
+<!-- 质量复核 -->
+<li style="display: none;" th:if="${role=='REVIEWER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/reviewer/');" class="elements">主页</a></li>
+<li th:if="${role=='REVIEWER'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/reviewer/page?page=0');disableSubMenu('objectId')" class="elements">项目复核</a>
+	<span class="arrow"></span>
+	<span style="display: none;" id="objectId"></span>
+	<ul id="objectManage">
+   		<li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/reviewer/test/index?objectId='+jQuery('#objectId').text());return false;">底稿查询</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/reviewer/report/index?objectId='+jQuery('#objectId').text());return false;">报告查询</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/reviewer/objectinfo?objectId='+jQuery('#objectId').text());return false;">项目基本信息查询</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/reviewer/feedback?objectId='+jQuery('#objectId').text());return false;">反馈意见</a></li>
+    </ul>
+</li>
 <li th:if="${role=='REVIEWER'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
+<!-- 审计师 -->
 <li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目工作</a></li>
 <li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目报告</a></li>
 <li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>

@@ -130,7 +130,7 @@ public class ManagerService {
 	 */
 	public Page<ItAuditObject> queryObjectPage(PageRequest pageRequest, String queryKey, String queryValue){
 		Long userId = AuthContextHolder.get().getUserInfo().getUserId();
-		return this.itAuditObjectPersistenceService.findByParam(pageRequest, queryKey, queryValue, userId);
+		return this.itAuditObjectPersistenceService.findManagerByParam(pageRequest, queryKey, queryValue, userId);
 	}
 	
 	/**
