@@ -7,4 +7,6 @@ import lombok.Data;
 @Data
 public class DeleteDTO {
 	private List<Long> ids;
+	
+	private Long objectId;
 }

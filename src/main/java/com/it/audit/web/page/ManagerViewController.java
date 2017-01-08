@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.it.audit.domain.ItAuditObject;
 import com.it.audit.service.ManagerService;
+import com.it.audit.service.UserService;
 import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
 import com.it.audit.web.dto.ObjectCreate;
@@ -38,6 +39,8 @@ public class ManagerViewController {
 	
 	@Autowired
 	private ManagerService managerService;
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 主页
@@ -64,7 +67,7 @@ public class ManagerViewController {
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_CREATE, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<ResponesBase> userCreate(@RequestBody @Valid ObjectCreate createInfo){
+	public ResponseEntity<ResponesBase> managerObjectCreate(@RequestBody @Valid ObjectCreate createInfo){
 		boolean result = this.managerService.createObject(createInfo);
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "项目创建成功", result?null:"创建失败，请检查输入内容"), HttpStatus.OK);
 	}
@@ -74,10 +77,11 @@ public class ManagerViewController {
 	 * @return
 	 */
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_PAGE, method = RequestMethod.GET)
-	public ModelAndView userPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
+	public ModelAndView managerObjectPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
 		Page<ItAuditObject> objectList = this.managerService.queryObjectPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
 		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
 		result.putAll(CommonUtil.buildPageParam(objectList, 7));
+		result.put("userMap", this.userService.queryAllToMap());
 		return new ModelAndView("manager/list", result);
 	}
 	
@@ -121,6 +125,7 @@ public class ManagerViewController {
 		ItAuditObject object = this.managerService.queryObjectDetail(id);
 		Map<String, Object> result = this.managerService.buildCreateParam();
 		result.put("info", object);
+		result.put("userMap", this.userService.queryAllToMap());
 		return new ModelAndView("manager/update", result);
 	}
 	
@@ -133,5 +138,18 @@ public class ManagerViewController {
 	public ResponseEntity<ResponesBase> objectUpdate(@RequestBody @Valid ObjectUpdate updateInfo){
 		String result = this.managerService.updateObject(updateInfo);
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, result == null?"项目创建成功": null, result), HttpStatus.OK);
+	}
+	
+	/**
+	 * 项目报告-项目列表
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.MANAGER_OBJECT_REPORT, method = RequestMethod.GET)
+	public ModelAndView managerObjectReport(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
+		Page<ItAuditObject> objectList = this.managerService.queryObjectPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
+		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
+		result.putAll(CommonUtil.buildPageParam(objectList, 7));
+		result.put("userMap", this.userService.queryAllToMap());
+		return new ModelAndView("manager/reportlist", result);
 	}
 }

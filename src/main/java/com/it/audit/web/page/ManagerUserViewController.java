@@ -96,7 +96,7 @@ public class ManagerUserViewController {
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_USER_DELETE, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<ResponesBase> managerObjectUserDelete(@RequestBody DeleteDTO ids){
-		String error = this.managerService.deleteObjectUser(ids.getIds());
+		String error = this.managerService.deleteObjectUser(ids.getIds(), ids.getObjectId());
 		if(StringUtils.isNotEmpty(error)){
 			return new ResponseEntity<ResponesBase>(new ResponesBase(-1, "", error), HttpStatus.OK);
 		}

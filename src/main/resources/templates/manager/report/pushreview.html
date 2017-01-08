@@ -1,0 +1,43 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/tables.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">项目经理 > 项目报告 > 项目列表</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables">
+	<div id="basicform" class="subcontent widgetbox">
+		<!--<div class="title"><h3>Tabbed Widget</h3></div>-->
+		<span class="pagedesc">被审计单位：<span th:text="${info.customName}"></span></span>
+		<span class="pagedesc">项目名称：<span th:text="${info.name}"></span></span>
+		<span class="pagedesc">审计期间：
+			<span th:text="${info.auditStartTime != null?#calendars.format(info.auditStartTime,'yyyy-MM-dd'):'-'}"></span> 
+			至 
+			<span th:text="${info.auditEndTime !=null?#calendars.format(info.auditEndTime,'yyyy-MM-dd'):'-'}"></span>
+		</span>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+			<colgroup>
+				<col class="con0" />
+				<col class="con1" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="head0" style="text-align: center;"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="center">
+						<form class="stdform" method="post" id='pushreview' action="javascript:void(0);">
+						<input type="text" style="display: none;" name="objectId" th:value="${info.id}"/>
+						<p class="stdformbutton left_centent" style="margin-left: 40%;">
+					    	<button class="submit radius2" onclick="submitFormByConfrim('pushreview', '/index/manager/pushreview', '', function(){jQuery('#leftmenu').children('li:eq(3)').children('a:eq(0)').click();}); return false;">提交复核</button>
+					    </p>
+					    </form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div><!--contentwrapper-->

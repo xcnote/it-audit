@@ -53,7 +53,12 @@ public class RequestURI {
 	public static final String MANAGER_OBJECT_REVIEW_GCUPDATE = MANAGER_BASE + "/review/gcupdate";
 	public static final String MANAGER_OBJECT_REVIEW_ACUPDATE = MANAGER_BASE + "/review/acupdate";
 	public static final String MANAGER_OBJECT_REVIEW_DAUPDATE = MANAGER_BASE + "/review/daupdate";
-
+	//项目经理-项目报告
+	public static final String MANAGER_OBJECT_REPORT = MANAGER_BASE + "/report";
+	public static final String MANAGER_OBJECT_REPORT_INFO = MANAGER_BASE + "/report/info";
+	public static final String MANAGER_OBJECT_REPORT_CREATE = MANAGER_BASE + "/report/create";
+	public static final String MANAGER_OBJECT_PUSHREVIEW = MANAGER_BASE + "/pushreview";
+	
 	public static final String ERROR_PAGE = "/404";
 	
 	public static final String[] INTERCEPT_URI = new String[]{BASE_URI, INDEX_URI, INDEX_URI + "/**", LOGOUT_URI};

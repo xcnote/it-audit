@@ -119,6 +119,9 @@ public class ManagerService {
 		}
 		return result;
 	}
+	public void update(ItAuditObject object){
+		this.itAuditObjectPersistenceService.save(object);
+	}
 	
 	/**
 	 * 查询项目分页
@@ -174,10 +177,10 @@ public class ManagerService {
 		}
 		
 		if(partnerUserId != null){
-			result.add(new ObjectUser(null, partnerUserId, userId2ObjectUser.get(partnerUserId).getUserName(), objectId, ObjectUserRole.PARTNER, null));
+			result.add(new ObjectUser(-1L, partnerUserId, userId2ObjectUser.get(partnerUserId).getUserName(), objectId, ObjectUserRole.PARTNER, null));
 		}
 		if(reviewUserId != null){
-			result.add(new ObjectUser(null, reviewUserId, userId2ObjectUser.get(reviewUserId).getUserName(), objectId, ObjectUserRole.REVIEW, null));
+			result.add(new ObjectUser(-2L, reviewUserId, userId2ObjectUser.get(reviewUserId).getUserName(), objectId, ObjectUserRole.REVIEW, null));
 		}
 		for(ItAuditObjectUser objectUser: objectUsers){
 			result.add(new ObjectUser(objectUser, userId2ObjectUser.get(objectUser.getUserId())));
@@ -230,11 +233,21 @@ public class ManagerService {
 		if(managers.contains(userId) && (role == ObjectUserRole.PARTNER || role == ObjectUserRole.REVIEW)){
 			return "存在不相容权限，请重新分配";
 		}
-		ItAuditObjectUser itObjectUser = new ItAuditObjectUser();
-		itObjectUser.setUserId(userId);
-		itObjectUser.setRole(role);
-		itObjectUser.setObjectId(objectId);
-		this.objectUserPersistenceService.save(itObjectUser);
+		ItAuditObject object = this.itAuditObjectPersistenceService.findById(objectId);
+		if(role == ObjectUserRole.PARTNER) {
+			object.setPartnerUserId(userId);
+			this.itAuditObjectPersistenceService.save(object);
+		} else
+		if(role == ObjectUserRole.REVIEW) {
+			object.setReviewUserId(userId);
+			this.itAuditObjectPersistenceService.save(object);
+		} else {
+			ItAuditObjectUser itObjectUser = new ItAuditObjectUser();
+			itObjectUser.setUserId(userId);
+			itObjectUser.setRole(role);
+			itObjectUser.setObjectId(objectId);
+			this.objectUserPersistenceService.save(itObjectUser);
+		}
 		return null;
 	}
 	
@@ -243,11 +256,11 @@ public class ManagerService {
 	 * @param ids
 	 * @return
 	 */
-	public String deleteObjectUser(List<Long> ids){
+	public String deleteObjectUser(List<Long> ids, Long objectId){
 		List<ItAuditObjectUser> users = this.objectUserPersistenceService.findByIdIn(ids);
 		for(ItAuditObjectUser user: users){
 			Long userId = user.getUserId();
-			Long objectId = user.getObjectId();
+			objectId = user.getObjectId();
 			
 			List<ItAuditTestGC> gcs = this.objectTestGCService.queryTestGCByTestUser(userId, objectId);
 			List<ItAuditTestAC> acs = this.objectTestACService.queryTestACByTestUser(userId, objectId);
@@ -256,7 +269,21 @@ public class ManagerService {
 				return this.userService.queryUserByUserId(userId).getUserName() + "存在已分配任务，请取消后重试";
 			}
 		}
-		this.objectUserPersistenceService.delete(ids.toArray(new Long[]{}));
+		List<Long> deleteIds = new ArrayList<Long>(ids);
+		ItAuditObject object = this.itAuditObjectPersistenceService.findById(objectId);
+		if(ids.contains(-1L)){
+			object.setPartnerUserId(null);
+			this.itAuditObjectPersistenceService.save(object);
+			deleteIds.remove(-1L);
+		}
+		if(ids.contains(-2L)){
+			object.setReviewUserId(null);
+			this.itAuditObjectPersistenceService.save(object);
+			deleteIds.remove(-2L);
+		}
+		if(deleteIds.size() > 0){
+			this.objectUserPersistenceService.delete(deleteIds.toArray(new Long[]{}));
+		}
 		return null;
 	}
 }

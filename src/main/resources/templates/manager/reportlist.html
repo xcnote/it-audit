@@ -3,7 +3,7 @@ jQuery.getScript('/js/custom/tables.js', function() {});
 </script>
 
 <div class="pageheader notab">
-    <h1 class="pagetitle">项目经理 > 项目管理 > 项目列表</h1>
+    <h1 class="pagetitle">项目经理 > 项目报告 > 项目列表</h1>
 </div><!--pageheader-->
 
 <div id="contentwrapper" class="contentwrapper tables">
@@ -14,7 +14,7 @@ jQuery.getScript('/js/custom/tables.js', function() {});
         	<option value="name" th:selected="${queryKey == 'name'}?'selected':false">项目名称</option>
         </select> &nbsp;
         <input type="text" id="query_param_value" class="search_input" th:value="${queryValue}"/>
-        <button class="radius3" onclick="loadCenterContentQuery('/index/manager/page?page=0');">查询</button>
+        <button class="radius3" onclick="loadCenterContentQuery('/index/manager/report?page=0');">查询</button>
     </div><!--tableoptions-->	
     <form method="post" action="javascript:void(0);">
     <table cellpadding="0" cellspacing="0" border="0" id="table1" class="stdtable stdtablecb">
@@ -31,26 +31,26 @@ jQuery.getScript('/js/custom/tables.js', function() {});
                 <th class="head1">项目编号</th>
                 <th class="head0">项目名称</th>
                 <th class="head1">项目合伙人</th>
-                <th class="head0">项目质量复核人</th>
+                <th class="head0">项目状态</th>
                 <th class="head1">项目创建时间</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="objInfo,index:${page.content}">
                 <td class="center">
-                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentBySubLeft(\'objectId\',\''+${objInfo.id}+'\');'" th:text="${objInfo.objectNumber}"></a>
+                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentBySubLeft(\'reportId\',\''+${objInfo.id}+'\');'" th:text="${objInfo.objectNumber}"></a>
                 </td>
                 <td class="center">
-                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentBySubLeft(\'objectId\',\''+${objInfo.id}+'\');'" th:text="${objInfo.name}"></a>
+                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentBySubLeft(\'reportId\',\''+${objInfo.id}+'\');'" th:text="${objInfo.name}"></a>
                 </td>
                 <td th:text="${objInfo.partnerUserId == null or userMap.get(objInfo.partnerUserId) == null ?'':userMap.get(objInfo.partnerUserId).userName}" class="center"></td>
-                <td th:text="${objInfo.reviewUserId == null or userMap.get(objInfo.reviewUserId) == null ?'':userMap.get(objInfo.reviewUserId).userName}" class="center"></td>
+                <td th:text="${objInfo.status.text}" class="center"></td>
                 <td th:text="${#calendars.format(objInfo.createTime,'yyyy-MM-dd HH:mm:ss')}" class="center"></td>
             </tr>
         </tbody>
     </table>
     </form>
-    <div class="right_padding_top" th:include="page::centerPageNumberSet(${page}, ${'/index/manager/page?'})">
+    <div class="right_padding_top" th:include="page::centerPageNumberSet(${page}, ${'/index/manager/report?'})">
 		<!-- 分页页码 -->
 	</div>
 </div><!--contentwrapper-->
