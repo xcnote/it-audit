@@ -1,0 +1,35 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/widgets.js', function() {});
+jQuery(document).ready(function(){
+	jQuery("#tabs ul:eq(0) li:eq(0) a").click();
+});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">高管> 管理层驾驶舱</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+	<div id="basicform" class="subcontent widgetbox">
+		<!--<div class="title"><h3>Tabbed Widget</h3></div>-->
+		<!--<div class="widgetcontent">-->
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-2" th:onclick="'loadTabContent(\'tabs-2\', \'/index/executive/object\');'">项目进展</a></li>
+					<li><a href="#tabs-3" th:onclick="'loadTabContent(\'tabs-3\', \'/index/executive/industry\');'">按行业分析</a></li>
+					<li><a href="#tabs-4" th:onclick="'loadTabContent(\'tabs-4\', \'/index/executive/scale\');'">按规模分析</a></li>
+				</ul>
+				<div id="tabs-2" class="tables">
+					
+				</div>
+				<div id="tabs-3" class="tables">
+					
+				</div>
+				<div id="tabs-4">
+					
+				</div>
+			</div><!--#tabs-->
+		<!--</div>widgetcontent-->
+	</div><!--widgetbox-->
+
+</div><!--contentwrapper-->

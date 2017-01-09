@@ -1,0 +1,136 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/tables.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">高管 > 项目报告 > 项目统计分析</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables">
+	<div id="basicform" class="subcontent widgetbox">
+		<!--<div class="title"><h3>Tabbed Widget</h3></div>-->
+		<span class="pagedesc">被审计单位：<span th:text="${info.customName}"></span></span>
+		<span class="pagedesc">项目名称：<span th:text="${info.name}"></span></span>
+		<span class="pagedesc">审计期间：
+			<span th:text="${info.auditStartTime != null?#calendars.format(info.auditStartTime,'yyyy-MM-dd'):'-'}"></span> 
+			至 
+			<span th:text="${info.auditEndTime !=null?#calendars.format(info.auditEndTime,'yyyy-MM-dd'):'-'}"></span>
+		</span>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+			<colgroup>
+				<col class="con0" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="head0" style="text-align: center;">测试发现的问题分布</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="center">
+					
+					<div class="widgetbox">
+                        <div class="title"><h3>GC测试统计分析</h3></div>
+                        <div class="widgetcontent padding0 statement">
+                           <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                                <colgroup>
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                    <col class="con0" />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="head0">一级控制域</th>
+                                        <th class="head1">控制点总数</th>
+                                        <th class="head0">问题总数</th>
+                                        <th class="head1">问题占比</th>
+                                        <th class="head0">重大缺陷</th>
+                                        <th class="head1">重要缺陷</th>
+                                        <th class="head0">一般缺陷</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>信息科技治理</td>
+                                        <td>4</td>
+                                        <td>2</td>
+                                        <td>50%</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--widgetcontent-->
+                    </div><!--widgetbox-->
+                    
+                    <div class="widgetbox">
+                        <div class="title"><h3>AC测试统计分析</h3></div>
+                        <div class="widgetcontent padding0 statement">
+                           <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                                <colgroup>
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="head0">问题评价</th>
+                                        <th class="head1">样本差异金额总计</th>
+                                        <th class="head0">样本金额总计</th>
+                                        <th class="head1">差异比例</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>存在可接受的合理差异</td>
+                                        <td>1000</td>
+                                        <td>950000000</td>
+                                        <td>1.1%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--widgetcontent-->
+                    </div><!--widgetbox-->
+					
+					<div class="widgetbox">
+                        <div class="title"><h3>DA测试统计分析</h3></div>
+                        <div class="widgetcontent padding0 statement">
+                           <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                                <colgroup>
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                    <col class="con0" />
+                                    <col class="con1" />
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="head0">问题评价</th>
+                                        <th class="head1">异常样本金额总计</th>
+                                        <th class="head0">样本金额总计</th>
+                                        <th class="head1">异常样本比例</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>发现一般异常情况</td>
+                                        <td>1000</td>
+                                        <td>950000000</td>
+                                        <td>1.1%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--widgetcontent-->
+                    </div><!--widgetbox-->
+					
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div><!--contentwrapper-->

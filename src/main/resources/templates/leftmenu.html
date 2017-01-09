@@ -7,8 +7,15 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 <li th:if="${role=='ADMIN'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库管理</a></li>
 
 <!-- 高管 -->
-<li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">管理层驾驶舱</a></li>
-<li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">报告调阅</a></li>
+<li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/executive/index');" class="elements">管理层驾驶舱</a></li>
+<li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/executive/report?page=0');disableSubMenu('reportId')" class="elements">报告调阅</a>
+	<span class="arrow"></span>
+	<span style="display: none;" id="reportId"></span>
+	<ul id="objectManage">
+   		<li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('reportId','/index/executive/report/info?objectId='+jQuery('#reportId').text());return false;">项目统计分析</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('reportId','/index/executive/report/down?objectId='+jQuery('#reportId').text());return false;">项目报告自动生成</a></li>
+    </ul>
+</li>
 <li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
 <!-- 项目经理 -->

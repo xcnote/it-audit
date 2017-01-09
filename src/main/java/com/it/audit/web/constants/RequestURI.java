@@ -17,6 +17,17 @@ public class RequestURI {
 	public static final String USER_UPDATE = INDEX_URI + "/user/update";
 	public static final String USER_DELETE = INDEX_URI + "/user/delete";
 	
+	//高管
+	public static final String EXECUTIVE_BASE = INDEX_URI + "/executive";
+	public static final String EXECUTIVE_INDEX = EXECUTIVE_BASE + "/index";
+	public static final String EXECUTIVE_OBJECT = EXECUTIVE_BASE + "/object";
+	public static final String EXECUTIVE_INDUSTRY = EXECUTIVE_BASE + "/industry";
+	public static final String EXECUTIVE_SCALE = EXECUTIVE_BASE + "/scale";
+	//高管 - 报告调阅 - 报告
+	public static final String EXECUTIVE_REPORT_LIST = EXECUTIVE_BASE + "/report";
+	public static final String EXECUTIVE_REPORT_INFO = EXECUTIVE_BASE + "/report/info";
+	public static final String EXECUTIVE_REPORT_DOWN = EXECUTIVE_BASE + "/report/down";
+	
 	//项目经理-项目创建与列表
 	public static final String MANAGER_BASE = INDEX_URI + "/manager";
 	public static final String MANAGER_OBJECT_CREATE = MANAGER_BASE + "/create";

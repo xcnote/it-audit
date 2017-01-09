@@ -1,0 +1,48 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/tables.js', function() {});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">高管 > 项目报告 > 项目报告下载</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables">
+	<div id="basicform" class="subcontent widgetbox">
+		<!--<div class="title"><h3>Tabbed Widget</h3></div>-->
+		<span class="pagedesc">被审计单位：<span th:text="${info.customName}"></span></span>
+		<span class="pagedesc">项目名称：<span th:text="${info.name}"></span></span>
+		<span class="pagedesc">审计期间：
+			<span th:text="${info.auditStartTime != null?#calendars.format(info.auditStartTime,'yyyy-MM-dd'):'-'}"></span> 
+			至 
+			<span th:text="${info.auditEndTime !=null?#calendars.format(info.auditEndTime,'yyyy-MM-dd'):'-'}"></span>
+		</span>
+		<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+			<colgroup>
+				<col class="con0" />
+				<col class="con1" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="head0" style="text-align: center;">下载</th>
+					<th class="head1" style="text-align: center;">下载</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="center">
+						<a href="javascript:void(0);" class="orangeboldlink">GC测试底稿</a><br/>
+						<a href="javascript:void(0);" class="orangeboldlink">AC测试底稿</a><br/>
+						<a href="javascript:void(0);" class="orangeboldlink">DA测试底稿</a><br/>
+						<a href="javascript:void(0);" class="orangeboldlink">标准报告</a><br/>
+						<a href="javascript:void(0);" class="orangeboldlink">统计分析报告</a><br/>
+						<a href="javascript:void(0);" class="orangeboldlink">标准问题清单</a><br/>
+					</td>
+					<td class="center">
+						<a href="javascript:void(0);" class="orangeboldlink">修订后的终板报告</a><br/>
+						<a href="javascript:void(0);" class="orangeboldlink">修订后的问题清单</a><br/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div><!--contentwrapper-->
