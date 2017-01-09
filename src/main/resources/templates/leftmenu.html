@@ -60,7 +60,14 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
         <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('objectId','/index/auditor/task/index?objectId='+jQuery('#objectId').text());return false;">项目工作任务</a></li>
     </ul>
 </li>
-<li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">项目报告</a></li>
+<li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/auditor/report?page=0');disableSubMenu('reportId');" class="elements">项目报告</a>
+	<span class="arrow"></span>
+	<span style="display: none;" id="reportId"></span>
+	<ul id="objectManage">
+   		<li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('reportId','/index/auditor/report/info?objectId='+jQuery('#reportId').text());return false;">项目统计分析</a></li>
+        <li><a href="javascript:void(0);" onclick="loadCenterContentBySubClick('reportId','/index/auditor/report/down?objectId='+jQuery('#reportId').text());return false;">项目报告自动生成</a></li>
+    </ul>
+</li>
 <li th:if="${role=='AUDITOR'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库查询</a></li>
 
 

@@ -79,7 +79,7 @@ public class AuditorViewController {
 	 * @return
 	 */
 	@RequestMapping(value = RequestURI.AUDITOR_OBJECT_LIST, method = RequestMethod.GET)
-	public ModelAndView reviewerObjectPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
+	public ModelAndView objectPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
 		Page<ItAuditObject> objectList = this.auditorService.queryObjectPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
 		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
 		result.putAll(CommonUtil.buildPageParam(objectList, 7));
@@ -285,6 +285,43 @@ public class AuditorViewController {
 			break;
 		}
 		return new ResponseEntity<ResponesBase>(new ResponesBase(0, "提交成功"), HttpStatus.OK);
+	}
+	
+	/**
+	 * 项目报告列表
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.AUDITOR_OBJECT_REPORT, method = RequestMethod.GET)
+	public ModelAndView objectReportPage(Integer page, @RequestParam(required=false) String queryKey, @RequestParam(required=false) String queryValue){
+		Page<ItAuditObject> objectList = this.auditorService.queryObjectPage(new PageRequest(page, 10, new Sort(Direction.DESC, "createTime")), queryKey, queryValue);
+		Map<String, Object> result = CommonUtil.buildQueryResult(queryKey, queryValue);
+		result.putAll(CommonUtil.buildPageParam(objectList, 7));
+		result.put("userMap", this.userService.queryAllToMap());
+		return new ModelAndView("auditor/reportlist", result);
+	}
+	
+	/**
+	 * 项目统计分析
+	 * @param page
+	 * @param objectId
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.AUDITOR_OBJECT_REPORT_INFO, method = RequestMethod.GET)
+	public ModelAndView reportInfo(@RequestParam Long objectId){
+		ItAuditObject object = this.managerService.queryObjectDetail(objectId);
+		return new ModelAndView("auditor/report/info", "info", object);
+	}
+	
+	/**
+	 * 项目报告列表
+	 * @param page
+	 * @param objectId
+	 * @return
+	 */
+	@RequestMapping(value = RequestURI.AUDITOR_OBJECT_REPORT_DOWN, method = RequestMethod.GET)
+	public ModelAndView reportCreatePage(@RequestParam Long objectId){
+		ItAuditObject object = this.managerService.queryObjectDetail(objectId);
+		return new ModelAndView("auditor/report/down", "info", object);
 	}
 	
 	private Map<String, Object> getTaskInfo(Long objectId){

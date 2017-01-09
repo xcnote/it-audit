@@ -91,6 +91,10 @@ public class RequestURI {
 	public static final String AUDITOR_OBJECT_TASK_ACUPDATE = AUDITOR_BASE + "/task/acupdate";
 	public static final String AUDITOR_OBJECT_TASK_DAUPDATE = AUDITOR_BASE + "/task/daupdate";
 	public static final String AUDITOR_OBJECT_TASK_SUBMIT = AUDITOR_BASE + "/task/submit";
+	//审计师-项目报告
+	public static final String AUDITOR_OBJECT_REPORT = AUDITOR_BASE + "/report";
+	public static final String AUDITOR_OBJECT_REPORT_INFO = AUDITOR_BASE + "/report/info";
+	public static final String AUDITOR_OBJECT_REPORT_DOWN = AUDITOR_BASE + "/report/down";
 	
 	public static final String ERROR_PAGE = "/404";
 	
