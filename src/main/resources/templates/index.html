@@ -27,6 +27,7 @@
 
 <script type="text/javascript" src="/js/audit/frame.js"></script>
 <script type="text/javascript" src="/js/audit/common.js"></script>
+<script type="text/javascript" src="/js/audit/echarts.common.min.js"></script>
 </head>
 
 <body class="withvernav">
@@ -100,12 +101,11 @@
         
         <div class="headerwidget">
         	<div class="earnings">
-            	<div class="one_half">
-                	<h4>当前已开通角色</h4>
-                </div><!--one_half-->
-                <div class="one_half last alignright">
-                	<h4 th:each="role,index:${indexInfo.user.roles}" th:text="${role.text}">无</h4>
-                </div><!--one_half last-->
+        		<h4>当前已开通角色：</h4>
+               	<br></br>
+               	<h4>
+               		<span class="orangeboldlink" th:each="role,index:${indexInfo.user.roles}" th:text="${role.text}+' | '"></span>
+               	</h4>
             </div><!--earnings-->
         </div><!--headerwidget-->
         
