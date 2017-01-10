@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.base.BasePersistenceDao;
 import com.it.audit.persistence.base.BasePersistenceService;
 import com.it.audit.persistence.dao.ItAuditTestGCRepository;
@@ -36,6 +37,15 @@ public class ItAuditTestGCPersistenceService extends BasePersistenceService<ItAu
 	
 	public Integer findCountByObjectId(Long objectId){
 		return this.itAuditTestGCRepository.findCountByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestGC> findByObjectId(Long objectId){
+		return this.itAuditTestGCRepository.findByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestGC> findByObjectIdAndImperfectionIn(Long objectId,
+			List<TestImperfectionType> imperfections) {
+		return this.itAuditTestGCRepository.findByObjectIdAndImperfectionIn(objectId, imperfections);
 	}
 	
 	public List<ItAuditTestGC> findByObjectIdAndTestUserId(Long objectId, Long testUserId){

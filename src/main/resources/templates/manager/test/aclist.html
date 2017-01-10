@@ -13,7 +13,7 @@ jQuery(document).ready(function(){
 
 
 <div class="tableoptions">
-	<button class="radius3">导出列表</button>
+	<button class="radius3" th:onclick="'window.open(\'/index/acexport?objectId='+${objectId}+'\');'">导出列表</button>
 	<div class="right_move">
 		<button class="radius3" th:onclick="'submitFormByConfrim(\'acList\', \'/index/manager/test/acDelete\', \'\', function(){loadTabContent(\'tabs-3\', \'/index/manager/test/aclist?page=0&amp;objectId='+${objectId}+'\');});'">删除</button> &nbsp;
 		<button class="radius3" th:onclick="'loadTabContent(\'tabs-3\', \'/index/manager/test/acUpdate?objectId='+${objectId}+'\');'">新增</button> &nbsp;

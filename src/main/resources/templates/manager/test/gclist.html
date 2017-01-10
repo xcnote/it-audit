@@ -31,7 +31,7 @@ function testGCImport(id, url){
 		<option th:each="group,index:${templateGroups}" th:value="${group.id}" th:text="${group.name}"></option>
 	</select> &nbsp;
 	<button class="radius3" th:onclick="'testGCImport(\'tabs-2\', \'/index/manager/test/gcImport?objectId='+${objectId}+'\');'">导入模板</button> &nbsp;&nbsp;
-	<button class="radius3">导出列表</button>
+	<button class="radius3" th:onclick="'window.open(\'/index/gcexport?objectId='+${objectId}+'\');'">导出列表</button>
 	<div class="right_move">
 		<button class="radius3" th:onclick="'submitFormByConfrim(\'gcList\', \'/index/manager/test/gcDelete\', \'\', function(){loadTabContent(\'tabs-2\', \'/index/manager/test/gclist?page=0&amp;objectId='+${objectId}+'\');});'">删除</button> &nbsp;
 		<button class="radius3" th:onclick="'loadTabContent(\'tabs-2\', \'/index/manager/test/gcUpdate?objectId='+${objectId}+'\');'">新增</button> &nbsp;

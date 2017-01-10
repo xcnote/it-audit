@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.it.audit.domain.ItAuditTestAC;
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.base.BasePersistenceDao;
 
 public interface ItAuditTestACRepository extends BasePersistenceDao<ItAuditTestAC, Long> {
@@ -26,4 +27,8 @@ public interface ItAuditTestACRepository extends BasePersistenceDao<ItAuditTestA
 	@Transactional
 	@Query("update ItAuditTestAC a set a.status = ?2 where a.id in (?1)")
 	void updateTestStatus(List<Long> ids, ObjectTestStatus status);
+
+	List<ItAuditTestAC> findByObjectId(Long objectId);
+
+	List<ItAuditTestAC> findByObjectIdAndImperfectionIn(Long objectId, List<TestImperfectionType> imperfections);
 }

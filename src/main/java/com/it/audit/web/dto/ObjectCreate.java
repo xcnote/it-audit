@@ -59,10 +59,10 @@ public class ObjectCreate {
 		object.setName(this.name);
 		object.setFinanceAudit(this.financeAudit);
 		object.setFinanceNumber(this.financeNumber);
-		object.setAuditStartTime(StringUtils.isNotBlank(this.auditStartTime)? new DateTime(DateUtils.formatDate(this.auditStartTime, "yyyy-MM-dd").getTime()): null);
-		object.setAuditEndTime(StringUtils.isNotBlank(this.auditEndTime)? new DateTime(DateUtils.formatDate(this.auditEndTime, "yyyy-MM-dd").getTime()): null);
-		object.setWorkStratTime(StringUtils.isNotBlank(this.workStratTime)? new DateTime(DateUtils.formatDate(this.workStratTime, "yyyy-MM-dd").getTime()): null);
-		object.setWorkEndTime(StringUtils.isNotBlank(this.workEndTime)? new DateTime(DateUtils.formatDate(this.workEndTime, "yyyy-MM-dd").getTime()): null);
+		object.setAuditStartTime(StringUtils.isNotBlank(this.auditStartTime)? new DateTime(DateUtils.parseDate(this.auditStartTime, "yyyy-MM-dd").getTime()): null);
+		object.setAuditEndTime(StringUtils.isNotBlank(this.auditEndTime)? new DateTime(DateUtils.parseDate(this.auditEndTime, "yyyy-MM-dd").getTime()): null);
+		object.setWorkStratTime(StringUtils.isNotBlank(this.workStratTime)? new DateTime(DateUtils.parseDate(this.workStratTime, "yyyy-MM-dd").getTime()): null);
+		object.setWorkEndTime(StringUtils.isNotBlank(this.workEndTime)? new DateTime(DateUtils.parseDate(this.workEndTime, "yyyy-MM-dd").getTime()): null);
 		object.setTarget(this.target);
 		return object;
 	}

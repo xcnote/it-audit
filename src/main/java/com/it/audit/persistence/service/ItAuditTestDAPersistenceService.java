@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import com.it.audit.domain.ItAuditTestDA;
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.base.BasePersistenceDao;
 import com.it.audit.persistence.base.BasePersistenceService;
 import com.it.audit.persistence.dao.ItAuditTestDARepository;
@@ -32,6 +33,15 @@ public class ItAuditTestDAPersistenceService extends BasePersistenceService<ItAu
 	@Override
 	protected BasePersistenceDao<ItAuditTestDA, Long> getPersistenceDao() {
 		return this.itAuditTestDARepository;
+	}
+	
+	public List<ItAuditTestDA> findByObjectId(Long objectId) {
+		return this.itAuditTestDARepository.findByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestDA> findByObjectIdAndImperfectionIn(Long objectId,
+			List<TestImperfectionType> imperfections) {
+		return this.itAuditTestDARepository.findByObjectIdAndImperfectionIn(objectId, imperfections);
 	}
 	
 	public Integer findCountByObjectId(Long objectId){

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.domain.ItAuditTestGCTemplate;
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.service.ItAuditTestGCPersistenceService;
 
 @Service
@@ -28,6 +29,14 @@ public class ObjectTestGCService {
 	 */
 	public Integer queryTestGCTotal(Long objectId){
 		return this.testGCPersistenceService.findCountByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestGC> queryTestGCAllList(Long objectId){
+		return this.testGCPersistenceService.findByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestGC> queryTestGCAllListByImperfections(Long objectId, List<TestImperfectionType> imperfections){
+		return this.testGCPersistenceService.findByObjectIdAndImperfectionIn(objectId, imperfections);
 	}
 	
 	/**

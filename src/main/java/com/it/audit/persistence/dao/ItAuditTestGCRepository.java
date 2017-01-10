@@ -8,12 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.base.BasePersistenceDao;
 
 public interface ItAuditTestGCRepository extends BasePersistenceDao<ItAuditTestGC, Long> {
 	
 	@Query("select count(a.id) from ItAuditTestGC a where a.objectId=?1")
 	Integer findCountByObjectId(Long objectId);
+	
+	List<ItAuditTestGC> findByObjectId(Long objectId);
 
 	List<ItAuditTestGC> findByObjectIdAndTestUserId(Long objectId, Long testUserId);
 	
@@ -26,4 +29,6 @@ public interface ItAuditTestGCRepository extends BasePersistenceDao<ItAuditTestG
 	@Transactional
 	@Query("update ItAuditTestGC a set a.status = ?2 where a.id in (?1)")
 	void updateTestStatus(List<Long> ids, ObjectTestStatus status);
+
+	List<ItAuditTestGC> findByObjectIdAndImperfectionIn(Long objectId, List<TestImperfectionType> imperfections);
 }

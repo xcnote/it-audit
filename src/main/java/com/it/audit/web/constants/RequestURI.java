@@ -107,6 +107,13 @@ public class RequestURI {
 	public static final String AUDITOR_OBJECT_REPORT_INFO = AUDITOR_BASE + "/report/info";
 	public static final String AUDITOR_OBJECT_REPORT_DOWN = AUDITOR_BASE + "/report/down";
 	
+	//公共接口
+	public static final String COMMON_TEST_GC_EXPORT = INDEX_URI + "/gcexport";
+	public static final String COMMON_TEST_AC_EXPORT = INDEX_URI + "/acexport";
+	public static final String COMMON_TEST_DA_EXPORT = INDEX_URI + "/daexport";
+	public static final String COMMON_TEST_REPORT_EXPORT = INDEX_URI + "/reportexport";
+	public static final String COMMON_TEST_PROBLEM_EXPORT = INDEX_URI + "/problemexport";
+	
 	public static final String ERROR_PAGE = "/404";
 	
 	public static final String[] INTERCEPT_URI = new String[]{BASE_URI, INDEX_URI, INDEX_URI + "/**", LOGOUT_URI};

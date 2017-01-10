@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.it.audit.domain.ItAuditTestDA;
 import com.it.audit.enums.ObjectTestStatus;
+import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.service.ItAuditTestDAPersistenceService;
 
 @Service
@@ -25,6 +26,14 @@ public class ObjectTestDAService {
 	 */
 	public Integer queryTestDATotal(Long objectId){
 		return this.testDAPersistenceService.findCountByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestDA> queryTestDAAllList(Long objectId) {
+		return this.testDAPersistenceService.findByObjectId(objectId);
+	}
+	
+	public List<ItAuditTestDA> queryTestDAAllListByImperfections(Long objectId, List<TestImperfectionType> imperfections){
+		return this.testDAPersistenceService.findByObjectIdAndImperfectionIn(objectId, imperfections);
 	}
 	
 	/**

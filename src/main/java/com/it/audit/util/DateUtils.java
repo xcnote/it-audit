@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class DateUtils {
 	
-	public static Date formatDate(String time, String pattern){
+	public static Date parseDate(String time, String pattern){
 		if(StringUtils.isBlank(time)){
 			return null;
 		}
@@ -28,11 +28,26 @@ public class DateUtils {
 		return date;
 	}
 	
+	public static String formatDate(Date date, String pattern) {
+		if(date == null) {
+			return null;
+		}
+		
+		String result = null;
+		try {
+			SimpleDateFormat format = new SimpleDateFormat(pattern);
+			result = format.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public static Date startTimeInYear(){
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(new Date());
 		int year = calendar.get(Calendar.YEAR);
-		return formatDate(year+"-01-01", "yyyy-MM-dd");
+		return parseDate(year+"-01-01", "yyyy-MM-dd");
 	}
 	
 	public static void main(String[] args) {
