@@ -4,7 +4,7 @@ jQuery.getScript('/js/audit/leftmenu.js', function() {});
 
 <!-- 系统管理员 -->
 <li th:if="${role=='ADMIN'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/user/page?page=0');" class="elements">用户管理</a></li>
-<li th:if="${role=='ADMIN'}"><a href="javascript:void(0);" onclick="actionNotOpened();" class="elements">知识库管理</a></li>
+<li th:if="${role=='ADMIN'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/template/group/page?page=0');" class="elements">知识库管理</a></li>
 
 <!-- 高管 -->
 <li th:if="${role=='EXECUTIVE'}"><a href="javascript:void(0);" onclick="loadCenterContent('/index/executive/index');" class="elements">管理层驾驶舱</a></li>

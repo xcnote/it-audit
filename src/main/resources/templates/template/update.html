@@ -1,0 +1,70 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+/*<![CDATA[*/
+/*]]>*/
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">系统管理员 > 知识库管理 > 模板变更</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+	<div id="basicform" class="subcontent widgetpage">
+		<form class="stdform width90form" method="post" id="templateUpdate" action="javascript:void(0);">
+			<input type="text" style="display: none;" name="id" th:value="${template == null? null:template.id}"/>
+			<input type="text" style="display: none;" id="templateGroupId" name="groupId" th:value="${templateGroupId}"/>
+			<p>
+				<label>风险编号</label>
+			    <span class="field">
+			    	<input type="text" name="riskNumber" class="smallinput" th:value="${template == null? null:template.riskNumber}" required="true"/>
+			    </span>
+			</p>
+			<p>
+		    	<label>IT风险描述</label>
+		        <span class="field">
+		        	<textarea cols="80" rows="5" name="riskDesc" class="longinput" th:text="${template == null? null:template.riskDesc}"></textarea>
+		        </span>
+		    </p>
+		    <p>
+				<label>控制活动</label>
+			    <span class="field">
+			    	<textarea cols="80" rows="5" name="controlActivity" class="longinput" th:text="${template == null? null:template.controlActivity}"></textarea>
+			    </span>
+			</p>
+			<p>
+				<label>一级控制域</label>
+			    <span class="field">
+			    	<input type="text" name="firstRegion" class="smallinput" th:value="${template == null? null:template.firstRegion}" required="true"/>
+			    </span>
+			</p>
+			<p>
+				<label>二级控制域</label>
+			    <span class="field">
+			    	<input type="text" name="secondRegion" class="smallinput" th:value="${template == null? null:template.secondRegion}" required="true"/>
+			    </span>
+			</p>
+			<p>
+				<label>风险初步评价</label>
+			    <span class="field">
+			    	<input type="text" name="riskEstimate" class="smallinput" th:value="${template == null? null:template.riskEstimate}" required="true"/>
+			    </span>
+			</p>
+			<p>
+				<label>监管指引</label>
+			    <span class="field">
+			    	<textarea cols="80" rows="5" name="supervise" class="longinput" th:text="${template == null? null:template.supervise}"></textarea>
+			    </span>
+			</p>
+			<p>
+				<label>审计程序</label>
+			    <span class="field">
+			    	<textarea cols="80" rows="5" name="audit" class="longinput" th:text="${template == null? null:template.audit}"></textarea>
+			    </span>
+			</p>
+			<p class="stdformbutton left_centent">
+		    	<button class="submit radius2" onclick="submitForm('templateUpdate', '/index/template/update', '/index/template/page?page=0&amp;groupId='+jQuery('#basicform #templateGroupId').val(), function(){}); return false;">提交</button>
+		        <input type="reset" class="reset radius2" onclick="loadCenterContentQuery('/index/template/page?page=00&amp;groupId='+jQuery('#basicform #templateGroupId').val());" value="返回" />
+		    </p>
+		</form>
+	</div>
+</div>

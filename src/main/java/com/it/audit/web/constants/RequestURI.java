@@ -16,6 +16,13 @@ public class RequestURI {
 	public static final String USER_CREATE = INDEX_URI + "/user/create";
 	public static final String USER_UPDATE = INDEX_URI + "/user/update";
 	public static final String USER_DELETE = INDEX_URI + "/user/delete";
+	//模板管理
+	public static final String TEMPLATE_GROUP_PAGE = INDEX_URI + "/template/group/page";
+	public static final String TEMPLATE_GROUP_UPDATE = INDEX_URI + "/template/group/update";
+	public static final String TEMPLATE_GROUP_DELETE = INDEX_URI + "/template/group/delete";
+	public static final String TEMPLATE_PAGE = INDEX_URI + "/template/page";
+	public static final String TEMPLATE_UPDATE = INDEX_URI + "/template/update";
+	public static final String TEMPLATE_DELETE = INDEX_URI + "/template/delete";
 	
 	//高管
 	public static final String EXECUTIVE_BASE = INDEX_URI + "/executive";

@@ -1,0 +1,32 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/forms.js', function() {});
+</script>
+<div class="pageheader notab">
+    <h1 class="pagetitle">系统管理员 > 知识库管理 > 模板组变更</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper">
+<div id="basicform" class="subcontent widgetpage">
+	<form class="stdform" method="post" id="templateGroup" action="javascript:void(0);">
+		<input type="text" style="display: none;" name="id" th:value="${group == null? '':group.id}"/>
+		<p>
+			<label>模板组ID</label>
+		    <span class="field">
+		    	<input th:if="${group == null}" type="text" disabled="disabled" class="smallinput" style="background:#eee" value="ID由系统自动生成"/>
+		    	<input th:if="${group != null}" type="text" disabled="disabled" class="smallinput" style="background:#eee" name="id" th:value="${group.id}"/>
+		    </span>
+		</p>
+		
+		<p>
+			<label>模板组名称</label>
+		    <span class="field">
+		    	<input type="text" name="name" class="smallinput" th:value="${group==null? '':group.name}" required="true"/>
+		    </span>
+		</p>
+		<p class="stdformbutton left_centent">
+	    	<button class="submit radius2" onclick="submitForm('templateGroup', '/index/template/group/update', '/index/template/group/page?page=0', function(){}); return false;">提交</button>
+	        <input type="reset" class="reset radius2" value="重置" />
+	    </p>
+	</form>
+</div>
+</div>

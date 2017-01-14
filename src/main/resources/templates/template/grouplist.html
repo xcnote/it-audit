@@ -1,0 +1,66 @@
+<script type="text/javascript">
+jQuery.getScript('/js/custom/tables.js', function() {});
+jQuery(document).ready(function(){
+	jQuery("#userList").validate({
+		errorPlacement: function(error, element) {  
+			jAlert("未选择任何用户", '提示');
+		}
+	});
+});
+</script>
+
+<div class="pageheader notab">
+    <h1 class="pagetitle">系统管理员 > 知识库管理 > 模板组列表</h1>
+</div><!--pageheader-->
+
+<div id="contentwrapper" class="contentwrapper tables">
+	<div class="tableoptions">
+        <select class="radius3" id="query_param_key">
+        	<option value="">请选择</option>
+        	<option value="name" th:selected="${queryKey == 'name'}?'selected':false">模板名称</option>
+        </select> &nbsp;
+        <input type="text" id="query_param_value" class="search_input" th:value="${queryValue}"/>
+        <button class="radius3" onclick="loadCenterContentQuery('/index/template/group/page?page=0');">查询</button>
+        <div class="right_move">
+			<button class="radius3" onclick="submitFormByConfrim('templateGroup', '/index/template/group/delete', '', function(){loadCenterContentQuery('/index/template/group/page?page=0');});">删除</button> &nbsp;
+			<button class="radius3" onclick="loadCenterContentQuery('/index/template/group/update');">新增</button> &nbsp;
+    	</div>
+    </div><!--tableoptions-->	
+    <form method="post" id="templateGroup" action="javascript:void(0);">
+    <table cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablecb">
+        <colgroup>
+        	<col class="con0" style="width: 4%" />
+            <col class="con1" />
+            <col class="con0" />
+            <col class="con1" />
+        </colgroup>
+        <thead>
+            <tr>
+            	<th class="head0"><input type="checkbox" class="checkall" /></th>
+                <th class="head1">模板组ID</th>
+                <th class="head0">模板组名称</th>
+                <th class="head1">模板组创建时间</th>
+                <th class="head0">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="groupInfo,index:${page.content}">
+            	<td align="center"><input type="checkbox" name="ids" th:value="${groupInfo.id}" required="true" minlength="1"/></td>
+                <td class="center">
+                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentQuery(\'/index/template/page?page=0&amp;groupId='+${groupInfo.id}+'\');'" th:text="${groupInfo.id}"></a>
+                </td>
+                <td class="center">
+                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentQuery(\'/index/template/page?page=0&amp;groupId='+${groupInfo.id}+'\');'" th:text="${groupInfo.name}"></a>
+                </td>
+                <td th:text="${#calendars.format(groupInfo.createTime,'yyyy-MM-dd HH:mm:ss')}" class="center"></td>
+                <td class="center">
+                	<a href="javascript:void(0);" class="orangeboldlink" th:onclick="'loadCenterContentQuery(\'/index/template/group/update?id='+${groupInfo.id}+'\');'">修改</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    <div class="right_padding_top" th:include="page::centerPageNumberSet(${page}, ${'/index/template/group/page?'})">
+		<!-- 分页页码 -->
+	</div>
+</div><!--contentwrapper-->

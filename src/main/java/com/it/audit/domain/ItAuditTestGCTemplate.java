@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -34,7 +37,7 @@ public class ItAuditTestGCTemplate {
 	@Column(name = "risk_desc", length = 1000)
 	private String riskDesc;
 	
-	//控制编号
+	//控制活动
 	@Column(name = "control_activity")
 	private String controlActivity;
 	
@@ -59,4 +62,9 @@ public class ItAuditTestGCTemplate {
 	private String audit;
 	
 	private Long groupId;
+	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@DateTimeFormat
+	@Column(name = "create_time")
+	private DateTime createTime = new DateTime();
 }

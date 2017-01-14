@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -29,4 +32,9 @@ public class ItAuditTestGCTemplateGroup {
 	//GC测试模板组名
 	@Column(name = "name")
 	private String name;
+	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@DateTimeFormat
+	@Column(name = "create_time")
+	private DateTime createTime = new DateTime();
 }
