@@ -44,6 +44,21 @@ public class ErrorViewController implements ErrorController{
         Assert.notNull(errorAttributes, "ErrorAttributes must not be null");
         this.errorAttributes = errorAttributes;
     }
+	
+	/**
+     * 定义500的ModelAndView
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(produces = "text/html",value = "/default")
+    public ModelAndView errorHtml(HttpServletRequest request,
+                                  HttpServletResponse response) {
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request,
+                isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        return buildDefaultErrorPage(model);
+    }
 
     /**
      * 定义404的ModelAndView
@@ -136,6 +151,6 @@ public class ErrorViewController implements ErrorController{
 	}
 	public static final ModelAndView build404ErrorPage(Map<String, Object> model){
 		log.error("request 404. model:{}", model);
-		return new ModelAndView("error", "info", "您访问的页面不存在");
+		return new ModelAndView("error404", "info", "您访问的页面不存在");
 	}
 }

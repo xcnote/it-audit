@@ -111,4 +111,17 @@ public class ItAuditTestDA {
 	public String getManagerOpinionToChinese(){
 		return CommonUtil.managerOpinionToChinese(managerOpinion);
 	}
+	
+	public Double getProblemRatio(){
+		if(problemAmount != null && sampleAmount != null){
+			return problemAmount / sampleAmount;
+		}
+		return null;
+	}
+	public void setProblemRatio(Double problemRatio){
+		if(problemAmount != null && sampleAmount != null){
+			this.problemRatio = problemAmount / sampleAmount;
+		}
+		this.problemRatio = null;
+	}
 }

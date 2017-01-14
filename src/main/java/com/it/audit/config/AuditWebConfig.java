@@ -75,59 +75,6 @@ public class AuditWebConfig extends WebMvcConfigurerAdapter{
         registry.addInterceptor(auditUserAuthInterceptor).addPathPatterns(RequestURI.AUTH_URI);
     }
 	
-//	/*
-//	 * @Override public void configureDefaultServletHandling(final
-//	 * DefaultServletHandlerConfigurer configurer) { configurer.enable(); //
-//	 * same as <mvc:default-servlet-handler/> }
-//	 */
-//	@Override
-//	public void configureContentNegotiation(
-//			final ContentNegotiationConfigurer configurer) {
-//		configurer.favorPathExtension(true).favorParameter(false)
-//				.ignoreAcceptHeader(false).useJaf(false)
-//				.defaultContentType(MediaType.APPLICATION_JSON)
-//				.mediaType("json", MediaType.APPLICATION_JSON);
-//	}
-
-//	@Override
-//	public void configureMessageConverters(
-//			final List<HttpMessageConverter<?>> converters) {
-//		converters.add(this.stringHttpMessageConverter());
-//		converters.add(this.jsonHttpMessageConverter());
-//	}
-//	
-//
-//	@Bean(name = "jsonMapper")
-//	public ObjectMapper jsonMapper() {
-//		final ObjectMapper bean = new ObjectMapper();
-//		bean.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//		SimpleModule module = new SimpleModule();  
-//		
-//		module.addSerializer(DateTime.class,new DateTimeSerializer());
-//		module.addDeserializer(DateTime.class, new DateTimeDeserializer());
-//		
-//		bean.registerModule(module);
-//		return bean;
-//	}
-//
-//	@Bean
-//	public MappingJackson2HttpMessageConverter jsonHttpMessageConverter() {
-//		final MappingJackson2HttpMessageConverter bean = new MappingJackson2HttpMessageConverter();
-//		bean.setObjectMapper(this.jsonMapper());
-//		bean.setSupportedMediaTypes(Lists.newArrayList(
-//				MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM));
-//		return bean;
-//	}
-//
-//	@Bean
-//	public StringHttpMessageConverter stringHttpMessageConverter() {
-//		StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(
-//				Charset.forName("UTF-8"));
-//		stringHttpMessageConverter.setWriteAcceptCharset(false);
-//		return stringHttpMessageConverter;
-//	}
-//	exception handle
-	
 	/**
 	 * 错误状态码处理定义
 	 * @return
@@ -138,8 +85,8 @@ public class AuditWebConfig extends WebMvcConfigurerAdapter{
             @Override
             public void customize(ConfigurableEmbeddedServletContainer container) {
                 container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
-//                container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500"));
-//                container.addErrorPages(new ErrorPage(java.lang.Throwable.class,"/error/500"));
+//                container.addErrorPages(new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/default"));
+//                container.addErrorPages(new ErrorPage(java.lang.Throwable.class,"/error/default"));
             }
         };
     }

@@ -111,4 +111,17 @@ public class ItAuditTestAC {
 	public String getManagerOpinionToChinese(){
 		return CommonUtil.managerOpinionToChinese(managerOpinion);
 	}
+	
+	public Double getDisRatio(){
+		if(disAmount != null && sampleAmount != null){
+			return disAmount / sampleAmount;
+		}
+		return null;
+	}
+	public void setDisRatio(Double disRatio){
+		if(disAmount != null && sampleAmount != null){
+			this.disRatio = disAmount / sampleAmount;
+		}
+		this.disRatio = null;
+	}
 }

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>错误提示页面</title>
+<title>404</title>
 <link rel="stylesheet" href="/css/style.default.css" type="text/css" />
 <script type="text/javascript" src="/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
@@ -12,8 +12,8 @@
 <script type="text/javascript">
 /*<![CDATA[*/
 var url = window.location.href;
-if(url.indexOf('/error/default') <= 0){
-	window.location.replace("/error/default");
+if(url.indexOf('/404') <= 0){
+	window.location.replace("/404");
 }
 /*]]>*/
 </script>
@@ -36,11 +36,18 @@ if(url.indexOf('/error/default') <= 0){
     
     
     <div class="contentwrapper padding10">
-    	<div class="errorwrapper error403">
+    	<div class="errorwrapper error404">
         	<div class="errorcontent">
-                <h1>500 Internal Server Error</h1>
-                <h3>The server encountered an internal error and was unable to complete your request.</h3>
+                <h1>404 页面不存在</h1>
+                <h3>We couldn't find that page. It appears that you are lost.</h3>
                 
+                <p>The page you are looking for is not found. This could be for several reasons</p>
+                <ul>
+                    <li>It never existed.</li>
+                    <li>It got deleted for some reason.</li>
+                    <li>You were looking for something that is not here.</li>
+                    <li>You like this page.</li>
+                </ul>
                 <br />
                 <button class="stdbtn btn_black" onclick="history.back()">Go Back to Previous Page</button> &nbsp; 
                 <button onclick="location.href='/'" class="stdbtn btn_orange">Go Back to Dashboard</button>
