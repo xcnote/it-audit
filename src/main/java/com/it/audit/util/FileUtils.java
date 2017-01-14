@@ -34,9 +34,13 @@ public class FileUtils {
 	 */
 	public static void writeFile(String filePath, String fileName, InputStream input){
 		try {
+			File basefilePath = new File(DEFAULT_FILE_PATH_BASE);
+			if(!basefilePath.exists() || !basefilePath.isDirectory()){
+				log.info("create file path {} result: {}", basefilePath.getAbsolutePath(), basefilePath.mkdir());
+			}
 			File currfilePath = new File(DEFAULT_FILE_PATH_BASE + File.separator + filePath);
 			if(!currfilePath.exists() || !currfilePath.isDirectory()){
-				System.out.println(currfilePath.mkdir());
+				log.info("create file path {} result: {}", basefilePath.getAbsolutePath(), currfilePath.mkdir());
 			}
 			System.out.println(System.getProperty("user.dir"));
 			System.out.println(currfilePath.getAbsolutePath());
