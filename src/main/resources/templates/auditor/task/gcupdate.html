@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 	
 	addChangeInFile("fileToUploadGC", jQuery("#uploadurlGC").val(), "fileuploadGC", null, function(data){
 		jQuery("#fileToUploadGC").parent().children(".filename").html("");
-		jQuery("#filelistGC").append("<span style='margin-left: 10px' class='fileNamesGC'><a href='/index/file/down/gctest?id="+data.result.id+"' class='orangeboldlink' target='_blank'>"+data.result.name+"</a><br/></span>");
+		jQuery("#filelistGC").append("<span style='margin-left: 10px' class='fileNamesGC'><a href='/index/file/down/gctest?id="+jQuery("#testGCUpdateId").val()+"&fileId="+data.result.id+"' class='orangeboldlink' target='_blank'>"+data.result.name+"</a><br/></span>");
 	});
 });
 /*]]>*/
@@ -19,7 +19,7 @@ jQuery(document).ready(function(){
 
 <div id="basicform" class="subcontent widgetpage">
 	<form class="stdform width90form" method="post" id="testGCUpdate" action="javascript:void(0);">
-	<input type="text" style="display: none;" name="id" th:value="${gc.id}"/>
+	<input type="text" style="display: none;" id="testGCUpdateId" name="id" th:value="${gc.id}"/>
 	<input type="text" style="display: none;" id="objectId" name="objectId" th:value="${gc.objectId}"/>
 	<div class="one_half" style="width: 75%; margin-right: 0;">
 	<div class="one_half" style="width: 50%; margin-right: 0;" id='testGCUpdate1'>

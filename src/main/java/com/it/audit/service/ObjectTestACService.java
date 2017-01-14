@@ -9,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.it.audit.domain.ItAuditTestAC;
-import com.it.audit.domain.ItAuditTestDA;
 import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.persistence.service.ItAuditTestACPersistenceService;
