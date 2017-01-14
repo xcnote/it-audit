@@ -32,7 +32,7 @@ public class TaskManager {
 		return scheduledExecutor;
 	}
 	
-	private void runTaskAtFixedTimePerDay(Runnable runnable, String HHmmss){
+	public void runTaskAtFixedTimePerDay(Runnable runnable, String HHmmss){
 		long rvtPeriodMS = 24 * 60 * 60 * 1000;  
 	    long initDelay  = getTimeMillis(HHmmss) - System.currentTimeMillis();  
 	    initDelay = initDelay > 0 ? initDelay : rvtPeriodMS + initDelay;  
