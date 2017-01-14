@@ -18,3 +18,4 @@ hs_err_pid*
 /log_dir_IS_UNDEFINED
 /target/
 /bin/
+/upload/
