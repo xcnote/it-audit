@@ -20,14 +20,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.it.audit.domain.ItAuditFile;
 import com.it.audit.domain.ItAuditTestAC;
 import com.it.audit.domain.ItAuditTestDA;
 import com.it.audit.domain.ItAuditTestGC;
+import com.it.audit.enums.FileType;
 import com.it.audit.enums.ObjectTaskType;
 import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.enums.ObjectUserRole;
 import com.it.audit.enums.TestImperfectionType;
 import com.it.audit.exception.NotFoundException;
+import com.it.audit.service.FileService;
 import com.it.audit.service.ManagerService;
 import com.it.audit.service.ObjectTestACService;
 import com.it.audit.service.ObjectTestDAService;
@@ -53,6 +56,8 @@ public class ManagerReviewViewController {
 	private ObjectTestACService objectTestACService;
 	@Autowired
 	private ObjectTestDAService objectTestDAService;
+	@Autowired
+	private FileService fileService;
 
 	/**
 	 * GC任务列表
@@ -134,24 +139,34 @@ public class ManagerReviewViewController {
 		Map<String, Object> result = new HashMap<>();
 		List<TestImperfectionType> imperfectionTypes = TestImperfectionType.getAllType(type);
 		result.put("imperfectionTyps", imperfectionTypes);
+		String address = "";
+		FileType fileType = null;
 		switch (type) {
 		case GC:
 			ItAuditTestGC gc = this.objectTestGCService.queryById(testId);
 			result.put("gc", gc);
-			return new ModelAndView("manager/review/gcupdate", result);
+			fileType = FileType.gctest;
+			address = "manager/review/gcupdate";
+			break;
 		case AC:
 			ItAuditTestAC ac = this.objectTestACService.queryById(testId);
 			result.put("ac", ac);
-			return new ModelAndView("manager/review/acupdate", result);
+			fileType = FileType.actest;
+			address = "manager/review/acupdate";
+			break;
 		case DA:
 			ItAuditTestDA da = this.objectTestDAService.queryById(testId);
 			result.put("da", da);
-			return new ModelAndView("manager/review/daupdate", result);
+			fileType = FileType.datest;
+			address = "manager/review/daupdate";
+			break;
 		default:
 			CommonUtil.checkAndThrowAssignException(false, new NotFoundException("无效处理类型"));
 			break;
 		}
-		return null;
+		List<ItAuditFile> files = this.fileService.findFileByTypeAndId(testId, fileType);
+		result.put("files", files);
+		return new ModelAndView(address, result);
 	}
 	
 	/**

@@ -1,9 +1,14 @@
 <script type="text/javascript">
 jQuery.getScript('/js/custom/tables.js', function() {});
+jQuery.getScript('/js/audit/ajaxfileupload.js', function() {});
+jQuery(document).ready(function(){
+	addChangeInFile("fileToUpload1", jQuery("#uploadurl1").val(), "fileupload1", "fileToDown1", function(){});
+	addChangeInFile("fileToUpload2", jQuery("#uploadurl2").val(), "fileupload2", "fileToDown2", function(){});
+});
 </script>
 
 <div class="pageheader notab">
-    <h1 class="pagetitle">项目经理 > 项目报告 > 项目列表</h1>
+    <h1 class="pagetitle">项目经理 > 项目报告 > 报告列表</h1>
 </div><!--pageheader-->
 
 <div id="contentwrapper" class="contentwrapper tables">
@@ -23,8 +28,8 @@ jQuery.getScript('/js/custom/tables.js', function() {});
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="head0" style="text-align: center;">下载</th>
-					<th class="head1" style="text-align: center;">上传</th>
+					<th class="head0" style="text-align: center;">标准下载</th>
+					<th class="head1" style="text-align: center;">更新上传</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,8 +43,50 @@ jQuery.getScript('/js/custom/tables.js', function() {});
 						<a th:href="'/index/problemexport?objectId='+${info.id}" class="orangeboldlink" target="_blank">标准问题清单</a><br/>
 					</td>
 					<td class="center">
-						<a href="javascript:void(0);" class="orangeboldlink">修订后的终板报告</a><br/>
-						<a href="javascript:void(0);" class="orangeboldlink">修订后的问题清单</a><br/>
+						<table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                            <colgroup>
+                                <col class="con0" />
+                                <col class="con1" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="head0">终板报告下载</th>
+                                    <th class="head1">终板报告上传</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a id="fileToDown1" th:style="${reportfile != null}? '':'display: none;'" th:href="'/index/file/down/report?id='+${info.id}" class="orangeboldlink" target="_blank">修订后的终板报告</a></td>
+                                    <td>
+                                    	<input id="fileToUpload1" type="file" name="file"/>
+                                    	<input type="button" class="submitbutton" value="Upload" id="fileupload1"/>    
+                                    	<input id="uploadurl1" style="display: none" type="text" th:value="'/index/file/upload/report?objectId='+${info.id}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                            <colgroup>
+                                <col class="con0" />
+                                <col class="con1" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="head0">问题清单下载</th>
+                                    <th class="head1">问题清单上传</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a id="fileToDown2" th:style="${problemfile != null}? '':'display: none;'" th:href="'/index/file/down/problem?id='+${info.id}" class="orangeboldlink" target="_blank">修订后的问题清单</a><br/></td>
+                                    <td>
+                                    	<input id="fileToUpload2" type="file" name="file"/>
+                                    	<input type="button" class="submitbutton" value="Upload" id="fileupload2"/>    
+                                    	<input id="uploadurl2" style="display: none" type="text" th:value="'/index/file/upload/problem?objectId='+${info.id}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 					</td>
 				</tr>
 			</tbody>

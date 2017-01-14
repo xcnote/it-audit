@@ -2,6 +2,7 @@ package com.it.audit.web.page;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import com.it.audit.domain.ItAuditTestGC;
 import com.it.audit.enums.ObjectStatus;
 import com.it.audit.enums.ObjectTestStatus;
 import com.it.audit.service.ManagerService;
+import com.it.audit.service.ObjectService;
 import com.it.audit.service.ObjectTestACService;
 import com.it.audit.service.ObjectTestDAService;
 import com.it.audit.service.ObjectTestGCService;
@@ -44,6 +46,8 @@ public class ManagerReportViewController {
 	private ObjectTestACService objectTestACService;
 	@Autowired
 	private ObjectTestDAService objectTestDAService;
+	@Autowired
+	private ObjectService objectService;
 
 	/**
 	 * 项目统计分析
@@ -66,7 +70,9 @@ public class ManagerReportViewController {
 	@RequestMapping(value = RequestURI.MANAGER_OBJECT_REPORT_CREATE, method = RequestMethod.GET)
 	public ModelAndView reportCreatePage(@RequestParam Long objectId){
 		ItAuditObject object = this.managerService.queryObjectDetail(objectId);
-		return new ModelAndView("manager/report/create", "info", object);
+		Map<String, Object> result = this.objectService.getObjectFile(object.getId());
+		result.put("info", object);
+		return new ModelAndView("manager/report/create", result);
 	}
 	
 	/**

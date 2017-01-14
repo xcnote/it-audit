@@ -56,7 +56,9 @@ jQuery.getScript('/js/custom/forms.js', function() {});
 			<p>
 				<label>附件</label>
 			    <span class="field">
-			    	
+			    	<span style="margin-left: 10px" class="fileNamesDA" th:each="file,index:${files}">
+			    		<a th:href="'/index/file/down/datest?id=' + ${file.testId} + '&amp;fileId=' + ${file.id}" class="orangeboldlink" target="_blank" th:text="${file.getName()}"></a><br/>
+			    	</span>
 			    </span>
 			</p>
 		</div>

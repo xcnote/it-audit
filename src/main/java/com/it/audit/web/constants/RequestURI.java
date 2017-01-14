@@ -113,6 +113,9 @@ public class RequestURI {
 	public static final String COMMON_TEST_DA_EXPORT = INDEX_URI + "/daexport";
 	public static final String COMMON_TEST_REPORT_EXPORT = INDEX_URI + "/reportexport";
 	public static final String COMMON_TEST_PROBLEM_EXPORT = INDEX_URI + "/problemexport";
+	public static final String COMMON_FILE_UPLOAD = INDEX_URI + "/file/upload/{type}";
+	public static final String COMMON_FILE_DOWN = INDEX_URI + "/file/down/{type}";
+	public static final String COMMON_FILE_DELETE = INDEX_URI + "/file/delete/{type}";
 	
 	public static final String ERROR_PAGE = "/404";
 	

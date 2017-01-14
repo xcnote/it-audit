@@ -38,8 +38,8 @@ jQuery.getScript('/js/custom/tables.js', function() {});
 						<a th:href="'/index/problemexport?objectId='+${info.id}" class="orangeboldlink">标准问题清单</a><br/>
 					</td>
 					<td class="center">
-						<a href="javascript:void(0);" class="orangeboldlink">修订后的终板报告</a><br/>
-						<a href="javascript:void(0);" class="orangeboldlink">修订后的问题清单</a><br/>
+						<a th:style="${reportfile != null}? '':'display: none;'" th:href="'/index/file/down/report?id='+${info.id}" class="orangeboldlink" target="_blank">修订后的终板报告</a><br/>
+						<a th:style="${problemfile != null}? '':'display: none;'" th:href="'/index/file/down/problem?id='+${info.id}" class="orangeboldlink" target="_blank">修订后的问题清单</a><br/>
 					</td>
 				</tr>
 			</tbody>

@@ -1,12 +1,20 @@
 <script type="text/javascript">
 jQuery.getScript('/js/custom/forms.js', function() {});
+jQuery.getScript('/js/audit/ajaxfileupload.js', function() {});
 //jQuery.getScript('/js/custom/elements.js', function() {});
+/*<![CDATA[*/
 jQuery(document).ready(function(){
 	jQuery("#testDAUpdate1").find("input").attr("disabled","disabled").attr("style","background:#eee");
 	jQuery("#testDAUpdate1").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
 	jQuery("#testDAUpdate2").find("input").attr("disabled","disabled").attr("style","background:#eee");
 	jQuery("#testDAUpdate2").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
+	
+	addChangeInFile("fileToUploadDA", jQuery("#uploadurlDA").val(), "fileuploadDA", null, function(data){
+		jQuery("#fileToUploadDA").parent().children(".filename").text("");
+		jQuery("#filelistDA").append("<span style='margin-left: 10px' class='fileNamesDA'><a href='/index/file/down/datest?id="+data.result.id+"' class='orangeboldlink' target='_blank'>"+data.result.name+"</a><br/></span>");
+	});
 });
+/*]]>*/
 </script>
 
 <div id="basicform" class="subcontent widgetpage">
@@ -61,9 +69,20 @@ jQuery(document).ready(function(){
 			</p>
 			<p>
 				<label>附件</label>
-			    <span class="field">
-			    	
-			    </span>
+			    <span class="field" id="filelistDA">
+	                <span>
+	                	<input id="fileToUploadDA" type="file" name="file"/>
+	                	<input type="button" class="submitbutton" value="Upload" id="fileuploadDA"/>    
+	                	<input id="uploadurlDA" style="display: none" type="text" th:value="'/index/file/upload/datest?objectId='+${da.objectId} + '&amp;testId=' + ${da.id}"/>
+	                	
+	                </span>
+	                <span style="margin-left: 10px;">
+	                	<a href="javascript:void(0);" th:onclick="'clearFile(\'/index/file/delete/datest?id='+${da.id}+'\', \'fileNamesDA\')'" target="_blank">&lt;清空附件&gt;</a><br/>
+	                </span>
+			    	<span style="margin-left: 10px" class="fileNamesDA" th:each="file,index:${files}">
+			    		<a th:href="'/index/file/down/datest?id=' + ${file.testId}" class="orangeboldlink" target="_blank" th:text="${file.getName()}"></a><br/>
+			    	</span>
+		    	</span>
 			</p>
 		</div>
 		</div>

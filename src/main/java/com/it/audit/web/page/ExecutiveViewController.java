@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.it.audit.domain.ItAuditObject;
 import com.it.audit.service.ExecutiveService;
+import com.it.audit.service.ObjectService;
 import com.it.audit.service.UserService;
 import com.it.audit.util.CommonUtil;
 import com.it.audit.web.constants.RequestURI;
@@ -31,6 +32,8 @@ public class ExecutiveViewController {
 	private UserService userService;
 	@Autowired
 	private ExecutiveService executiveService;
+	@Autowired
+	private ObjectService objectService;
 
 	/**
 	 * 主页
@@ -102,6 +105,8 @@ public class ExecutiveViewController {
 	@RequestMapping(value = RequestURI.EXECUTIVE_REPORT_DOWN, method = RequestMethod.GET)
 	public ModelAndView reportDown(@RequestParam Long objectId){
 		ItAuditObject object = this.executiveService.queryObjectDetail(objectId);
-		return new ModelAndView("executive/report/down", "info", object);
+		Map<String, Object> result = this.objectService.getObjectFile(object.getId());
+		result.put("info", object);
+		return new ModelAndView("executive/report/down", result);
 	}
 }

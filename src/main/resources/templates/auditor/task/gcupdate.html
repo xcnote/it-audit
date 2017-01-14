@@ -1,12 +1,20 @@
 <script type="text/javascript">
 jQuery.getScript('/js/custom/forms.js', function() {});
+jQuery.getScript('/js/audit/ajaxfileupload.js', function() {});
 //jQuery.getScript('/js/custom/elements.js', function() {});
+/*<![CDATA[*/
 jQuery(document).ready(function(){
 	jQuery("#testGCUpdate1").find("input").attr("disabled","disabled").attr("style","background:#eee");
 	jQuery("#testGCUpdate1").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
 	jQuery("#testGCUpdate2").find("input").attr("disabled","disabled").attr("style","background:#eee");
 	jQuery("#testGCUpdate2").find("textarea").attr("disabled","disabled").attr("style","background:#eee");
+	
+	addChangeInFile("fileToUploadGC", jQuery("#uploadurlGC").val(), "fileuploadGC", null, function(data){
+		jQuery("#fileToUploadGC").parent().children(".filename").html("");
+		jQuery("#filelistGC").append("<span style='margin-left: 10px' class='fileNamesGC'><a href='/index/file/down/gctest?id="+data.result.id+"' class='orangeboldlink' target='_blank'>"+data.result.name+"</a><br/></span>");
+	});
 });
+/*]]>*/
 </script>
 
 <div id="basicform" class="subcontent widgetpage">
@@ -109,8 +117,19 @@ jQuery(document).ready(function(){
 		</p>
 		<p>
 			<label>OE测试附件</label>
-		    <span class="field">
-		    	
+		    <span class="field" id="filelistGC">
+                <span>
+                	<input id="fileToUploadGC" type="file" name="file"/>
+                	<input type="button" class="submitbutton" value="Upload" id="fileuploadGC"/>    
+                	<input id="uploadurlGC" style="display: none" type="text" th:value="'/index/file/upload/gctest?objectId='+${gc.objectId} + '&amp;testId=' + ${gc.id}"/>
+                	
+                </span>
+                <span style="margin-left: 10px;">
+                	<a href="javascript:void(0);" th:onclick="'clearFile(\'/index/file/delete/gctest?id='+${gc.id}+'\', \'fileNamesGC\')'" target="_blank">&lt;清空附件&gt;</a><br/>
+                </span>
+		    	<span style="margin-left: 10px" class="fileNamesGC" th:each="file,index:${files}">
+		    		<a th:href="'/index/file/down/gctest?id=' + ${file.testId} + '&amp;fileId=' + ${file.id}" class="orangeboldlink" target="_blank" th:text="${file.getName()}"></a><br/>
+		    	</span>
 		    </span>
 		</p>
 	</div>

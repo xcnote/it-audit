@@ -58,7 +58,9 @@ jQuery(document).ready(function(){
 			<p>
 				<label>OE测试附件</label>
 			    <span class="field">
-			    	
+			    	<span style="margin-left: 10px" class="fileNamesAC" th:each="file,index:${files}">
+			    		<a th:href="'/index/file/down/actest?id=' + ${file.testId} + '&amp;fileId=' + ${file.id}" class="orangeboldlink" target="_blank" th:text="${file.getName()}"></a><br/>
+			    	</span>
 			    </span>
 			</p>
 		</div>
