@@ -33,9 +33,9 @@ jQuery.getScript('/js/custom/tables.js', function() {});
 						<a th:href="'/index/gcexport?objectId='+${info.id}" class="orangeboldlink" target="_blank">GC测试底稿</a><br/>
 						<a th:href="'/index/acexport?objectId='+${info.id}" class="orangeboldlink" target="_blank">AC测试底稿</a><br/>
 						<a th:href="'/index/daexport?objectId='+${info.id}" class="orangeboldlink" target="_blank">DA测试底稿</a><br/>
-						<a href="javascript:void(0);" class="orangeboldlink">标准报告</a><br/>
+						<a href="/index/file/down/normreport?id=1" class="orangeboldlink" target="_blank">标准报告</a><br/>
 						<a th:href="'/index/reportexport?objectId='+${info.id}" class="orangeboldlink" target="_blank">统计分析报告</a><br/>
-						<a th:href="'/index/problemexport?objectId='+${info.id}" class="orangeboldlink">标准问题清单</a><br/>
+						<a th:href="'/index/problemexport?objectId='+${info.id}" class="orangeboldlink" target="_blank">标准问题清单</a><br/>
 					</td>
 					<td class="center">
 						<a th:style="${reportfile != null}? '':'display: none;'" th:href="'/index/file/down/report?id='+${info.id}" class="orangeboldlink" target="_blank">修订后的终板报告</a><br/>
